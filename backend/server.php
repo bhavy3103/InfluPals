@@ -14,12 +14,8 @@ function generateRandomPostIds($prefix) {
 }
 
 include('index.php'); 
-$db = mysqli_connect('localhost', 'root', '', 'mad');
 
-// Check connection
-if (!$db) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once 'db_connection.php';
 
 // Step 1: Generate random IDs
 $postIds = generateRandomPostIds('post_');
