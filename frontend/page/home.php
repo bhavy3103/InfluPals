@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAD</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
+    <div class="flex items-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
+      <span class="text-xl font-bold">Instagram</span>
+    </div>
+
+    <div class="flex items-center">
+      <div class="relative">
+        <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
+        <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer">
+    <div class="bg-white rounded-md overflow-hidden shadow-md p-6">
+      <div class="flex justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Doushouqi-dog.svg" height="150" width="150" class="rounded-full">
+      </div>
+      <p class="text-xl font-semibold flex justify-center">User Name</p>
+      <p class="text-gray-600 flex justify-center">Digital Creator</p>
+      <div class="flex flex-row justify-evenly mt-7">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">290</p>
+          <p class="font-semibold text-xl mb-2">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-5">7</p>
+          <p class="font-semibold text-xl mb-2">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-7">
+        <img src="address-41.svg" height="18" width="18">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

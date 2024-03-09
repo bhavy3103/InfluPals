@@ -1,0 +1,87 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+}
+
+.wrapper {
+    max-width: 300px;
+    margin: 200px auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    text-align: center;
+}
+
+.input {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.button {
+    text-align: center;
+}
+.btn {
+    width: 100%;
+    background-color: #5aa4f8;
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.OR-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+span {
+    flex-grow: 1;
+    height: 0.5px;
+    background-color: #ddd;
+    width: 20%;
+}
+
+.or {
+    margin: 0 10px;
+    color: #999;
+    font-size: 12px;
+}
+
+.login-with-instagram {
+    text-align: center;
+}
+
+.img-link {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+a {
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: pointer;
+}
