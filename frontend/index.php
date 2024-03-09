@@ -41,20 +41,21 @@
 
     <script>
 
-const fetchapi = async (finalData) => {
-    fetch('../backend/api.php', {
-        method: 'POST',
-        body: JSON.stringify(finalData),
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-        console.log(data); // Log the parsed JSON response from the PHP script
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
+        const fetchapi = async (finalData) => {
+            fetch('../backend/api/registerUser.php', {
+                method: 'POST',
+                body: JSON.stringify(finalData),
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                console.log('data', data); // Log the parsed JSON response from the PHP script
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 
         const getInstagramAccountId = async (pageId, pageAccessToken) => {
             let res;
