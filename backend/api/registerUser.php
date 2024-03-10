@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $id = $data['id'];
   $name = $data['name'];
   $username = $data['username'];
+  $profile_photo=$data['profile_picture_url'];
   $posts = $data['media_count'];
   $email = '';
   $followers = $data['followers_count'];
@@ -60,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_query($conn, $recentpostQuery);
         $recentpostsId = mysqli_insert_id($conn);
 
-        $sql = "INSERT INTO creator (id, name, username, posts, email, followers, category, bio, impressions, profile_view, demographic_id, recentposts_id) 
-          VALUES ('$id', '$name', '$username', '$posts', '$email', '$followers', '$category', '$bio', '$impressions', '$profile_view', '$demographicsId', '$recentpostsId')";
+        $sql = "INSERT INTO creator (id, name, username,profile_photo, posts, email, followers, category, bio, impressions, profile_view, demographic_id, recentposts_id) 
+          VALUES ('$id', '$name', '$username','$profile_photo', '$posts', '$email', '$followers', '$category', '$bio', '$impressions', '$profile_view', '$demographicsId', '$recentpostsId')";
   
         if (mysqli_query($conn, $sql)) {
             mysqli_commit($conn);
