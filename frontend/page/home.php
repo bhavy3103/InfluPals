@@ -32,17 +32,31 @@
     </div>
 
     <script>
+        var sendSingleUserId = (userId) => {
+            console.log(userId);
+            if (userId !== undefined) {
+                // Redirect to profile.php with the user ID as a query parameter
+                window.location.href = `profile.php?userId=${userId}`;
+            } else {
+                console.error('User ID is undefined.');
+            }
+        }
+
         fetch('../../backend/api/getAllUsers.php')
             .then(response => response.json())
             .then(data => {
                 // Log the response object in the console
                 console.log(data);
-                
+
+                sendSingleUserId(data.id);
                 // Access and display limited data for each user
                 const userGrid = document.getElementById('userGrid');
                 data.forEach(user => {
                     const card = document.createElement('div');
                     card.classList.add('bg-white', 'rounded-md', 'overflow-hidden', 'shadow-md', 'p-6', 'flex', 'flex-col');
+
+                    card.addEventListener('click', () => sendSingleUserId(user.id));
+
                     card.innerHTML = `
                         <div class="flex justify-center">
                             <img src="${user.profile_photo}" height="150" width="150" class="rounded-full">
