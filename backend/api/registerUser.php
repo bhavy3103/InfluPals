@@ -43,12 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $mediaType = isset($mediaItem['media_type']) ? $mediaItem['media_type'] : '';
           $thumbnail = isset($mediaItem['media_url']) ? $mediaItem['media_url'] : '';
           $url = isset($mediaItem['permalink']) ? $mediaItem['permalink'] : '';
-          // $mediaId = isset($mediaItem['id']) ? $mediaItem['id'] : $i;
-          $mediaId = $i;
+          $mediaId = isset($mediaItem['id']) ? $mediaItem['id'] : $i;
 
           $mediaQuery = "INSERT INTO post (id, media_type, thumbnail, url) VALUES ('$mediaId', '$mediaType', '$thumbnail', '$url')";
           if (mysqli_query($conn, $mediaQuery)) {
-            $postId = mysqli_insert_id($conn);
+            // $postId = mysqli_insert_id($conn);
             $postIds[] = $mediaId;
           } else {
             throw new Exception("Error inserting media: " . mysqli_error($conn));
@@ -68,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_commit($conn);
             echo "Data inserted successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo json_encode(array('status' => 'error', 'message' => mysqli_error($conn)));
         }
         
     } catch (Exception $e) {

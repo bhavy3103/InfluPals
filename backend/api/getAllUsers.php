@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(array('message' => 'No data found.'));
     }
 } else {
-    http_response_code(405); // Method Not Allowed
+    http_response_code(405);
     echo "405 Method Not Allowed";
 }
 
