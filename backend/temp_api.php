@@ -6,7 +6,7 @@ function getAllData() {
   // if(!$db){
   //   die("Connection failed: " . mysqli_connect_error());
   // }
-  $db= mysqli_connect('localhost', 'dipole', '123', 'mad');
+  $db= mysqli_connect('localhost', 'root', '', 'mad');
   if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
   }
@@ -45,7 +45,7 @@ function getAllData() {
 
 
 // function setPost($data) {
-  $db = mysqli_connect('localhost', 'dipole', '123', 'mad');
+  $db = mysqli_connect('localhost', 'root', '', 'mad');
   if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
   }

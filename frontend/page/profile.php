@@ -24,6 +24,14 @@
 </head>
 
 <body class="bg-gray-100">
+
+    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
+        <div class="flex items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
+            <span class="text-xl font-bold">Instagram</span>
+        </div>
+    </nav>
+
     <div class="container mx-auto py-16 px-8">
         <!-- Bio -->
         <div class="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-16" id="bioSection">
@@ -88,11 +96,11 @@
                     <div class="p-4 flex justify-between items-center">
                         <div class="flex items-center space-x-2">
                             <i class="far fa-heart"></i>
-                            <p>1.4K</p>
+                            <p>${formatCount(post.like_count)}</p>
                         </div>
                         <div class="flex items-center space-x-2">
                             <i class="far fa-comment"></i>
-                            <p>2546</p>
+                            <p>${formatCount(post.comments_count)}</p>
                         </div>
                     </div>
                 </div>
@@ -107,32 +115,32 @@
                 .then(response => response.json())
                 .then(data => {
                     new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: Object.keys(data.age),
-                            datasets: [{
-                                label: 'Total Followers in percentage',
-                                data: Object.values(data.age).map(category => category.percentage),
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    grid: {
-                                        display: false
+                            type: 'bar',
+                            data: {
+                                labels: Object.keys(data.age),
+                                datasets: [{
+                                    label: 'Total Followers in percentage',
+                                    data: Object.values(data.age).map(category => category.percentage),
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            display: false
+                                        }
+                                    },
+                                    x: {
+                                        grid: {
+                                            display: false
+                                        }
                                     }
                                 },
-                                x: {
-                                    grid: {
-                                        display: false
-                                    }
-                                }
-                            },
-                            animation: true
-                        }
-                    }),
+                                animation: true
+                            }
+                        }),
                         new Chart(mf, {
                             type: 'doughnut',
                             data: {
@@ -187,11 +195,23 @@
         const userId = new URLSearchParams(window.location.search).get('userId');
         console.log('User ID in profile.php:', userId);
 
+        function formatCount(count) {
+            if (count >= 1000000) {
+                return (count / 1000000).toFixed(1) + 'M';
+            } else if (count >= 1000) {
+                return (count / 1000).toFixed(1) + 'k';
+            } else {
+                return count.toString();
+            }
+        }
+
         const fetchapi = async (userId) => {
             try {
                 const response = await fetch('../../backend/api/getSingleUser.php', {
                     method: 'POST',
-                    body: JSON.stringify({ id: userId }),
+                    body: JSON.stringify({
+                        id: userId
+                    }),
                 });
 
                 if (!response.ok) {

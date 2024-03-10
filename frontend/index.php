@@ -4,196 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>MAD</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="wrapper">
-
-        <form>
-            <div class="input">
-                <input placeholder="enter your username here...">
-            </div>
-
-            <div class="button">
-                <button class="btn">Log in</button>
-            </div>
-
-        </form>
-
-        <div class="OR-container">
-            <span></span>
-            <div class="or">OR</div>
-            <span></span>
+    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
+        <div class="flex items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
+            <span class="text-xl font-bold">Instagram</span>
         </div>
 
-        <div class="login-with-instagram">
-            <div class="img-link">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" height="20"
-                    width="20" alt="Instagram Icon">
-                <a onclick="openInstagramLoginPage()">Login with Instagram</a>
+        <div class="flex items-center">
+            <div class="relative">
+                <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
+                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                </div>
+                <button onclick="openLoginPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Login As Creator
+                </button>
             </div>
-
         </div>
 
+    </nav>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer" id="userGrid">
+        <!-- User cards will be added here dynamically -->
     </div>
 
     <script>
+        var sendSingleUserId = (userId) => {
+            console.log(userId);
+            if (userId !== undefined) {
+                // Redirect to profile.php with the user ID as a query parameter
+                window.location.href = `page/profile.php?userId=${userId}`;
+            } else {
+                console.error('User ID is undefined.');
+            }
+        }
 
-        const fetchapi = async (finalData) => {
-            fetch('../backend/api/registerUser.php', {
-                method: 'POST',
-                body: JSON.stringify(finalData),
-            })
-            .then(response => {
-                return response.json();
-            })
+        const openLoginPage = () => {
+            location.assign('./page/login.php');
+        }
+
+        fetch('../backend/api/getAllUsers.php')
+            .then(response => response.json())
             .then(data => {
-                console.log('data', data); // Log the parsed JSON response from the PHP script
+                // Log the response object in the console
+                console.log(data);
+
+                sendSingleUserId(data.id);
+                // Access and display limited data for each user
+                const userGrid = document.getElementById('userGrid');
+                data.forEach(user => {
+                    const card = document.createElement('div');
+                    card.classList.add('bg-white', 'rounded-md', 'overflow-hidden', 'shadow-md', 'p-6', 'flex', 'flex-col');
+
+                    card.addEventListener('click', () => sendSingleUserId(user.id));
+
+                    card.innerHTML = `
+                        <div class="flex justify-center">
+                            <img src="${user.profile_photo}" height="150" width="150" class="rounded-full">
+                        </div>
+                        <p class="text-xl font-semibold flex justify-center">${user.username}</p>
+                        <p class="text-gray-600 flex justify-center">${user.bio}</p>
+                        <div class="flex flex-row justify-evenly mt-7">
+                            <div class="flex flex-col">
+                                <p class="text-gray-600 font-semibold ml-7">${user.followers}</p>
+                                <p class="font-semibold text-xl mb-2">Followers</p>
+                            </div>
+                            <div class="flex flex-col ml-6">
+                                <p class="text-gray-600 font-semibold ml-5">${user.posts}</p>
+                                <p class="font-semibold text-xl mb-2">Posts</p>
+                            </div>
+                        </div>
+
+                    `;
+                    userGrid.appendChild(card);
+                });
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-
-        const getInstagramAccountId = async (pageId, pageAccessToken) => {
-            let res;
-            try {
-                res = await new Promise((resolve, reject) => {
-                    FB.api(
-                        `/${pageId}`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                        fields: 'instagram_business_account'
-                    },
-                        function (response) {
-                            if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
-                            } else {
-                                resolve(response);
-                            }
-                        }
-                    );
-                });
-            } catch (error) {
-                console.error('Error fetching Instagram account:', error);
-            }
-            return res["instagram_business_account"].id;
-        };
-
-        const getInstagramAccountDetails = async (instaId, pageAccessToken) => {
-            let details;
-            try {
-                details = await new Promise((resolve, reject) => {
-                    FB.api(
-                        `/${instaId}`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                        fields: 'name, username,profile_picture_url, media_count, followers_count, biography, media'
-                    },
-                        function (response) {
-                            if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
-                            } else {
-                                resolve(response);
-                            }
-                        }
-                    );
-                });
-            } catch (error) {
-                console.error('Error fetching Instagram account:', error);
-            }
-
-            return details;
-        }
-
-        const getMediaDetails = async (mediaId, pageAccessToken) => {
-            let mediaDetails;
-            try {
-                mediaDetails = await new Promise((resolve, reject) => {
-                    FB.api(
-                        `/${mediaId}`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                        fields: 'media_type, thumbnail_url, permalink, media_url, like_count, comments_count'
-                    },
-                        function (response) {
-                            if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
-                            } else {
-                                resolve(response);
-                            }
-                        }
-                    );
-                });
-            } catch (error) {
-                console.error('Error fetching Instagram account:', error);
-            }
-
-            return mediaDetails;
-        }
-
-        const openInstagramLoginPage = () => {
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {
-                    return;
-                }
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-
-            window.fbAsyncInit = function () {
-                FB.init({
-                    appId: '1737552000101235',
-                    xfbml: true,
-                    version: 'v19.0'
-                });
-                FB.login(function (response) {
-                    if (response.authResponse) {
-                        console.log('Welcome!  Fetching your information.... ');
-                        FB.api('/me', {
-                            fields: 'accounts'
-                        }, function (response) {
-                            const page = response.accounts["data"][0];
-                            const pageId = page.id;
-                            const pageAccessToken = page.access_token;
-                            getInstagramAccountId(pageId, pageAccessToken).then((instaId) => {
-                                getInstagramAccountDetails(instaId, pageAccessToken).then((accountDetails) => {
-                                    const mediaPromises = accountDetails["media"]["data"].map(media => {
-                                        return getMediaDetails(media.id, pageAccessToken)
-                                            .then(mediaDetails => ({
-                                                id: media.id,
-                                                details: mediaDetails
-                                            }));
-                                    });
-                                    Promise.all(mediaPromises).then(mediaDetailsArray => {
-                                        // Sort the media details array based on the original order of IDs
-                                        mediaDetailsArray.sort((a, b) => {
-                                            return accountDetails["media"]["data"].findIndex(item => item.id === a.id) - accountDetails["media"]["data"].findIndex(item => item.id === b.id);
-                                        });
-                                        const finalData = {
-                                            ...accountDetails,
-                                            media: mediaDetailsArray.map(media => media.details)
-                                        }
-                                        console.log(finalData);
-                                        fetchapi(finalData);
-                                        // location.assign('./page/home.php')
-                                    }).catch(error => {
-                                        console.error('Error fetching media details:', error);
-                                    });
-                                })
-                            })
-                        });
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
-                });
-            };
-        }
+            .catch(error => console.error('Error fetching data:', error));
     </script>
 </body>
 

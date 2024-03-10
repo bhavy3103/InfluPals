@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "dipole";
-$password = "123";
+$username = "root";
+$password = "";
 $dbname = "mad";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

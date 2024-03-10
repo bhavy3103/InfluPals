@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userCheckResult = mysqli_query($conn, $userCheckQuery);
         if (mysqli_num_rows($userCheckResult) > 0) {
             // User already exists, return early
-            echo "User already exists";
+            echo json_encode(array('message' => "User Already Exists"));
             mysqli_commit($conn);
             exit; // Stop further execution
         }
-        
+
         // Insert media objects into post table
         $postIds = [];
         for ($i = 0; $i < 4; $i++) {
@@ -44,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $mediaType = isset($mediaItem['media_type']) ? $mediaItem['media_type'] : '';
           $thumbnail = isset($mediaItem['media_url']) ? $mediaItem['media_url'] : '';
           $url = isset($mediaItem['permalink']) ? $mediaItem['permalink'] : '';
+          $like_count = isset($mediaItem['like_count']) ? $mediaItem['like_count'] : 0;
+          $comments_count = isset($mediaItem['comments_count']) ? $mediaItem['comments_count'] : 0;
           $mediaId = isset($mediaItem['id']) ? $mediaItem['id'] : $i;
 
-          $mediaQuery = "INSERT INTO post (id, media_type, thumbnail, url) VALUES ('$mediaId', '$mediaType', '$thumbnail', '$url')";
+          $mediaQuery = "INSERT INTO post (id, media_type, thumbnail, url, like_count, comments_count) VALUES ('$mediaId', '$mediaType', '$thumbnail', '$url', '$like_count', '$comments_count')";
           if (mysqli_query($conn, $mediaQuery)) {
             // $postId = mysqli_insert_id($conn);
             $postIds[] = $mediaId;
@@ -66,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         if (mysqli_query($conn, $sql)) {
             mysqli_commit($conn);
-            echo "Data inserted successfully";
+            echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully"));
         } else {
             // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             echo json_encode(array('status' => 'error', 'message' => mysqli_error($conn)));
