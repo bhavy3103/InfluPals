@@ -7,7 +7,7 @@ $data = json_decode($jsonData, true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $data['id'];
-    $query= "SELECT creator.id, creator.name, creator.username, creator.posts, creator.email, creator.followers, 
+    $query= "SELECT creator.id, creator.name, creator.username,creator.profile_photo,creator.posts, creator.email, creator.followers, 
       creator.category, creator.bio, creator.impressions, creator.profile_view, creator.demographic_id, creator.recentposts_id, 
       recentposts.post1, recentposts.post2, recentposts.post3, recentposts.post4
       FROM creator

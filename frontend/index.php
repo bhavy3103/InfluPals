@@ -90,7 +90,7 @@
                         `/${instaId}`,
                         'GET', {
                         access_token: pageAccessToken,
-                        fields: 'name, username, media_count, followers_count, biography, media'
+                        fields: 'name, username,profile_picture_url, media_count, followers_count, biography, media'
                     },
                         function (response) {
                             if (!response || response.error) {
