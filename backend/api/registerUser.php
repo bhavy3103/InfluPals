@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userCheckResult = mysqli_query($conn, $userCheckQuery);
         if (mysqli_num_rows($userCheckResult) > 0) {
             // User already exists, return early
-            echo json_encode(array('message' => "User Already Exists"));
+            echo json_encode(array('message' => "User Already Exists", "id" => $id));
             mysqli_commit($conn);
             exit; // Stop further execution
         }

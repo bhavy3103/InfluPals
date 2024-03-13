@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    
+
     <div class="wrapper">
 
         <form>
@@ -31,7 +31,8 @@
 
         <div class="login-with-instagram">
             <div class="img-link">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" height="20" width="20" alt="Instagram Icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" height="20"
+                    width="20" alt="Instagram Icon">
                 <a onclick="openInstagramLoginPage()">Login with Instagram</a>
             </div>
 
@@ -42,16 +43,16 @@
     <script>
         const fetchapi = async (finalData) => {
             fetch('../../backend/api/registerUser.php', {
-                    method: 'POST',
-                    body: JSON.stringify(finalData),
-                })
+                method: 'POST',
+                body: JSON.stringify(finalData),
+            })
                 .then(response => {
                     return response.json();
                 })
                 .then(data => {
                     console.log('data', data); // Log the parsed JSON response from the PHP script
-                    location.assign(`./page/profile.php?userId=${userId}`);
-                    // window.location.href = `profile.php?userId=${userId}`;
+                    //location.assign(`./profile.php?userId=${userId}`);
+                    window.location.href = `profile.php?userId=${data.id}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -65,10 +66,10 @@
                     FB.api(
                         `/${pageId}`,
                         'GET', {
-                            access_token: pageAccessToken,
-                            fields: 'instagram_business_account'
-                        },
-                        function(response) {
+                        access_token: pageAccessToken,
+                        fields: 'instagram_business_account'
+                    },
+                        function (response) {
                             if (!response || response.error) {
                                 reject(response.error || new Error('Unknown error'));
                             } else {
@@ -90,10 +91,10 @@
                     FB.api(
                         `/${instaId}`,
                         'GET', {
-                            access_token: pageAccessToken,
-                            fields: 'name, username,profile_picture_url, media_count, followers_count, biography, media'
-                        },
-                        function(response) {
+                        access_token: pageAccessToken,
+                        fields: 'name, username,profile_picture_url, media_count, followers_count, biography, media'
+                    },
+                        function (response) {
                             if (!response || response.error) {
                                 reject(response.error || new Error('Unknown error'));
                             } else {
@@ -116,10 +117,10 @@
                     FB.api(
                         `/${mediaId}`,
                         'GET', {
-                            access_token: pageAccessToken,
-                            fields: 'media_type, thumbnail_url, permalink, media_url, like_count, comments_count'
-                        },
-                        function(response) {
+                        access_token: pageAccessToken,
+                        fields: 'media_type, thumbnail_url, permalink, media_url, like_count, comments_count'
+                    },
+                        function (response) {
                             if (!response || response.error) {
                                 reject(response.error || new Error('Unknown error'));
                             } else {
@@ -136,7 +137,7 @@
         }
 
         const openInstagramLoginPage = () => {
-            (function(d, s, id) {
+            (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {
                     return;
@@ -147,18 +148,18 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
 
-            window.fbAsyncInit = function() {
+            window.fbAsyncInit = function () {
                 FB.init({
                     appId: '1737552000101235',
                     xfbml: true,
                     version: 'v19.0'
                 });
-                FB.login(function(response) {
+                FB.login(function (response) {
                     if (response.authResponse) {
                         console.log('Welcome!  Fetching your information.... ');
                         FB.api('/me', {
                             fields: 'accounts'
-                        }, function(response) {
+                        }, function (response) {
                             const page = response.accounts["data"][0];
                             const pageId = page.id;
                             const pageAccessToken = page.access_token;
