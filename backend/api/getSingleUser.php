@@ -7,38 +7,36 @@ $data = json_decode($jsonData, true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $data['id'];
-    $query= "SELECT creator.id, creator.name, creator.username,creator.profile_photo,creator.posts, creator.email, creator.followers, 
-      creator.category, creator.bio, creator.impressions, creator.profile_view, creator.demographic_id, creator.recentposts_id, 
-      recentposts.post1, recentposts.post2, recentposts.post3, recentposts.post4
-      FROM creator
-      INNER JOIN recentposts ON creator.recentposts_id = recentposts.id
-      WHERE creator.id = '$id'";
-
-    $result = mysqli_query($conn, $query); // Pass the connection as the first parameter
-    $userdata=mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $p1=$userdata[0]['post1'];
-    $p2=$userdata[0]['post2'];
-    $p3=$userdata[0]['post3'];
-    $p4=$userdata[0]['post4'];
+    // $id=1;
+    
+    // SQL query to fetch user details
+    $query = "SELECT * FROM page WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
 
     if (!$result) {
-        echo "Error: " . mysqli_error($conn); // Display the error message
+        echo json_encode(array('error' => mysqli_error($conn))); // Return error message if query fails
+        exit;
     }
+
     if (mysqli_num_rows($result) > 0) {
-        $postsquery = "SELECT * FROM post WHERE id IN ($p1, $p2, $p3, $p4)";
-        $posts=mysqli_query($conn, $postsquery);
-        $data = mysqli_fetch_all($posts, MYSQLI_ASSOC);
-        // echo json_encode($data);
-        // exit;
+        $profileData = mysqli_fetch_assoc($result); // Fetch user data
 
-        $response = array();
+        // Prepare response in the required format
+        $response = array(
+            'id' => $profileData['id'],
+            'type' => $profileData['type'],
+            'name' => $profileData['name'],
+            'username' => $profileData['username'],
+            'profile_picture_url' => $profileData['profile_picture_url'],
+            // You need to adjust these based on your table structure
+            'media_count' => $profileData['media_count'],
+            'followers_count' => $profileData['followers_count'],
+            'category' => $profileData['category'],
+            'biography' => $profileData['biography'],
+            'location' => $profileData['location']
+        );
 
-        $response['creator'] = $userdata[0];
-        foreach ($data as $media) {
-            $response['media'][] = $media;
-        }
-        echo json_encode($response);
+        echo json_encode($response); // Return response
     } else {
         echo json_encode(array('message' => 'No data found.'));
     }
@@ -46,5 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405);
     echo "405 Method Not Allowed";
 }
-
 ?>
