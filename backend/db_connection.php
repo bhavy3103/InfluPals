@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "mad";
+$dbname = "insta_project";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
