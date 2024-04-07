@@ -64,17 +64,17 @@
 
                     card.innerHTML = `
                         <div class="flex justify-center">
-                            <img src="${user.profile_photo}" height="150" width="150" class="rounded-full">
+                            <img src="${user.profile_picture_url}" height="150" width="150" class="rounded-full">
                         </div>
                         <p class="text-xl font-semibold flex justify-center">${user.username}</p>
-                        <p class="text-gray-600 flex justify-center">${user.bio}</p>
+                        <p class="text-gray-600 flex justify-center">${user.biography}</p>
                         <div class="flex flex-row justify-evenly mt-7">
                             <div class="flex flex-col">
-                                <p class="text-gray-600 font-semibold ml-7">${user.followers}</p>
+                                <p class="text-gray-600 font-semibold ml-7">${user.followers_count}</p>
                                 <p class="font-semibold text-xl mb-2">Followers</p>
                             </div>
                             <div class="flex flex-col ml-6">
-                                <p class="text-gray-600 font-semibold ml-5">${user.posts}</p>
+                                <p class="text-gray-600 font-semibold ml-5">${user.media_count}</p>
                                 <p class="font-semibold text-xl mb-2">Posts</p>
                             </div>
                         </div>
