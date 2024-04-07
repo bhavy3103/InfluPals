@@ -12,9 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $profile_picture_url = $data['profile_picture_url'];
     $media_count = $data['media_count'];
     $followers_count = $data['followers_count'];
-    $category = $data['category'];
+    $category = isset($data['category']) ? $data['category'] : '';
     $biography = $data['biography'];
-    $location = $data['location'];
+    $location = isset($data['location']) ? $data['location'] : '';
+
+    $demographicsAge = $data['demographicsAge'];
+    $demographicsCity = $data['demographicsCity'];
+    $demographicsGender = $data['demographicsGender'];
+
+    $media=$data['media'];
 
     mysqli_query($conn, "SET foreign_key_checks = 0");
 
@@ -33,9 +39,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Insert user data into profile table
         $insertQuery = "INSERT INTO page (id, type, name, username, profile_picture_url, media_count, followers_count, category, biography, location) 
-                          VALUES ('$id', '', '$name', '$username', '$profile_picture_url', '$media_count', '$followers_count', '$category', '$biography', '$location')";
+                          VALUES ('$id', 'instagram', '$name', '$username', '$profile_picture_url', '$media_count', '$followers_count', '$category', '$biography', '$location')";
 
         if (mysqli_query($conn, $insertQuery)) {
+            $demographicsCityString=json_encode($demographicsCity);
+            $demographicsGenderString=json_encode($demographicsGender);
+            $demographicsAgeString=json_encode($demographicsAge);
+            mysqli_query($conn, "INSERT INTO demographics (page_id, city, gender, age) 
+                VALUES ('$id', '$demographicsCityString', '$demographicsGenderString', '$demographicsAgeString')");
+
+            foreach ($media as $ele) {
+                $eleId=$ele['id'];
+                $eleLikeCount=$ele['like_count'];
+                $elePermalink=$ele['permalink'];
+                $eleMediaUrl=$ele['media_url'];
+                $eleMediaType=$ele['media_type'];
+                // $eleTimestamp=$ele['timestamp'];
+                mysqli_query($conn, "INSERT INTO media (id, page_id, like_count, permalink, media_url, media_type, media_product_type, timestamp, thumbnail_url)
+                    VALUES ('$eleId', '$id', '$eleLikeCount', '$elePermalink', '$eleMediaUrl', '$eleMediaType', '', '', '')");
+            }
+
             mysqli_commit($conn);
             echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully"));
         } else {

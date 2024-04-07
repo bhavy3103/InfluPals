@@ -43,7 +43,7 @@
         let pagesArray = [];
 
         const showLoggedInContent = (pages) => {
-            console.log(pages);
+            console.log('pages', pages);
             document.getElementById('accountsContainer').style.display = 'block';
             document.getElementById('loginWithPage').style.display = 'none';
 
@@ -106,82 +106,107 @@
         };
 
         const getInstagramAccountDetails = async (instaId, pageAccessToken) => {
-            let details, demographicsAge, demographicsCity, demographicsGender;
             try {
-                details = await new Promise((resolve, reject) => {
+                // Array to store all promises
+                const promises = [];
+
+                // Fetch basic Instagram account details
+                const detailsPromise = new Promise((resolve, reject) => {
                     FB.api(
                         `/${instaId}`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                        fields: 'name, username,profile_picture_url, media_count, followers_count, biography, media'
-                    },
+                        'GET',
+                        {
+                            access_token: pageAccessToken,
+                            fields: 'name, username, profile_picture_url, media_count, followers_count, biography, media'
+                        },
                         function (response) {
                             if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
+                                reject(response.error || new Error('Failed to fetch Instagram account details'));
                             } else {
                                 resolve(response);
                             }
                         }
                     );
                 });
+                promises.push(detailsPromise);
 
-                demographicsAge = await new Promise((resolve, reject) => {
+                // Fetch demographic data for age breakdown
+                const demographicsAgePromise = new Promise((resolve, reject) => {
                     FB.api(
-                        `/${instaId}/insights?metric=follower_demographics&period= lifetime&metric_type=total_value&breakdown=age`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                    },
+                        `/${instaId}/insights?metric=follower_demographics&period=lifetime&metric_type=total_value&breakdown=age`,
+                        'GET',
+                        {
+                            access_token: pageAccessToken,
+                        },
                         function (response) {
                             if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
+                                reject(response.error || new Error('Failed to fetch age demographics'));
                             } else {
-                                resolve(response);
+                                resolve(response.data[0]?.total_value?.breakdowns[0]?.results || []);
                             }
                         }
                     );
                 });
+                promises.push(demographicsAgePromise);
 
-                demographicsCity = await new Promise((resolve, reject) => {
+                // Fetch demographic data for city breakdown
+                const demographicsCityPromise = new Promise((resolve, reject) => {
                     FB.api(
-                        `/${instaId}/insights?metric=follower_demographics&period= lifetime&metric_type=total_value&breakdown=city`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                    },
+                        `/${instaId}/insights?metric=follower_demographics&period=lifetime&metric_type=total_value&breakdown=city`,
+                        'GET',
+                        {
+                            access_token: pageAccessToken,
+                        },
                         function (response) {
                             if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
+                                reject(response.error || new Error('Failed to fetch city demographics'));
                             } else {
-                                resolve(response);
+                                resolve(response.data[0]?.total_value?.breakdowns[0]?.results || []);
                             }
                         }
                     );
                 });
+                promises.push(demographicsCityPromise);
 
-                demographicsGender = await new Promise((resolve, reject) => {
+                // Fetch demographic data for gender breakdown
+                const demographicsGenderPromise = new Promise((resolve, reject) => {
                     FB.api(
-                        `/${instaId}/insights?metric=follower_demographics&period= lifetime&metric_type=total_value&breakdown=gender`,
-                        'GET', {
-                        access_token: pageAccessToken,
-                    },
+                        `/${instaId}/insights?metric=follower_demographics&period=lifetime&metric_type=total_value&breakdown=gender`,
+                        'GET',
+                        {
+                            access_token: pageAccessToken,
+                        },
                         function (response) {
                             if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
+                                reject(response.error || new Error('Failed to fetch gender demographics'));
                             } else {
-                                resolve(response);
+                                resolve(response.data[0]?.total_value?.breakdowns[0]?.results || []);
                             }
                         }
                     );
                 });
+                promises.push(demographicsGenderPromise);
 
+                // Wait for all promises to resolve
+                const [details, demographicsAge, demographicsCity, demographicsGender] = await Promise.all(promises);
+
+                // Assign the demographic data to the details object
+                details.demographicsAge = demographicsAge;
+                details.demographicsCity = demographicsCity;
+                details.demographicsGender = demographicsGender;
+                console.log(details);
+                console.log(demographicsAge);
+                console.log(demographicsCity);
+                console.log(demographicsGender);
+
+                return details;
             } catch (error) {
                 console.error('Error fetching Instagram account:', error);
+                // Handle the error appropriately (e.g., return an empty object)
+                return {};
             }
-            details.demographicsAge = demographicsAge["data"][0].total_value.breakdowns[0].results;
-            details.demographicsCity = demographicsCity["data"][0].total_value.breakdowns[0].results;
-            details.demographicsGender = demographicsGender["data"][0].total_value.breakdowns[0].results;
-
-            return details;
         }
+
 
         const getMediaDetails = async (mediaId, pageAccessToken) => {
             let mediaDetails;
@@ -191,12 +216,13 @@
                         `/${mediaId}`,
                         'GET', {
                         access_token: pageAccessToken,
-                        fields: 'media_type, thumbnail_url, permalink, media_url, like_count, comments_count'
+                        fields: 'media_type, thumbnail_url, permalink, media_url, like_count, comments_count, media_product_type, timestamp'
                     },
                         function (response) {
                             if (!response || response.error) {
                                 reject(response.error || new Error('Unknown error'));
                             } else {
+                                console.log(response);
                                 resolve(response);
                             }
                         }
@@ -246,7 +272,7 @@
 
         const savePageDetails = (pageId) => {
             const { access_token: pageAccessToken } = pagesArray.find(page => page.id == pageId)
-            console.log(pageId, pageAccessToken);
+            console.log('pageid',pageId, pageAccessToken);
             getInstagramAccountId(pageId, pageAccessToken).then((instaId) => {
                 getInstagramAccountDetails(instaId, pageAccessToken).then((accountDetails) => {
                     const mediaPromises = accountDetails["media"]["data"].map(media => {
@@ -265,7 +291,7 @@
                             ...accountDetails,
                             media: mediaDetailsArray.map(media => media.details)
                         }
-                        console.log(finalData);
+                        console.log('final',finalData);
                         fetchapi(finalData);
                     }).catch(error => {
                         console.error('Error fetching media details:', error);
