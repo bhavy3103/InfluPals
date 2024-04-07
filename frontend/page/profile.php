@@ -165,17 +165,28 @@
             fetch('demographic_bmark_data.json')
                 .then(response => response.json())
                 .then(data => {
-                    // Sort the results by follower count in descending order
-                    const sortedResults = data.data[0].total_value.breakdowns[2].results.sort((a, b) => b.value - a.value);
 
+                    // Sort the results by follower count in descending order
+                    // const sortedResults = data.data[0].total_value.breakdowns[2].results.sort((a, b) => b.value - a.value);
+                    // sum = 0
+                    // sortedResults.slice(7, sortedResults.length).map(i => i.value).forEach(i => {
+                    //     sum += i
+                    // })
+                    // // Take the top 10 cities
+                    // const top10Results = sortedResults.slice(0, 7);
+                    // // Extract labels and data for the top 10 cities
+                    // const top10Labels = top10Results.map(i => i.dimension_values[0].split(',')[0]);
+                    // top10Labels.push("Others")
+                    // const top10Data = top10Results.map(i => i.value);
+                    // top10Data.push(sum)
+
+                    const sortedResults = user.demographicsCity.sort((a, b) => b.value - a.value);
                     sum = 0
                     sortedResults.slice(7, sortedResults.length).map(i => i.value).forEach(i => {
                         sum += i
                     })
-
                     // Take the top 10 cities
                     const top10Results = sortedResults.slice(0, 7);
-
                     // Extract labels and data for the top 10 cities
                     const top10Labels = top10Results.map(i => i.dimension_values[0].split(',')[0]);
                     top10Labels.push("Others")
@@ -183,36 +194,38 @@
                     top10Data.push(sum)
 
                     // Extract state-wise follower count
-                    const stateWiseData = {};
-                    data.data[0].total_value.breakdowns[2].results.forEach(entry => {
-                        const [, state] = entry.dimension_values[0].split(', ');
-                        if (!stateWiseData[state]) {
-                            stateWiseData[state] = entry.value;
-                        } else {
-                            stateWiseData[state] += entry.value;
-                        }
-                    });
+                    // const stateWiseData = {};
+                    // data.data[0].total_value.breakdowns[2].results.forEach(entry => {
+                    //     const [, state] = entry.dimension_values[0].split(', ');
+                    //     if (!stateWiseData[state]) {
+                    //         stateWiseData[state] = entry.value;
+                    //     } else {
+                    //         stateWiseData[state] += entry.value;
+                    //     }
+                    // });
 
-                    console.log(stateWiseData)
+                    // console.log(stateWiseData)
 
-                    // Prepare data for the pie chart
-                    const state_labels = Object.keys(stateWiseData);
-                    const state_values = Object.values(stateWiseData);
+                    // // Prepare data for the pie chart
+                    // const state_labels = Object.keys(stateWiseData);
+                    // const state_values = Object.values(stateWiseData);
 
-                    console.log(state_labels)
-                    console.log(state_values)
+                    // console.log(state_labels)
+                    // console.log(state_values)
 
                     // Age Distribution Chart
-                    age = data.data[0].total_value.breakdowns[0].results.map(result => result.value)
+                    age = user.demographicsAge.map(ele => ele.value)
                     const ageData = {
-                        x: data.data[0].total_value.breakdowns[0].results.map(result => result.dimension_values[0]),
-                        y: data.data[0].total_value.breakdowns[0].results.map(result => result.value),
+                        // x: data.data[0].total_value.breakdowns[0].results.map(result => result.dimension_values[0]),
+                        // y: data.data[0].total_value.breakdowns[0].results.map(result => result.value),
+                        x : user.demographicsAge.map(ele=>ele.dimension_values[0]),
+                        y : user.demographicsAge.map(ele => ele.value),
                         type: 'bar',
                         marker: {
                             color: 'rgb(24, 46, 112)'
                         },
                         name: 'Age vise Followers',
-                        text: data.data[0].total_value.breakdowns[0].results.map(result => (result.value)),
+                        text: user.demographicsAge.map(ele => ele.value),
                         textposition: 'auto',
                         hoverinfo: 'x+text',
                         opacity: 0.8,
@@ -270,11 +283,21 @@
 
                     // Gender Distribution Chart
                     const genderData = {
-                        values: data.data[0].total_value.breakdowns[1].results.map(i => i.value),
-                        labels: data.data[0].total_value.breakdowns[1].results.map(i => {
-                            if (i.dimension_values[0] === 'M') {
+                        // values: data.data[0].total_value.breakdowns[1].results.map(i => i.value),
+                        // labels: data.data[0].total_value.breakdowns[1].results.map(i => {
+                        //     if (i.dimension_values[0] === 'M') {
+                        //         return 'Male';
+                        //     } else if (i.dimension_values[0] === 'F') {
+                        //         return 'Female';
+                        //     } else {
+                        //         return 'Undefined';
+                        //     }
+                        // }),
+                        values: user.demographicsGender.map(ele => ele.value),
+                        labels: user.demographicsGender.map(ele => {
+                            if (ele.dimension_values[0] === 'M') {
                                 return 'Male';
-                            } else if (i.dimension_values[0] === 'F') {
+                            } else if (ele.dimension_values[0] === 'F') {
                                 return 'Female';
                             } else {
                                 return 'Undefined';
@@ -326,30 +349,30 @@
                     //     showlegend: false,
                     // };
 
-                    const stateData = {
-                        labels: state_labels,
-                        values: state_values,
-                        type: 'pie',
-                        name: 'State vise Followers',
-                        hoverinfo: 'label+percent',
-                        textinfo: "label+percent",
-                        textposition: "inside",
-                        hole: .3,
-                    };
+                    // const stateData = {
+                    //     labels: state_labels,
+                    //     values: state_values,
+                    //     type: 'pie',
+                    //     name: 'State vise Followers',
+                    //     hoverinfo: 'label+percent',
+                    //     textinfo: "label+percent",
+                    //     textposition: "inside",
+                    //     hole: .3,
+                    // };
 
-                    const stateLayout = {
-                        title: {
-                            text: 'State Wise Distribution',
-                            font: {
-                                size: 24,
-                            }
-                        },
-                        legend: {
-                            font: {
-                                size: 16,
-                            }
-                        }
-                    };
+                    // const stateLayout = {
+                    //     title: {
+                    //         text: 'State Wise Distribution',
+                    //         font: {
+                    //             size: 24,
+                    //         }
+                    //     },
+                    //     legend: {
+                    //         font: {
+                    //             size: 16,
+                    //         }
+                    //     }
+                    // };
 
                     // Plot charts
                     Plotly.newPlot('ageChart', [ageData], ageLayout);
