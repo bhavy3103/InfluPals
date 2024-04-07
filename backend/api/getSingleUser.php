@@ -43,12 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Fetch media data
         while ($mediaData = mysqli_fetch_assoc($mediaResult)) {
             $media[] = array(
+                'id' => $mediaData['id'],
                 'media_type' => $mediaData['media_type'],
                 'permalink' => $mediaData['permalink'],
                 'media_url' => $mediaData['media_url'],
                 'like_count' => $mediaData['like_count'],
                 'comments_count' => $mediaData['comments_count'],
-                'id' => $mediaData['id']
+                'thumbnail_url' => $mediaData['thumbnail_url'],
+                'timestamp' => $mediaData['timestamp'],
+                'media_product_type' => $mediaData['media_product_type'],
             );
         }
 

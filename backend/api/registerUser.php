@@ -51,12 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($media as $ele) {
                 $eleId=$ele['id'];
                 $eleLikeCount=$ele['like_count'];
+                $eleCommentsCount=$ele['comments_count'];
                 $elePermalink=$ele['permalink'];
                 $eleMediaUrl=$ele['media_url'];
                 $eleMediaType=$ele['media_type'];
-                // $eleTimestamp=$ele['timestamp'];
-                mysqli_query($conn, "INSERT INTO media (id, page_id, like_count, permalink, media_url, media_type, media_product_type, timestamp, thumbnail_url)
-                    VALUES ('$eleId', '$id', '$eleLikeCount', '$elePermalink', '$eleMediaUrl', '$eleMediaType', '', '', '')");
+                $eleTimestamp=$ele['timestamp'];
+                $eleMediaProductType=$ele['media_product_type'];
+                $eleThumbnailUrl=$ele['thumbnail_url'];
+                mysqli_query($conn, "INSERT INTO media (id, page_id, like_count, comments_count, permalink, media_url, media_type, media_product_type, timestamp, thumbnail_url)
+                    VALUES ('$eleId', '$id', '$eleLikeCount', '$eleCommentsCount', '$elePermalink', '$eleMediaUrl', '$eleMediaType', '$eleMediaProductType', '$eleTimestamp', '$eleThumbnailUrl')");
             }
 
             mysqli_commit($conn);
