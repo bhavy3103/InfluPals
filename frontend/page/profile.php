@@ -23,13 +23,17 @@
         }
     </script>
     <style>
+        nav {
+            z-index: 1;
+        }
+
         #bar {
             display: flex !important;
-            justify-content: space-evenly !important;
+            justify-content: space-evenly;
         }
 
         #bar>div {
-            width: 30% !important;
+            width: 30%;
         }
 
         #bioSection {
@@ -70,10 +74,10 @@
             <!-- Followers Demographics -->
             <h2 class="text-3xl pb-3 text-orange-400 font-medium">Followers Demographics</h2>
             <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container" style="height: 375px; display: block; ">
-                    <div class="chart_wrapper" id="ageChart"></div>
-                    <div class="chart_wrapper" id="genderChart"></div>
-                    <div class="chart_wrapper" id="cityChart"></div>
-                    <!-- <div class="chart_wrapper" id="stateChart"></div> -->
+                <div class="chart_wrapper" id="ageChart"></div>
+                <div class="chart_wrapper" id="genderChart"></div>
+                <div class="chart_wrapper" id="cityChart"></div>
+                <!-- <div class="chart_wrapper" id="stateChart"></div> -->
             </div>
 
             <hr class="my-8 mt-14 border-gray-300">
@@ -87,7 +91,7 @@
     </div>
 
     <script>
-        let user={};
+        let user = {};
         const profileData = () => {
             // Example: Dynamically set bio section
             const bioSection = document.getElementById('bioSection');
@@ -157,230 +161,136 @@
                 </div>
             `).join('');
         }
-        const openMedia=(media_url)=>{
+        const openMedia = (media_url) => {
             window.open(media_url, "_blank");
         }
 
         const createCharts = () => {
-            fetch('demographic_bmark_data.json')
-                .then(response => response.json())
-                .then(data => {
 
-                    // Sort the results by follower count in descending order
-                    // const sortedResults = data.data[0].total_value.breakdowns[2].results.sort((a, b) => b.value - a.value);
-                    // sum = 0
-                    // sortedResults.slice(7, sortedResults.length).map(i => i.value).forEach(i => {
-                    //     sum += i
-                    // })
-                    // // Take the top 10 cities
-                    // const top10Results = sortedResults.slice(0, 7);
-                    // // Extract labels and data for the top 10 cities
-                    // const top10Labels = top10Results.map(i => i.dimension_values[0].split(',')[0]);
-                    // top10Labels.push("Others")
-                    // const top10Data = top10Results.map(i => i.value);
-                    // top10Data.push(sum)
+            const sortedResults = user.demographicsCity.sort((a, b) => b.value - a.value);
+            sum = 0
+            sortedResults.slice(7, sortedResults.length).map(i => i.value).forEach(i => {
+                sum += i
+            })
+            // Take the top 10 cities
+            const top10Results = sortedResults.slice(0, 7);
+            // Extract labels and data for the top 10 cities
+            const top10Labels = top10Results.map(i => i.dimension_values[0].split(',')[0]);
+            top10Labels.push("Others")
+            const top10Data = top10Results.map(i => i.value);
+            top10Data.push(sum)
 
-                    const sortedResults = user.demographicsCity.sort((a, b) => b.value - a.value);
-                    sum = 0
-                    sortedResults.slice(7, sortedResults.length).map(i => i.value).forEach(i => {
-                        sum += i
-                    })
-                    // Take the top 10 cities
-                    const top10Results = sortedResults.slice(0, 7);
-                    // Extract labels and data for the top 10 cities
-                    const top10Labels = top10Results.map(i => i.dimension_values[0].split(',')[0]);
-                    top10Labels.push("Others")
-                    const top10Data = top10Results.map(i => i.value);
-                    top10Data.push(sum)
+            // Age Distribution Chart
+            age = user.demographicsAge.map(ele => ele.value)
+            const ageData = {
+                x: user.demographicsAge.map(ele => ele.dimension_values[0]),
+                y: user.demographicsAge.map(ele => ele.value),
+                type: 'bar',
+                marker: {
+                    color: 'rgb(24, 46, 112)'
+                },
+                name: 'Age vise Followers',
+                text: user.demographicsAge.map(ele => ele.value),
+                textposition: 'auto',
+                hoverinfo: 'x+text',
+                opacity: 0.8,
+            };
+            const ageLayout = {
+                xaxis: {
+                    title: 'Age',
+                    color: 'red'
+                },
+                yaxis: {
+                    title: 'Total number of Followers',
+                    color: 'red'
+                },
+                title: {
+                    text: 'Age Wise Distribution',
+                    font: {
+                        size: 24,
+                    }
+                },
+                showlegend: false,
+            };
 
-                    // Extract state-wise follower count
-                    // const stateWiseData = {};
-                    // data.data[0].total_value.breakdowns[2].results.forEach(entry => {
-                    //     const [, state] = entry.dimension_values[0].split(', ');
-                    //     if (!stateWiseData[state]) {
-                    //         stateWiseData[state] = entry.value;
-                    //     } else {
-                    //         stateWiseData[state] += entry.value;
-                    //     }
-                    // });
+            // City Distribution Chart
+            const cityData = {
+                y: top10Labels,
+                x: top10Data,
+                type: 'bar',
+                marker: {
+                    color: 'rgb(11, 153, 51)'
+                },
+                name: 'City vise Followers',
+                orientation: 'h',
+                text: top10Data,
+                textposition: 'auto',
+                hoverinfo: 'y+text',
+                opacity: 0.8,
+            };
+            const cityLayout = {
+                xaxis: {
+                    title: 'Total number of Followers',
+                    color: 'red'
+                },
+                yaxis: {
+                    title: 'City',
+                    color: 'red'
+                },
+                title: {
+                    text: 'City Wise Distribution',
+                    font: {
+                        size: 24,
+                    }
+                },
+                showlegend: false,
+            };
 
-                    // console.log(stateWiseData)
+            // Gender Distribution Chart
+            const genderData = {
+                values: user.demographicsGender.map(ele => ele.value),
+                labels: user.demographicsGender.map(ele => {
+                    if (ele.dimension_values[0] === 'M') {
+                        return 'Male';
+                    } else if (ele.dimension_values[0] === 'F') {
+                        return 'Female';
+                    } else {
+                        return 'Undefined';
+                    }
+                }),
+                type: 'pie',
+                hoverinfo: 'label+percent',
+                name: 'Gender vise follower count',
 
-                    // // Prepare data for the pie chart
-                    // const state_labels = Object.keys(stateWiseData);
-                    // const state_values = Object.values(stateWiseData);
+            };
+            const genderLayout = {
+                title: {
+                    text: 'Gender Wise Distribution',
+                    font: {
+                        size: 24,
+                    }
+                },
+                legend: {
+                    font: {
+                        size: 16,
+                    }
+                }
+            };
 
-                    // console.log(state_labels)
-                    // console.log(state_values)
+            // Plot charts
+            Plotly.newPlot('ageChart', [ageData], ageLayout);
+            Plotly.newPlot('genderChart', [genderData], genderLayout);
+            Plotly.newPlot('cityChart', [cityData], cityLayout);
 
-                    // Age Distribution Chart
-                    age = user.demographicsAge.map(ele => ele.value)
-                    const ageData = {
-                        // x: data.data[0].total_value.breakdowns[0].results.map(result => result.dimension_values[0]),
-                        // y: data.data[0].total_value.breakdowns[0].results.map(result => result.value),
-                        x : user.demographicsAge.map(ele=>ele.dimension_values[0]),
-                        y : user.demographicsAge.map(ele => ele.value),
-                        type: 'bar',
-                        marker: {
-                            color: 'rgb(24, 46, 112)'
-                        },
-                        name: 'Age vise Followers',
-                        text: user.demographicsAge.map(ele => ele.value),
-                        textposition: 'auto',
-                        hoverinfo: 'x+text',
-                        opacity: 0.8,
-                    };
-                    const ageLayout = {
-                        xaxis: {
-                            title: 'Age',
-                            color: 'red'
-                        },
-                        yaxis: {
-                            title: 'Total number of Followers',
-                            color: 'red'
-                        },
-                        title: {
-                            text: 'Age Wise Distribution',
-                            font: {
-                                size: 24,
-                            }
-                        },
-                        showlegend: false,
-                    };
-
-                    // City Distribution Chart
-                    const cityData = {
-                        y: top10Labels,
-                        x: top10Data,
-                        type: 'bar',
-                        marker: {
-                            color: 'rgb(11, 153, 51)'
-                        },
-                        name: 'City vise Followers',
-                        orientation: 'h',
-                        text: top10Data,
-                        textposition: 'auto',
-                        hoverinfo: 'y+text',
-                        opacity: 0.8,
-                    };
-                    const cityLayout = {
-                        xaxis: {
-                            title: 'Total number of Followers',
-                            color: 'red'
-                        },
-                        yaxis: {
-                            title: 'City',
-                            color: 'red'
-                        },
-                        title: {
-                            text: 'City Wise Distribution',
-                            font: {
-                                size: 24,
-                            }
-                        },
-                        showlegend: false,
-                    };
-
-                    // Gender Distribution Chart
-                    const genderData = {
-                        // values: data.data[0].total_value.breakdowns[1].results.map(i => i.value),
-                        // labels: data.data[0].total_value.breakdowns[1].results.map(i => {
-                        //     if (i.dimension_values[0] === 'M') {
-                        //         return 'Male';
-                        //     } else if (i.dimension_values[0] === 'F') {
-                        //         return 'Female';
-                        //     } else {
-                        //         return 'Undefined';
-                        //     }
-                        // }),
-                        values: user.demographicsGender.map(ele => ele.value),
-                        labels: user.demographicsGender.map(ele => {
-                            if (ele.dimension_values[0] === 'M') {
-                                return 'Male';
-                            } else if (ele.dimension_values[0] === 'F') {
-                                return 'Female';
-                            } else {
-                                return 'Undefined';
-                            }
-                        }),
-                        type: 'pie',
-                        hoverinfo: 'label+percent',
-                        // marker: {
-                        //     colors: [
-                        //         'rgb(255, 99, 132)',
-                        //         'rgb(54, 162, 235)',
-                        //         'rgb(255, 205, 86)',
-                        //         'rgb(2, 205, 86)'
-                        //     ]
-                        // },
-                        name: 'Gender vise follower count',
-
-                    };
-                    const genderLayout = {
-                        title: {
-                            text: 'Gender Wise Distribution',
-                            font: {
-                                size: 24,
-                            }
-                        },
-                        legend: {
-                            font: {
-                                size: 16,
-                            }
-                        }
-                    };
-
-                    // State Distribution Chart
-                    // const stateData = {
-                    //     x: state_labels,
-                    //     y: state_values,
-                    //     type: 'bar',
-                    //     marker: { color: 'rgb(0, 167, 185)' },
-                    //     name: 'State vise Followers',
-                    //     text: state_values,
-                    //     textposition: 'auto',
-                    //     hoverinfo: 'x+text',
-                    //     opacity: 0.8,
-                    // };
-                    // const stateLayout = {
-                    //     xaxis: { title: 'State' },
-                    //     yaxis: { title: 'Total number of Followers' },
-                    //     title: 'State Wise Distribution',
-                    //     showlegend: false,
-                    // };
-
-                    // const stateData = {
-                    //     labels: state_labels,
-                    //     values: state_values,
-                    //     type: 'pie',
-                    //     name: 'State vise Followers',
-                    //     hoverinfo: 'label+percent',
-                    //     textinfo: "label+percent",
-                    //     textposition: "inside",
-                    //     hole: .3,
-                    // };
-
-                    // const stateLayout = {
-                    //     title: {
-                    //         text: 'State Wise Distribution',
-                    //         font: {
-                    //             size: 24,
-                    //         }
-                    //     },
-                    //     legend: {
-                    //         font: {
-                    //             size: 16,
-                    //         }
-                    //     }
-                    // };
-
-                    // Plot charts
-                    Plotly.newPlot('ageChart', [ageData], ageLayout);
-                    Plotly.newPlot('genderChart', [genderData], genderLayout);
-                    Plotly.newPlot('cityChart', [cityData], cityLayout);
-                    // Plotly.newPlot('stateChart', [stateData], stateLayout);
-                })
-                .catch(error => console.error('Error fetching JSON:', error));
+            Plotly.newPlot('ageChart', [ageData], ageLayout, {
+                displayModeBar: false
+            });
+            Plotly.newPlot('genderChart', [genderData], genderLayout, {
+                displayModeBar: false
+            });
+            Plotly.newPlot('cityChart', [cityData], cityLayout, {
+                displayModeBar: false
+            });
         };
 
         const userId = new URLSearchParams(window.location.search).get('userId');
