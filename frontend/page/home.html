@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      }
+      
+      .wrapper {
+      max-width: 1550px;
+      width: 100%;
+      position: relative;
+      }
+      .wrapper i {
+      top: 50%;
+      height: 50px;
+      width: 50px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      position: absolute;
+      text-align: center;
+      line-height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+      transform: translateY(-50%);
+      transition: transform 0.1s linear;
+      }
+      .wrapper i:active{
+      transform: translateY(-50%) scale(0.85);
+      }
+      .wrapper i:first-child{
+      left: -20px;
+      }
+      .wrapper i:last-child{
+      right: -20px;
+      }
+      .wrapper .carousel{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% / 4) - 10px);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      border-radius: 8px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      }
+      .carousel::-webkit-scrollbar {
+      display: none;
+      }
+      .carousel.no-transition {
+      scroll-behavior: auto;
+      }
+      .carousel.dragging {
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      }
+      .carousel.dragging .card {
+      cursor: grab;
+      user-select: none;
+      }
+      .carousel :where(.card, .img) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+      .carousel .card {
+      scroll-snap-align: start;
+      height: 342px;
+      list-style: none;
+      background: #fff;
+      cursor: pointer;
+      padding-bottom: 15px;
+      flex-direction: column;
+      border-radius: 8px;
+      background-color: rgb(245, 242, 242);
+      }
+      .carousel .card .img {
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      }
+      .card .img img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      }
+      .carousel .card h2 {
+      font-weight: 500;
+      font-size: 1.56rem;
+      margin: 30px 0 5px;
+      }
+      .carousel .card span {
+      color: #6A6D78;
+      font-size: 1.31rem;
+      }
+
+      @media screen and (max-width: 900px) {
+      .wrapper .carousel {
+          grid-auto-columns: calc((100% / 2) - 9px);
+      }
+      }
+
+      @media screen and (max-width: 600px) {
+      .wrapper .carousel {
+          grid-auto-columns: 100%;
+      }
+      }
+</style>
+</head>
+<body>
+  <div class="relative flex flex-row">
+    <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 ml-5">
+      <div
+        class="relative h-56 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+        <img
+          src="lifestyle.png"
+          alt="card-image" />
+      </div>
+      <div class="p-6">
+        <h5 class="block mt-2 text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+          Lifestyle
+        </h5>
+        
+      </div>
+      <div class="p-6 pt-0">
+        <button
+          class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+          type="button">
+          <a href="cards.html">See More</a>
+        </button>
+      </div>
+    </div>
+
+    <div class="wrapper ml-10 mr-2 mt-16">
+      <i id="left" class="fa-solid fa-angle-left" style="top: calc(50% - 20px)"></i>
+      <ul class="carousel">
+        <li class="card">
+          <div class="img"><img src="img-1.jpg" alt="img" draggable="false"></div>
+          <h2>Blanche Pearson</h2>
+          <span>Content creator</span>
+        </li>
+        <li class="card">
+          <div class="img"><img src="img-2.jpg" alt="img" draggable="false"></div>
+          <h2>Joenas Brauers</h2>
+          <span>Content creator</span>
+        </li>
+        <li class="card">
+          <div class="img"><img src="img-3.jpg" alt="img" draggable="false"></div>
+          <h2>Lariach French</h2>
+          <span>Content creator</span>
+        </li>
+        <li class="card">
+          <div class="img"><img src="img-4.jpg" alt="img" draggable="false"></div>
+          <h2>James Khosravi</h2>
+          <span>Content creator</span>
+        </li>
+        <li class="card">
+          <div class="img"><img src="img-5.jpg" alt="img" draggable="false"></div>
+          <h2>Kristina Zasiadko</h2>
+          <span>Content creator</span>
+        </li>
+        <li class="card">
+          <div class="img"><img src="img-6.jpg" alt="img" draggable="false"></div>
+          <h2>Donald Horton</h2>
+          <span>Content creator</span>
+        </li>
+      </ul>
+      <i id="right" class="fa-solid fa-angle-right" style="top: calc(50% - 20px)"></i>
+    </div>
+
+  </div>
+
+      <script>
+        const wrapper = document.querySelector(".wrapper");
+        const carousel = document.querySelector(".carousel");
+        const firstCardWidth = carousel.querySelector(".card").offsetWidth;
+        const arrowBtns = document.querySelectorAll(".wrapper i");
+        const carouselChildrens = [...carousel.children];
+
+        let isDragging = false, isAutoPlay = true, startX, startScrollLeft, timeoutId;
+
+        // Get the number of cards that can fit in the carousel at once
+        let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
+
+        // Insert copies of the last few cards to beginning of carousel for infinite scrolling
+        carouselChildrens.slice(-cardPerView).reverse().forEach(card => {
+            carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
+        });
+
+        // Insert copies of the first few cards to end of carousel for infinite scrolling
+        carouselChildrens.slice(0, cardPerView).forEach(card => {
+            carousel.insertAdjacentHTML("beforeend", card.outerHTML);
+        });
+
+        // Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
+        carousel.classList.add("no-transition");
+        carousel.scrollLeft = carousel.offsetWidth;
+        carousel.classList.remove("no-transition");
+
+        // Add event listeners for the arrow buttons to scroll the carousel left and right
+        arrowBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
+            });
+        });
+
+        const dragStart = (e) => {
+            isDragging = true;
+            carousel.classList.add("dragging");
+            // Records the initial cursor and scroll position of the carousel
+            startX = e.pageX;
+            startScrollLeft = carousel.scrollLeft;
+        }
+
+        const dragging = (e) => {
+            if(!isDragging) return; // if isDragging is false return from here
+            // Updates the scroll position of the carousel based on the cursor movement
+            carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
+        }
+
+        const dragStop = () => {
+            isDragging = false;
+            carousel.classList.remove("dragging");
+        }
+
+        const infiniteScroll = () => {
+            // If the carousel is at the beginning, scroll to the end
+            if(carousel.scrollLeft === 0) {
+                carousel.classList.add("no-transition");
+                carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
+                carousel.classList.remove("no-transition");
+            }
+            // If the carousel is at the end, scroll to the beginning
+            else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+                carousel.classList.add("no-transition");
+                carousel.scrollLeft = carousel.offsetWidth;
+                carousel.classList.remove("no-transition");
+            }
+
+            // Clear existing timeout & start autoplay if mouse is not hovering over carousel
+            clearTimeout(timeoutId);
+            if(!wrapper.matches(":hover")) autoPlay();
+        }
+
+        const autoPlay = () => {
+            if(window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+            // Autoplay the carousel after every 2500 ms
+            timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 2500);
+        }
+        autoPlay();
+
+        carousel.addEventListener("mousedown", dragStart);
+        carousel.addEventListener("mousemove", dragging);
+        document.addEventListener("mouseup", dragStop);
+        carousel.addEventListener("scroll", infiniteScroll);
+        wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
+        wrapper.addEventListener("mouseleave", autoPlay);
+      </script>
+      
+</body>
+</html>
