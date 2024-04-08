@@ -49,21 +49,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES ('$id', '$demographicsCityString', '$demographicsGenderString', '$demographicsAgeString')");
 
             foreach ($media as $ele) {
-                $eleId=$ele['id'];
-                $eleLikeCount=$ele['like_count'];
-                $eleCommentsCount=$ele['comments_count'];
-                $elePermalink=$ele['permalink'];
-                $eleMediaUrl=$ele['media_url'];
-                $eleMediaType=$ele['media_type'];
-                $eleTimestamp=$ele['timestamp'];
-                $eleMediaProductType=$ele['media_product_type'];
-                $eleThumbnailUrl=$ele['thumbnail_url'];
+                $eleId = $ele['id'];
+                $eleLikeCount = isset($ele['like_count']) ? $ele['like_count'] : '';
+                $eleCommentsCount = isset($ele['comments_count']) ? $ele['comments_count'] : '';
+                $elePermalink = isset($ele['permalink']) ? $ele['permalink'] : '';
+                $eleMediaUrl = isset($ele['media_url']) ? $ele['media_url'] : '';
+                $eleMediaType = isset($ele['media_type']) ? $ele['media_type'] : '';
+                $eleTimestamp = isset($ele['timestamp']) ? $ele['timestamp'] : '';
+                $eleMediaProductType = isset($ele['media_product_type']) ? $ele['media_product_type'] : '';
+                $eleThumbnailUrl = isset($ele['thumbnail_url']) ? $ele['thumbnail_url'] : '';
+
                 mysqli_query($conn, "INSERT INTO media (id, page_id, like_count, comments_count, permalink, media_url, media_type, media_product_type, timestamp, thumbnail_url)
                     VALUES ('$eleId', '$id', '$eleLikeCount', '$eleCommentsCount', '$elePermalink', '$eleMediaUrl', '$eleMediaType', '$eleMediaProductType', '$eleTimestamp', '$eleThumbnailUrl')");
             }
 
+
             mysqli_commit($conn);
-            echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully"));
+            echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully", 'id' => $id));
         } else {
             echo json_encode(array('status' => 'error', 'message' => mysqli_error($conn)));
         }
