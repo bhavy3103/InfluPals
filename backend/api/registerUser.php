@@ -63,7 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES ('$eleId', '$id', '$eleLikeCount', '$eleCommentsCount', '$elePermalink', '$eleMediaUrl', '$eleMediaType', '$eleMediaProductType', '$eleTimestamp', '$eleThumbnailUrl')");
             }
 
-
+            // Insert default row into pricing table
+            $insertPricingQuery = "INSERT INTO pricing (page_id, story, igtv_video, reel, live_stream, feed_post) 
+                VALUES ('$id', 'default', 'default', 'default', 'default', 'default')";
+            mysqli_query($conn, $insertPricingQuery);
+        
             mysqli_commit($conn);
             echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully", 'id' => $id));
         } else {

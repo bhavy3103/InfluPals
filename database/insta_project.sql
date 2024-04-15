@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 08:02 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Apr 15, 2024 at 08:37 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `demographics` (
   `city` mediumtext NOT NULL,
   `gender` mediumtext NOT NULL,
   `age` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ CREATE TABLE `media` (
   `media_product_type` varchar(100) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `thumbnail_url` varchar(5000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,23 @@ CREATE TABLE `page` (
   `category` varchar(100) NOT NULL,
   `biography` varchar(1000) DEFAULT NULL,
   `location` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pricing`
+--
+
+CREATE TABLE `pricing` (
+  `id` bigint(20) NOT NULL,
+  `page_id` bigint(20) NOT NULL,
+  `story` int(15) NOT NULL DEFAULT 0,
+  `igtv_video` int(15) NOT NULL DEFAULT 0,
+  `reel` int(15) NOT NULL DEFAULT 0,
+  `live_stream` int(15) NOT NULL DEFAULT 0,
+  `feed_post` int(15) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -98,6 +114,13 @@ ALTER TABLE `page`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pricing`
+--
+ALTER TABLE `pricing`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `page_id` (`page_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -105,7 +128,13 @@ ALTER TABLE `page`
 -- AUTO_INCREMENT for table `demographics`
 --
 ALTER TABLE `demographics`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `pricing`
+--
+ALTER TABLE `pricing`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -122,6 +151,12 @@ ALTER TABLE `demographics`
 --
 ALTER TABLE `media`
   ADD CONSTRAINT `fk_media_page_id` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pricing`
+--
+ALTER TABLE `pricing`
+  ADD CONSTRAINT `pricing_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
