@@ -156,13 +156,20 @@ function populateComparisonTable(influencer1Data, influencer2Data) {
     cell1.textContent = criterion;
 
     // Check if the criterion is demographics or some other data
-    if (criterion === 'demographicsAge' || criterion === 'demographicsCity' || criterion === 'demographicsGender') {
+    if (criterion === 'demographicsAge' || criterion === 'demographicsGender') {
         // If it's demographics, cityData, or genderData, format the data
         const influencer1Text = formatDemographics(influencer1Data[criterion]);
         const influencer2Text = formatDemographics(influencer2Data[criterion]);
         cell2.innerHTML = influencer1Text;
         cell3.innerHTML = influencer2Text;
-    }  else {
+    }
+    else if(criterion==='demographicsCity'){
+        const influencer1Text = formatDemographicsCity(influencer1Data[criterion]);
+        const influencer2Text = formatDemographicsCity(influencer2Data[criterion]);
+        cell2.innerHTML = influencer1Text;
+        cell3.innerHTML = influencer2Text;
+    } 
+     else {
     // If it's not demographics, cityData, or genderData, simply display the data
     const influencer1Text = formatText(influencer1Data[criterion]);
     const influencer2Text = formatText(influencer2Data[criterion]);
@@ -203,16 +210,35 @@ const formatDemographics = (data) => {
     return ''; // Return an empty string if data is not an array
 };
 
+// Function to format demographics data
+const formatDemographicsCity = (data) => {
+    // Check if data is an array
+    if (Array.isArray(data)) {
+        // Sort city data by value in descending order
+        const sortedCityData = data.sort((a, b) => b.value - a.value);
+        // Take top 5 cities
+        const topCities = sortedCityData.slice(0, 5);
+        // Create an array of strings for top cities and their values
+        const formattedData = topCities.map(city => `${city.dimension_values[0]}: ${city.value}`);
+        // Join the formatted data with line breaks
+        return formattedData.join('<br>');
+    }
+    return ''; // Return an empty string if data is not an array
+};
+
+
     console.log(influencer1Data.demographicsAge);
     console.log(influencer1Data.demographicsCity);
     console.log(influencer1Data.demographicsGender);
     // Loop through each criterion and create rows for each influencer
-    Object.keys(influencer1Data).forEach(criterion => {
-        // Skip the 'id' criterion as it's not needed in the comparison
-        if (criterion !== 'id') {
-            createRow(criterion, influencer1Data, influencer2Data);
-        }
-    });
+    // Loop through each criterion and create rows for each influencer
+Object.keys(influencer1Data).forEach(criterion => {
+    // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
+    if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media') {
+        createRow(criterion, influencer1Data, influencer2Data);
+    }
+});
+
 }
 </script>
 
