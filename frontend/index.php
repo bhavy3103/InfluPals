@@ -28,59 +28,52 @@
 
     </nav>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer" id="userGrid">
-        <!-- User cards will be added here dynamically -->
-    </div>
+    <div id="categoryGrid"></div>
 
     <script>
-        var sendSingleUserId = (userId) => {
-            console.log(userId);
-            if (userId !== undefined) {
-                // Redirect to profile.php with the user ID as a query parameter
-                window.location.href = `page/profile.php?userId=${userId}`;
-            } else {
-                console.error('User ID is undefined.');
-            }
-        }
-
         const openLoginPage = () => {
             location.assign('./page/login.php');
         }
 
-        fetch('../backend/api/getAllUsers.php')
+        var openCategoryCards = (category) => {
+            if (category !== undefined) {
+                window.location.href = `page/cards.php?category=${category}`;
+            } else {
+                console.error('Category is undefined.');
+            }
+        }
+
+        fetch('../backend/api/getAllCategories.php')
             .then(response => response.json())
             .then(data => {
-                // Log the response object in the console
                 console.log(data);
 
-                sendSingleUserId(data.id);
                 // Access and display limited data for each user
-                const userGrid = document.getElementById('userGrid');
-                data.forEach(user => {
+                const categoriesGrid = document.getElementById('categoryGrid');
+                data.forEach(category => {
                     const card = document.createElement('div');
-                    card.classList.add('bg-white', 'rounded-md', 'overflow-hidden', 'shadow-md', 'p-6', 'flex', 'flex-col');
+                    card.classList.add('grid', 'grid-cols-5', 'gap-4', 'mb-6');
 
-                    card.addEventListener('click', () => sendSingleUserId(user.id));
+                    card.addEventListener('click', () => openCategoryCards(category[1]));
 
                     card.innerHTML = `
-                        <div class="flex justify-center">
-                            <img src="${user.profile_picture_url}" height="150" width="150" class="rounded-full">
-                        </div>
-                        <p class="text-xl font-semibold flex justify-center">${user.username}</p>
-                        <p class="text-gray-600 flex justify-center">${user.biography}</p>
-                        <div class="flex flex-row justify-evenly mt-7">
-                            <div class="flex flex-col">
-                                <p class="text-gray-600 font-semibold ml-7">${user.followers_count}</p>
-                                <p class="font-semibold text-xl mb-2">Followers</p>
+                        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
+                            <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                                <img src="${category[2]}" alt="card-image" />
                             </div>
-                            <div class="flex flex-col ml-6">
-                                <p class="text-gray-600 font-semibold ml-5">${user.media_count}</p>
-                                <p class="font-semibold text-xl mb-2">Posts</p>
-                            </div>
-                        </div>
+                            <div class="p-3">
+                                <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                                    ${category[1]}
+                                </h5>
 
-                    `;
-                    userGrid.appendChild(card);
+                            </div>
+                            <div class="p-6 pt-0">
+                                <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
+                                    <a href="./cards.php?category=${category[1]}">See More</a>
+                                </button>
+                            </div>
+                        </div>`;
+                    categoriesGrid.appendChild(card);
                 });
             })
             .catch(error => console.error('Error fetching data:', error));

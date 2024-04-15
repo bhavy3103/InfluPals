@@ -1,3 +1,5 @@
+
+
 <?php
 
 require_once '../../backend/db_connection.php';
@@ -12,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $profile_picture_url = $data['profile_picture_url'];
     $media_count = $data['media_count'];
     $followers_count = $data['followers_count'];
-    $category = isset($data['category']) ? $data['category'] : '';
+    $category = isset($data['category']) ? $data['category'] : 'OTHERS';
     $biography = $data['biography'];
     $location = isset($data['location']) ? $data['location'] : '';
 
@@ -67,6 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insertPricingQuery = "INSERT INTO pricing (page_id, story, igtv_video, reel, live_stream, feed_post) 
                 VALUES ('$id', 'default', 'default', 'default', 'default', 'default')";
             mysqli_query($conn, $insertPricingQuery);
+
+            // Insert Category
+            $categoryQuery = "SELECT * FROM category WHERE name = '$category'";
+            $userCheckResult = mysqli_query($conn, $userCheckQuery);
+            if (!(mysqli_num_rows($userCheckResult) > 0)) {
+                mysqli_query($conn, "INSERT INTO category (name) VALUES ('$category')");
+            }
         
             mysqli_commit($conn);
             echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully", 'id' => $id));
