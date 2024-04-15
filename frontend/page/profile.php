@@ -76,7 +76,6 @@
                         Pricing Details
                     </button>
 
-                    <!-- pop-up -->
                     <div id="price-modal" class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
                         <div class="relative rounded-lg">
                             <!-- Modal header -->
