@@ -157,6 +157,19 @@ ALTER TABLE `media`
 --
 ALTER TABLE `pricing`
   ADD CONSTRAINT `pricing_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE;
+
+
+
+CREATE TABLE `category` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `image_url` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

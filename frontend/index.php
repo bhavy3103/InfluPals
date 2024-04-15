@@ -23,6 +23,8 @@
                 <button onclick="openLoginPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Login As Creator
                 </button>
+                <a href="./page/compare.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Compare</a>
+
             </div>
         </div>
 
@@ -37,7 +39,7 @@
 
         var openCategoryCards = (category) => {
             if (category !== undefined) {
-                window.location.href = `page/cards.php?category=${category}`;
+                window.location.href = `cards.php?category=${category}`;
             } else {
                 console.error('Category is undefined.');
             }
