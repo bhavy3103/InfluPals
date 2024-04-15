@@ -74,6 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['demographicsAge'] = $demographicsAge;
         $response['demographicsCity']=$demographicsCity;
         $response['demographicsGender']=$demographicsGender;
+        
+        // 4. SQL Query of fetch pricing details
+        $pricingQuery = "SELECT * FROM pricing WHERE page_id = '$id'";
+        $pricingResult = mysqli_query($conn, $pricingQuery);
+
+        if (!$pricingResult) {
+            echo json_encode(array('error' => mysqli_error($conn))); // Return error message if query fails
+            exit;
+        }
+
+        $pricingData = mysqli_fetch_assoc($pricingResult);
+        $response['pricing']=$pricingData;
 
         echo json_encode($response); // Return response
     } else {
