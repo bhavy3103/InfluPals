@@ -1,187 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-        *{
-            font-family: "Poppins", sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-        .bg{
-            background-color: rgb(252, 250, 250);;
-        }
+    * {
+      font-family: "Poppins", sans-serif;
+    }
 
-        .profile {
-            height: 160px;
-            width: 160px;
-            border-radius: 50%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-        }
-        
-    </style>
+    .bg {
+      background-color: rgb(252, 250, 250);
+      ;
+    }
+
+    .profile {
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+    }
+  </style>
 </head>
+
 <body>
 
-    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
-        <div class="flex items-center">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
-          <span class="text-xl font-bold">Instagram</span>
+  <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
+    <div class="flex items-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2"
+        alt="instagram">
+      <span class="text-xl font-bold">Instagram</span>
+    </div>
+
+    <div class="flex items-center">
+      <div class="relative">
+        <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
+        <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+
         </div>
-        
-        <div class="flex items-center">
-          <div class="relative">
-            <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
-            <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-              
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8">
-        <div class="bg overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-1.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">2900</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">7000</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Delhi</p>
-            </div>
-          </div>
-
-          <div class="bg overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-2.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">2900</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">7000</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Delhi</p>
-            </div>
-          </div>
-
-          <div class="bg overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-3.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">2900</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">7000</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Delhi</p>
-            </div>
-          </div>
-
-          <div class="bg overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-4.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">2900</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">7000</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Delhi</p>
-            </div>
-          </div>
-
-          <div class="bg overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-5.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">2900</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">7000</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Delhi</p>
-            </div>
-          </div>
-
-          <div class="bg rounded-md overflow-hidden shadow-md">
-            <div class="flex justify-center mt-2">
-              <img src="img-6.jpg" class="profile">
-            </div>
-              <p class="text-lg font-semibold flex justify-center mt-2">Kristina Zasiadko</p>
-              <p class="text-gray-600 flex justify-center">Content Creator</p>
-            <div class="flex flex-row justify-evenly mt-3">
-              <div class="flex flex-col">
-                <p class="text-gray-600 font-semibold ml-7">7.2k</p>
-                <p class="font-semibold text-xl mb-1">Followers</p>
-              </div>
-              <div class="flex flex-col ml-6">
-                <p class="text-gray-600 font-semibold ml-1">5432</p>
-                <p class="font-semibold text-lg mb-1">Posts</p>
-              </div>
-            </div>
-            <div class="flex justify-center text-gray-600 mt-1 mb-2">
-              <img src="address-41.svg" height="18" width="18">
-              <p class="ml-1">Hydrabad</p>
-            </div>
-          </div>
-
-          
       </div>
-      
-  
-    
+    </div>
+  </nav>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8">
+    <div class="bg overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">2900</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">7000</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+    <div class="bg overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">2900</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">7000</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+    <div class="bg overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">2900</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">7000</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+    <div class="bg overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">2900</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">7000</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+    <div class="bg overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Blanche Pearson</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">2900</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">7000</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Delhi</p>
+      </div>
+    </div>
+
+    <div class="bg rounded-md overflow-hidden shadow-md">
+      <div class="flex justify-center mt-2">
+        <img src="img-3.jpg" class="profile" alt="profile">
+      </div>
+      <p class="text-lg font-semibold flex justify-center mt-2">Kristina Zasiadko</p>
+      <p class="text-gray-600 flex justify-center">Content Creator</p>
+      <div class="flex flex-row justify-evenly mt-3">
+        <div class="flex flex-col">
+          <p class="text-gray-600 font-semibold ml-7">7.2k</p>
+          <p class="font-semibold text-xl mb-1">Followers</p>
+        </div>
+        <div class="flex flex-col ml-6">
+          <p class="text-gray-600 font-semibold ml-1">5432</p>
+          <p class="font-semibold text-lg mb-1">Posts</p>
+        </div>
+      </div>
+      <div class="flex justify-center text-gray-600 mt-1 mb-2">
+        <img src="address-41.svg" height="18" width="18" alt="city">
+        <p class="ml-1">Hydrabad</p>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

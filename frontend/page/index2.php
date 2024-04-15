@@ -33,7 +33,7 @@
         <div class="grid grid-cols-5 gap-4 mb-6">
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="lifestyle.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -43,14 +43,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div>
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="fitness.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -60,14 +60,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div> 
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="food.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -77,14 +77,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div> 
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="fashion.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -94,14 +94,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div>
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="makeup.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -111,14 +111,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div>
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="art.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -128,14 +128,14 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div>
 
             <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
                 <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <img src="photography.png" alt="card-image" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card-image" />
                 </div>
                 <div class="p-3">
                     <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -145,7 +145,7 @@
                 </div>
                 <div class="p-6 pt-0">
                     <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                    <a href="./page/cards.html">See More</a>
+                    <a href="./index_filter.php">See More</a>
                     </button>
                 </div>
             </div>
@@ -158,14 +158,14 @@
             console.log(userId);
             if (userId !== undefined) {
                 // Redirect to profile.php with the user ID as a query parameter
-                window.location.href = `page/profile.php?userId=${userId}`;
+                window.location.href = `./profile.php?userId=${userId}`;
             } else {
                 console.error('User ID is undefined.');
             }
         }
 
         const openLoginPage = () => {
-            location.assign('./page/login.php');
+            location.assign('./login.php');
         }
 
         fetch('../backend/api/getAllUsers.php')
