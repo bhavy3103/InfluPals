@@ -69,6 +69,98 @@
                 <!-- The content will be dynamically set here -->
             </div>
 
+            <!-- modal -->
+            <div class="flex justify-center items-center gap-6">
+                <div>
+                    <button onclick="showDialog()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                        Pricing Details
+                    </button>
+
+                    <!-- pop-up -->
+                    <div id="price-modal" class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
+                        <div class="relative rounded-lg">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between py-2 px-4 md:p-5 border-b">
+                                <div class="text-xl text-center font-semibold text-gray-800">
+                                    Pricing
+                                </div>
+                                <button onclick="showDialog()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+
+                            <!-- body -->
+                            <div id="pricing_block">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button onclick="showBookNow()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                        Book Now
+                    </button>
+                    <div
+                        id="book-now"
+                        class="hidden bg-white fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
+                        <form action="../../backend/api/booking.php" method="post" id="booking_form">
+                            <div class="heading text-center text-3xl text-indigo-600 font-medium">Add Your Requirnments
+                                <!-- <hr class="mx-4 mt-3 border-indigo-400" style="width: 20%; height: 10px; margin: 0 auto;"> -->
+                            </div>
+
+                            <div class="row mb-3 mx-4 mt-11 ">
+                                <label for="name" class="col-sm-3 col-form-label font-medium text-xl">Name : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" min="0" class="form-control" name="name" id="name" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mx-4 mt-3">
+                                <label for="email" class="col-sm-3 col-form-label font-medium text-xl">Email :</label>
+                                <div class="col-sm-9">
+                                    <input type="email" min="0" class="form-control" name="email" id="email" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mx-4 mt-3">
+                                <label for="contact" class="col-sm-3 col-form-label font-medium text-xl">Contact :</label>
+                                <div class="col-sm-9">
+                                    <input type="tel" min="0" class="form-control" name="contact" id="contact" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mx-4 mt-3">
+                                <label for="requirnments" class="col-sm-3 col-form-label font-medium text-xl">Requisite:</label>
+                                <div class="col-sm-9">
+                                    <textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control"
+                                        style="resize: none; height: 150px;" placeholder="60s reel with voiceover and good video shots."
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3 mx-4 mt-3">
+                                <label for="budget" class="col-sm-3 col-form-label font-medium text-xl">Budget :</label>
+                                <div class="col-sm-9">
+                                    <input type="number" min="0" class="form-control" name="budget" id="budget" required>
+                                </div>
+                            </div>
+
+                            <!-- <div class="text-gray-600 flex justify-center">
+                                * Above price is based on per individual element
+                            </div> -->
+
+                            <div class="mt-3 pr-4 flex items-center justify-center gap-x-6">
+                                <button type="submit"
+                                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    Book</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <hr class="my-8 border-gray-300">
 
             <!-- Followers Demographics -->
@@ -92,13 +184,37 @@
 
     <script>
         let user = {};
+        
+        let isHide=true;
+        let isHideBookNow=true;
+        const showDialog=()=>{
+            console.log(isHide);
+            isHide=!isHide;
+            const modal=document.getElementById('price-modal');
+            if(isHide){
+                modal.style.display="none";
+            }
+            else{
+                modal.style.display="block";
+            }
+        }
+        const showBookNow=()=>{
+            isHideBookNow=!isHideBookNow;
+            const modal=document.getElementById('book-now');
+            if(isHideBookNow){
+                modal.style.display="none";
+            }
+            else{
+                modal.style.display="block";
+            }
+        }
         const profileData = () => {
             // Example: Dynamically set bio section
             const bioSection = document.getElementById('bioSection');
             bioSection.innerHTML = `
-                <div class="flex-shrink-0 ">
-                    <img src="${user.profile_picture_url}" class="rounded-full shadow-lg w-48 h-48 mx-8" alt="User_logo">
-                    <p class="text-4xl mt-4 lg:mt-3 lg:text-center lg:text-4xl font-bold">${user.name}</p>
+            <div class="flex-shrink-0 ">
+            <img src="${user.profile_picture_url}" class="rounded-full shadow-lg w-48 h-48 mx-8" alt="User_logo">
+            <p class="text-4xl mt-4 lg:mt-3 lg:text-center lg:text-4xl font-bold">${user.name}</p>
                 </div>
                 <div class="mt-8 lg:mt-200 my-100">
                     <div class="flex items-center space-x-4 mt-8">
@@ -123,7 +239,7 @@
                         <div class="bg-white text-lg text-center rounded-md p-4 item-center w-35">
                             <p class="font-bold text-2xl">${user.followers_count}</p>
                             <p class="text-orange-400 font-medium">Profile Views</p>
-                        </div>
+                        </div>                        
                         
                     </div>
                     
@@ -132,6 +248,39 @@
                     </div>
                 </div>      
             `;
+
+            // pricing
+            const pricingSection = document.getElementById('pricing_block');
+            pricingSection.innerHTML=`
+                <div class="justify-center border px-8 py-4 overflow-y-scroll">
+                    <div class="my-4 flex gap-4">
+                        <div for="post" class="text-xl font-medium text-gray-700">Story</div>
+                        <div id="story">₹ ${user.pricing.story} / story</div>
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div for="post" class="text-xl font-medium text-gray-700">IGTV Video</div>
+                        <div id="igtv_video">₹ ${user.pricing.igtv_video} / igtv video</div>
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div for="post" class="text-xl font-medium text-gray-700">Reel</div>
+                        <div id="reel">₹ ${user.pricing.reel} / reel</div>
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div for="post" class="text-xl font-medium text-gray-700">Live Stream</div>
+                        <div id="live_stream">₹ ${user.pricing.live_stream} / live stream</div>
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div for="post" class="text-xl font-medium text-gray-700">Feed Post</div>
+                        <div id="feed_post">₹ ${user.pricing.feed_post} / feed post</div>
+                    </div>
+                    
+                    <div class="border-t"></div>
+                    <div class="my-4">
+                    <button class="block text-white text-center mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
+                    </div>
+                </div>
+            `
+            
             //Animate to posts smoothly
             document.querySelectorAll('a[href^="#post"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
