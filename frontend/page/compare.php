@@ -156,7 +156,7 @@ function populateComparisonTable(influencer1Data, influencer2Data) {
     cell1.textContent = criterion;
 
     // Check if the criterion is demographics or some other data
-    if (criterion === 'demographicsAge' || criterion === 'demographicsGender') {
+    if (criterion === 'demographicsAge' || criterion === 'demographicsGender' ) {
         // If it's demographics, cityData, or genderData, format the data
         const influencer1Text = formatDemographics(influencer1Data[criterion]);
         const influencer2Text = formatDemographics(influencer2Data[criterion]);
@@ -168,19 +168,37 @@ function populateComparisonTable(influencer1Data, influencer2Data) {
         const influencer2Text = formatDemographicsCity(influencer2Data[criterion]);
         cell2.innerHTML = influencer1Text;
         cell3.innerHTML = influencer2Text;
-    } 
-     else {
+    }
+    // else if (criterion==='pricing'){
+    //     Object.keys(influencer1Data[criterion]).forEach((val)=>{
+    //         console.log(val);
+    //         const influencer1Text = (influencer1Data.pricing[val]);
+    //         const influencer2Text = (influencer2Data.pricing[val]);
+    //         cell2.innerHTML = influencer1Text;
+    //         cell3.innerHTML = influencer2Text;
+    //         row.appendChild(cell1);
+    //         row.appendChild(cell2);
+    //         row.appendChild(cell3);
+    //         table.appendChild(row);
+    //     })
+    //     return ;
+        
+    // } 
+    else {
     // If it's not demographics, cityData, or genderData, simply display the data
+    console.log(criterion);
     const influencer1Text = formatText(influencer1Data[criterion]);
     const influencer2Text = formatText(influencer2Data[criterion]);
     cell2.innerHTML = influencer1Text;
     cell3.innerHTML = influencer2Text;
-}
+    }
     row.appendChild(cell1);
     row.appendChild(cell2);
     row.appendChild(cell3);
     table.appendChild(row);
 };
+
+
 
 // Function to format text and add line breaks if it exceeds a certain length
 const formatText = (text) => {
@@ -230,12 +248,20 @@ const formatDemographicsCity = (data) => {
     console.log(influencer1Data.demographicsAge);
     console.log(influencer1Data.demographicsCity);
     console.log(influencer1Data.demographicsGender);
+    console.log(influencer1Data);
     // Loop through each criterion and create rows for each influencer
     // Loop through each criterion and create rows for each influencer
-Object.keys(influencer1Data).forEach(criterion => {
+
+    const influencerData = {
+    ...influencer1Data,
+    ...(influencer1Data.pricing)
+};
+console.log(influencerData);
+
+    Object.keys({...influencerData, ...(influencerData.pricing)}).forEach(criterion => {
     // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
-    if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media') {
-        createRow(criterion, influencer1Data, influencer2Data);
+    if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media' && criterion !== 'pricing' && criterion !== 'page_id') {
+        createRow(criterion, influencerData, influencerData);
     }
 });
 
