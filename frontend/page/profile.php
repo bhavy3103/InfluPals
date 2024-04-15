@@ -55,10 +55,14 @@
 
         <div class="">
             <div class="space-x-3 pe-200">
-                <a href="../index.php" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Home</a>
-                <a href="" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
-                <a href="./compare.php" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a>
-                <a href="" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
+                <a href="../index.php"
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Home</a>
+                <a href=""
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
+                <a href="./compare.php"
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a>
+                <a href=""
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
             </div>
         </div>
     </nav>
@@ -73,20 +77,26 @@
             <!-- modal -->
             <div class="flex justify-center items-center gap-6">
                 <div>
-                    <button onclick="showDialog()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                    <button onclick="showDialog()"
+                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        type="button">
                         Pricing Details
                     </button>
 
-                    <div id="price-modal" class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
+                    <div id="price-modal"
+                        class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
                         <div class="relative rounded-lg">
                             <!-- Modal header -->
                             <div class="flex items-center justify-between py-2 px-4 md:p-5 border-b relative">
                                 <div class="text-3xl text-center mx-auto font-semibold text-gray-800">
                                     Pricing
                                 </div>
-                                <button onclick="showDialog()" type="button" class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                <button onclick="showDialog()" type="button"
+                                    class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                     </svg>
                                     <span class="sr-only">Close modal</span>
                                 </button>
@@ -100,63 +110,82 @@
                 </div>
 
                 <div>
-                    <button onclick="showBookNow()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                    <button onclick="showBookNow()"
+                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        type="button">
                         Book Now
                     </button>
-                    <div
-                        id="book-now"
+
+                    <!-- main body of book-now -->
+                    <div id="book-now"
                         class="hidden bg-white fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
-                        <form action="../../backend/api/booking.php" method="post" id="booking_form">
-                            <div class="heading text-center text-3xl text-indigo-600 font-medium">Add Your Requirnments
-                                <!-- <hr class="mx-4 mt-3 border-indigo-400" style="width: 20%; height: 10px; margin: 0 auto;"> -->
-                            </div>
+                        <!-- <form  method="post" id="booking_form"> -->
+                        <!-- <div class="heading text-center text-3xl text-indigo-600 font-medium">Add Your Requirnments
+                            <hr class="mx-4 mt-3 border-indigo-400" style="width: 20%; height: 10px; margin: 0 auto;">
+                        </div> -->
 
-                            <div class="row mb-3 mx-4 mt-11 ">
-                                <label for="name" class="col-sm-3 col-form-label font-medium text-xl">Name : </label>
-                                <div class="col-sm-9">
-                                    <input type="text" min="0" class="form-control" name="name" id="name" required>
-                                </div>
+                        <div class="flex items-center justify-between py-2 px-4 md:p-5 border-b relative">
+                            <div class="text-3xl text-center mx-auto font-semibold text-gray-800">
+                                Booking
                             </div>
+                            <button onclick="showBookNow()" type="button"
+                                class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <div class="row mb-3 mx-4 mt-11 ">
+                            <label for="name" class="col-sm-3 col-form-label font-medium text-xl">Name : </label>
+                            <div class="col-sm-9">
+                                <input type="text" min="0" class="form-control" name="name" id="name" required>
+                            </div>
+                        </div>
 
-                            <div class="row mb-3 mx-4 mt-3">
-                                <label for="email" class="col-sm-3 col-form-label font-medium text-xl">Email :</label>
-                                <div class="col-sm-9">
-                                    <input type="email" min="0" class="form-control" name="email" id="email" required>
-                                </div>
+                        <div class="row mb-3 mx-4 mt-3">
+                            <label for="email" class="col-sm-3 col-form-label font-medium text-xl">Email :</label>
+                            <div class="col-sm-9">
+                                <input type="email" min="0" class="form-control" name="email" id="email" required>
                             </div>
+                        </div>
 
-                            <div class="row mb-3 mx-4 mt-3">
-                                <label for="contact" class="col-sm-3 col-form-label font-medium text-xl">Contact :</label>
-                                <div class="col-sm-9">
-                                    <input type="tel" min="0" class="form-control" name="contact" id="contact" required>
-                                </div>
+                        <div class="row mb-3 mx-4 mt-3">
+                            <label for="contact" class="col-sm-3 col-form-label font-medium text-xl">Contact
+                                :</label>
+                            <div class="col-sm-9">
+                                <input type="tel" min="0" class="form-control" name="contact" id="contact" required>
                             </div>
+                        </div>
 
-                            <div class="row mb-3 mx-4 mt-3">
-                                <label for="requirnments" class="col-sm-3 col-form-label font-medium text-xl">Requisite:</label>
-                                <div class="col-sm-9">
-                                    <textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control"
-                                        style="resize: none; height: 150px;" placeholder="60s reel with voiceover and good video shots."
-                                        required></textarea>
-                                </div>
+                        <div class="row mb-3 mx-4 mt-3">
+                            <label for="requirnments"
+                                class="col-sm-3 col-form-label font-medium text-xl">Requisite:</label>
+                            <div class="col-sm-9">
+                                <textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control"
+                                    style="resize: none; height: 150px;"
+                                    placeholder="60s reel with voiceover and good video shots." required></textarea>
                             </div>
-                            <div class="row mb-3 mx-4 mt-3">
-                                <label for="budget" class="col-sm-3 col-form-label font-medium text-xl">Budget :</label>
-                                <div class="col-sm-9">
-                                    <input type="number" min="0" class="form-control" name="budget" id="budget" required>
-                                </div>
+                        </div>
+                        <div class="row mb-3 mx-4 mt-3">
+                            <label for="budget" class="col-sm-3 col-form-label font-medium text-xl">Budget :</label>
+                            <div class="col-sm-9">
+                                <input type="number" min="0" class="form-control" name="budget" id="budget" required>
                             </div>
+                        </div>
 
-                            <!-- <div class="text-gray-600 flex justify-center">
+                        <!-- <div class="text-gray-600 flex justify-center">
                                 * Above price is based on per individual element
                             </div> -->
 
-                            <div class="mt-3 pr-4 flex items-center justify-center gap-x-6">
-                                <button type="submit"
-                                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                    Book</button>
-                            </div>
-                        </form>
+                        <div class="mt-3 pr-4 flex items-center justify-center gap-x-6">
+                            <button onclick="bookingFunc()"
+                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Book</button>
+                        </div>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -165,7 +194,8 @@
 
             <!-- Followers Demographics -->
             <h2 class="text-3xl pb-3 text-orange-400 font-medium">Followers Demographics</h2>
-            <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container" style="height: 375px; display: block; ">
+            <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container"
+                style="height: 375px; display: block; ">
                 <div class="chart_wrapper" id="ageChart"></div>
                 <div class="chart_wrapper" id="genderChart"></div>
                 <div class="chart_wrapper" id="cityChart"></div>
@@ -176,7 +206,8 @@
 
             <!-- Posts -->
             <h2 class="text-3xl pb-3 text-orange-400 font-medium">Recent Posts</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 bg-white rounded-lg shadow-lg p-8" id="postsSection">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 bg-white rounded-lg shadow-lg p-8"
+                id="postsSection">
                 <!-- The content will be dynamically set here -->
             </div>
         </span>
@@ -184,28 +215,79 @@
 
     <script>
         let user = {};
-        
-        let isHide=true;
-        let isHideBookNow=true;
-        const showDialog=()=>{
-            console.log(isHide);
-            isHide=!isHide;
-            const modal=document.getElementById('price-modal');
-            if(isHide){
-                modal.style.display="none";
+
+        let isHide = true;
+        let isHideBookNow = true;
+        const bookingFunc = () => {
+            const uname = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
+            const requirements = document.getElementById('requirements').value;
+            const budget = document.getElementById('budget').value;
+
+            const data = {
+                "id": userId,
+                "uname": uname,
+                "email": email,
+                "contact": contact,
+                "requirements": requirements,
+                "budget": budget
             }
-            else{
-                modal.style.display="block";
+
+            const options = {
+                method: "POST", // HTTP method
+                headers: {
+                    "Content-Type": "application/json" // Specify content type as JSON
+                },
+                body: JSON.stringify(data) // Convert JavaScript object to JSON string
+            };
+
+            fetch("http://localhost/Final_instagram_project/MAD_Project/backend/api/bookingForm.php", options)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Parse response JSON if request was successful
+                    }
+                    throw new Error("Network response was not ok.");
+                })
+                .then(data => {
+                    // Handle response data
+                    console.log("Response:", data);
+                    // You can perform additional actions here based on the response
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error("Error:", error);
+                });
+
+            document.getElementById('name').value = "";
+            document.getElementById('email').value = "";
+            document.getElementById('contact').value = "";
+            document.getElementById('requirements').value = "";
+            document.getElementById('budget').value = "";
+
+            showBookNow();
+
+        }
+
+        const showDialog = () => {
+            console.log(isHide);
+            isHide = !isHide;
+            const modal = document.getElementById('price-modal');
+            if (isHide) {
+                modal.style.display = "none";
+            }
+            else {
+                modal.style.display = "block";
             }
         }
-        const showBookNow=()=>{
-            isHideBookNow=!isHideBookNow;
-            const modal=document.getElementById('book-now');
-            if(isHideBookNow){
-                modal.style.display="none";
+        const showBookNow = () => {
+            isHideBookNow = !isHideBookNow;
+            const modal = document.getElementById('book-now');
+            if (isHideBookNow) {
+                modal.style.display = "none";
             }
-            else{
-                modal.style.display="block";
+            else {
+                modal.style.display = "block";
             }
         }
         const profileData = () => {
@@ -251,7 +333,7 @@
 
             // pricing
             const pricingSection = document.getElementById('pricing_block');
-            pricingSection.innerHTML=`
+            pricingSection.innerHTML = `
                 <div class="justify-center border px-8 py-4 overflow-y-scroll">
                     <div class="my-4 flex gap-4">
                         <div for="post" class="text-xl font-medium text-gray-700">Story</div>
@@ -280,10 +362,10 @@
                     </div>
                 </div>
             `
-            
+
             //Animate to posts smoothly
             document.querySelectorAll('a[href^="#post"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
 
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -296,7 +378,7 @@
             const postsSection = document.getElementById('postsSection');
             postsSection.innerHTML = user.media.map(post => `
                 <div onclick="openMedia('${post.permalink}')" class="border-2 border-gray-500 rounded-md overflow-hidden cursor-pointer" id="posts">    
-                    <img src="${post.media_type=='IMAGE' ? post.media_url : post.thumbnail_url}" alt="" class="w-full">
+                    <img src="${post.media_type == 'IMAGE' ? post.media_url : post.thumbnail_url}" alt="" class="w-full">
                     <div class="p-4 flex bg-gray-100 justify-between items-center">
                         <div class="flex items-center space-x-2">
                             <i class="far fa-heart"></i>

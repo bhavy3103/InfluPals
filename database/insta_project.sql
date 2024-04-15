@@ -26,6 +26,15 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `demographics`
 --
+CREATE TABLE `booking_details` (
+  `id` bigint(20) NOT NULL,
+  `uname` varchar(50) NOT NULL,
+  `email` varchar(1000) NOT NULL,
+  `contact` int(10) NOT NULL,
+  `requirements` varchar(10000) NOT NULL,
+  `budget` bigint(20) NOT NULL,
+  `creator_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `demographics` (
   `id` bigint(20) NOT NULL,
@@ -96,6 +105,11 @@ CREATE TABLE `pricing` (
 --
 -- Indexes for table `demographics`
 --
+ALTER TABLE `booking_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `creator_id` (`creator_id`);
+
+
 ALTER TABLE `demographics`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_demographics_page_id` (`page_id`);
