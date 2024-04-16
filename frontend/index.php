@@ -30,7 +30,9 @@
 
     </nav>
 
-    <div id="categoryGrid"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer" id="categoryGrid">
+        <!-- User cards will be added here dynamically -->
+    </div>
 
     <script>
         const openLoginPage = () => {
