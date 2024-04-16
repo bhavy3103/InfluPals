@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/fe2fdff340.js" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
+
         tailwind.config = {
             theme: {
                 extend: {
@@ -118,7 +119,7 @@
 
                     <!-- main body of book-now -->
                     <div id="book-now"
-                        class="hidden bg-white fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
+                        class="hidden bg-white rounded-lg fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
                         <!-- <form  method="post" id="booking_form"> -->
                         <!-- <div class="heading text-center text-3xl text-indigo-600 font-medium">Add Your Requirnments
                             <hr class="mx-4 mt-3 border-indigo-400" style="width: 20%; height: 10px; margin: 0 auto;">
@@ -138,49 +139,54 @@
                                 <span class="sr-only">Close modal</span>
                             </button>
                         </div>
-                        <div class="row mb-3 mx-4 mt-11 ">
-                            <label for="name" class="col-sm-3 col-form-label font-medium text-xl">Name : </label>
-                            <div class="col-sm-9">
-                                <input type="text" min="0" class="form-control" name="name" id="name" required>
+
+
+                        <div class="flex flex-col justify-center items-center mx-4 mt-11">
+                            <div class="w-full max-w-sm flex flex-col mb-3">
+                                <div class="flex flex-col mb-3">
+                                    <label for="name" class="font-medium text-xl mr-2 mb-1">Name :</label>
+                                    <input type="text" min="0"
+                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="name"
+                                        id="name" required>
+                                </div>
+
+                                <div class="flex flex-col mb-3 ">
+                                    <label for="email" class="font-medium text-xl mr-2 mb-1">Email :</label>
+                                    <input type="email" min="0"
+                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="email"
+                                        id="email" required>
+                                </div>
+
+                                <div class="flex flex-col mb-3">
+                                    <label for="contact" class="font-medium text-xl mr-2 mb-1">Contact :</label>
+                                    <input type="tel" min="0" minlength="10" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="contact"
+                                        id="contact" required>
+                                </div>
+
+                                <div class="flex flex-col mb-3">
+                                    <label for="requirements" class="font-medium text-xl mr-2 mb-1">Requisite:</label>
+                                    <textarea name="requirements" id="requirements" cols="30" rows="10"
+                                        class="form-control border border-gray-300 rounded-md px-4 py-1"
+                                        style="resize: none; height: 150px;"
+                                        placeholder="60s reel with voiceover and good video shots." required></textarea>
+                                </div>
+
+                                <div class="flex flex-col mb-3">
+                                    <label for="budget" class="font-medium text-xl mr-2 mb-1">Budget :</label>
+                                    <input type="number" min="0"
+                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="budget"
+                                        id="budget" required>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="row mb-3 mx-4 mt-3">
-                            <label for="email" class="col-sm-3 col-form-label font-medium text-xl">Email :</label>
-                            <div class="col-sm-9">
-                                <input type="email" min="0" class="form-control" name="email" id="email" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3 mx-4 mt-3">
-                            <label for="contact" class="col-sm-3 col-form-label font-medium text-xl">Contact
-                                :</label>
-                            <div class="col-sm-9">
-                                <input type="tel" min="0" class="form-control" name="contact" id="contact" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3 mx-4 mt-3">
-                            <label for="requirnments"
-                                class="col-sm-3 col-form-label font-medium text-xl">Requisite:</label>
-                            <div class="col-sm-9">
-                                <textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control"
-                                    style="resize: none; height: 150px;"
-                                    placeholder="60s reel with voiceover and good video shots." required></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3 mx-4 mt-3">
-                            <label for="budget" class="col-sm-3 col-form-label font-medium text-xl">Budget :</label>
-                            <div class="col-sm-9">
-                                <input type="number" min="0" class="form-control" name="budget" id="budget" required>
-                            </div>
-                        </div>
 
                         <!-- <div class="text-gray-600 flex justify-center">
                                 * Above price is based on per individual element
                             </div> -->
 
-                        <div class="mt-3 pr-4 flex items-center justify-center gap-x-6">
+                        <div class="mt-3 mb-3 pr-4 flex items-center justify-center gap-x-6">
                             <button onclick="bookingFunc()"
                                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Book</button>
