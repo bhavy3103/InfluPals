@@ -242,7 +242,7 @@
                 body: JSON.stringify(data) // Convert JavaScript object to JSON string
             };
 
-            fetch("http://localhost/Final_instagram_project/MAD_Project/backend/api/bookingForm.php", options)
+            fetch("../../backend/api/bookingForm.php", options)
                 .then(response => {
                     if (response.ok) {
                         return response.json(); // Parse response JSON if request was successful

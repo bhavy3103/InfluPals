@@ -33,14 +33,14 @@
             white-space: nowrap; /* Prevent text wrapping */
         }
         th {
-            background-color: #3498db;
+            background-color: #0885B0;
             color: #fff;
         }
         .influencer1 {
-            background-color: #d5dbdb;
+            background-color: #338AFF;
         }
         .influencer2 {
-            background-color: #f2dede;
+            background-color: #084FB0;
         }
     </style>
 </head>
@@ -261,7 +261,7 @@ console.log(influencerData);
     Object.keys({...influencerData, ...(influencerData.pricing)}).forEach(criterion => {
     // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
     if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media' && criterion !== 'pricing' && criterion !== 'page_id') {
-        createRow(criterion, influencerData, influencerData);
+        createRow(criterion, influencerData, influencer2Data);
     }
 });
 
