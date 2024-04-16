@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 08:37 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 16, 2024 at 06:19 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,8 +24,9 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demographics`
+-- Table structure for table `booking_details`
 --
+
 CREATE TABLE `booking_details` (
   `id` bigint(20) NOT NULL,
   `uname` varchar(50) NOT NULL,
@@ -33,8 +34,26 @@ CREATE TABLE `booking_details` (
   `contact` int(10) NOT NULL,
   `requirements` varchar(10000) NOT NULL,
   `budget` bigint(20) NOT NULL,
-  `creator_id` bigint(20) NOT NULL
+  `page_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `image_url` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `demographics`
+--
 
 CREATE TABLE `demographics` (
   `id` bigint(20) NOT NULL,
@@ -103,13 +122,21 @@ CREATE TABLE `pricing` (
 --
 
 --
--- Indexes for table `demographics`
+-- Indexes for table `booking_details`
 --
 ALTER TABLE `booking_details`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `creator_id` (`creator_id`);
+  ADD KEY `creator_id` (`page_id`);
 
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `demographics`
+--
 ALTER TABLE `demographics`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_demographics_page_id` (`page_id`);
@@ -139,20 +166,32 @@ ALTER TABLE `pricing`
 --
 
 --
+-- AUTO_INCREMENT for table `booking_details`
+--
+ALTER TABLE `booking_details`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `demographics`
 --
 ALTER TABLE `demographics`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pricing`
 --
 ALTER TABLE `pricing`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `booking_details`
+--
+ALTER TABLE `booking_details`
+  ADD CONSTRAINT `booking_details_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `demographics`
@@ -171,19 +210,6 @@ ALTER TABLE `media`
 --
 ALTER TABLE `pricing`
   ADD CONSTRAINT `pricing_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE;
-
-
-
-CREATE TABLE `category` (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `image_url` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
