@@ -261,7 +261,7 @@ console.log(influencerData);
     Object.keys({...influencerData, ...(influencerData.pricing)}).forEach(criterion => {
     // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
     if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media' && criterion !== 'pricing' && criterion !== 'page_id') {
-        createRow(criterion, influencerData, influencer2Data);
+        createRow(criterion, influencerData, influencerData);
     }
 });
 
