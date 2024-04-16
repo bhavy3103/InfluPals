@@ -107,24 +107,24 @@
                 data.forEach(user => {
                     if (user.category === category) {
                         const card = document.createElement('div');
-                        card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-md', 'p-6', 'flex', 'flex-col');
+                        card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-xl', 'p-6', 'flex', 'flex-col');
 
                         card.addEventListener('click', () => sendSingleUserId(user.id));
 
                         card.innerHTML = `
-                            <div class="flex justify-center">
-                                <img src="${user.profile_picture_url}" height="150" width="150" class="rounded-full" alt="profile">
+                        <div class="flex justify-center">
+                                <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile">
                             </div>
-                            <p class="text-xl font-semibold flex justify-center mt-4">${user.username}</p>
-                            <p class="text-gray-600 flex justify-center">${user.biography}</p>
-                            <div class="flex flex-row justify-evenly mt-7">
+                            <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
+                            <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2">${user.biography}</p>
+                            <div class="flex flex-row justify-evenly mt-6">
                                 <div class="flex flex-col">
-                                    <p class="text-gray-600 font-semibold ml-7">${user.followers_count}</p>
-                                    <p class="font-semibold text-xl mb-2">Followers</p>
+                                    <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
+                                    <p class="font-semibold text-xl mb-1">Followers</p>
                                 </div>
                                 <div class="flex flex-col ml-6">
-                                    <p class="text-gray-600 font-semibold ml-5">${user.media_count}</p>
-                                    <p class="font-semibold text-xl mb-2">Posts</p>
+                                    <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
+                                    <p class="font-semibold text-lg mb-1">Posts</p>
                                 </div>
                             </div>
                         `;
@@ -156,27 +156,27 @@
             data.forEach(user => {
                 if (user.category === category) {
                     const card = document.createElement('div');
-                    card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-md', 'p-6', 'flex', 'flex-col');
+                    card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-xl', 'p-6', 'flex', 'flex-col');
 
                     card.addEventListener('click', () => sendSingleUserId(user.id));
 
                     card.innerHTML = `
-                <div class="flex justify-center">
-                    <img src="${user.profile_picture_url}" height="150" width="150" class="rounded-full" alt="profile">
-                </div>
-                <p class="text-xl font-semibold flex justify-center mt-4">${user.username}</p>
-                <p class="text-gray-600 flex justify-center">${user.biography}</p>
-                <div class="flex flex-row justify-evenly mt-7">
-                    <div class="flex flex-col">
-                        <p class="text-gray-600 font-semibold ml-7">${user.followers_count}</p>
-                        <p class="font-semibold text-xl mb-2">Followers</p>
-                    </div>
-                    <div class="flex flex-col ml-6">
-                        <p class="text-gray-600 font-semibold ml-5">${user.media_count}</p>
-                        <p class="font-semibold text-xl mb-2">Posts</p>
-                    </div>
-                </div>
-            `;
+                            <div class="flex justify-center">
+                                <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile">
+                            </div>
+                            <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
+                            <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2">${user.biography}</p>
+                            <div class="flex flex-row justify-evenly mt-6">
+                                <div class="flex flex-col">
+                                    <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
+                                    <p class="font-semibold text-xl mb-1">Followers</p>
+                                </div>
+                                <div class="flex flex-col ml-6">
+                                    <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
+                                    <p class="font-semibold text-lg mb-1">Posts</p>
+                                </div>
+                            </div>
+                    `;
                     userGrid.appendChild(card);
                 }
             });

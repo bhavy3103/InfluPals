@@ -61,22 +61,19 @@
                     card.addEventListener('click', () => openCategoryCards(category[1]));
 
                     card.innerHTML = `
-                        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
-                            <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                    <a href="./cards.php?category=${category[1]}">
+                        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-xl bg-clip-border rounded-xl w-72">
+                            <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-xl bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
                                 <img src="${category[2]}" alt="card-image" />
                             </div>
                             <div class="p-3">
-                                <h5 class="block mt-2 ml-4 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                                    ${category[1]}
+                                <h5 class="block mt-2 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 md:text-center">
+                                    ${category[1].toUpperCase()}
                                 </h5>
 
                             </div>
-                            <div class="p-6 pt-0">
-                                <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">
-                                    <a href="./cards.php?category=${category[1]}">See More</a>
-                                </button>
-                            </div>
-                        </div>`;
+                        </div>
+                        </a>`;
                     categoriesGrid.appendChild(card);
                 });
             })
