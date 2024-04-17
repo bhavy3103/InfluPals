@@ -50,19 +50,10 @@
         </div>
     </nav>
 
-    <div class="bg-white border-b border-gray-300 p-4 flex items-center justify-center shadow-md">
-        <!-- Sort Options -->
-        <div class="flex items-center">
-            <button onclick="sortUsers('followers_count')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
-                <i class="fas fa-sort"></i> Followers
-            </button>
-            <button onclick="sortUsers('media_count')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
-                <i class="fas fa-sort"></i> Posts
-            </button>
-        </div>
+    <div class="bg-white border-b border-gray-300 p-4 shadow-md flex items-center justify-between">
 
         <!-- Filter options -->
-        <div class="relative">
+        <!-- <div class="relative">
             <button id="filterDropdown" class="flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
                 Filter by Follower Count <i class="fas fa-chevron-down ml-2"></i>
             </button>
@@ -74,6 +65,32 @@
                     <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="10001-">10001+</button>
                 </div>
             </div>
+        </div> -->
+
+        <!-- Filter options -->
+        <div class="left-1 flex items-center">
+            <label for="minFollowers" class="mr-2">Min Followers:</label>
+            <input type="text" id="minFollowers" name="minFollowers" class="border border-gray-300 rounded-md p-2 w-24 mr-2" placeholder="0">
+
+            <label for="maxFollowers" class="mr-2">Max Followers:</label>
+            <input type="text" id="maxFollowers" name="maxFollowers" class="border border-gray-300 rounded-md p-2 w-24 mr-4" placeholder="0">
+
+            <button onclick="filterUsers(event)" id="filterButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+            <button onclick="removeFilter()" id="filterButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
+                Remove Filter
+            </button>
+        </div>
+
+        <!-- Sort Options -->
+        <div class="right-1 flex items-center">
+            <button onclick="sortUsers('followers_count')" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
+                <i class="fas fa-sort"></i> Followers
+            </button>
+            <button onclick="sortUsers('media_count')" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
+                <i class="fas fa-sort"></i> Posts
+            </button>
         </div>
 
     </div>
@@ -139,6 +156,7 @@
         let sortOrder = 'asc';
         let searchQuery = '';
 
+        /*
         // Get the button and dropdown content elements
         const button = document.getElementById('filterDropdown');
         const dropdownContent = document.getElementById('filterDropdownContent');
@@ -148,6 +166,7 @@
             // Toggle the 'hidden' class on the dropdown content element
             dropdownContent.classList.toggle('hidden');
         });
+        */
 
         function renderUsersFromAPI(data) {
             const userGrid = document.getElementById('userGrid');
@@ -207,6 +226,8 @@
                         }
                     });
                     renderUsersFromAPI(data);
+                    document.getElementById('minFollowers').value = ""
+                    document.getElementById('maxFollowers').value = ""
                 })
                 .catch(error => console.error('Error fetching data:', error));
         }
@@ -225,11 +246,14 @@
                     });
 
                     renderUsersFromAPI(filteredUsers);
+                    document.getElementById('minFollowers').value = ""
+                    document.getElementById('maxFollowers').value = ""
                 })
                 .catch(error => console.error('Error fetching data:', error));
 
         }
 
+        /*
         // Function to filter users based on follower count range
         function filterByFollowerCountRange(min, max) {
 
@@ -264,6 +288,55 @@
                 dropdownContent.classList.add('hidden');
             });
         });
+
+        */
+
+        function filterUsers(event) {
+
+            let min = document.getElementById('minFollowers').value;
+            let max = document.getElementById('maxFollowers').value;
+
+            if ((isNaN(min) || min <= -1 || min == "") && (isNaN(max) || max <= -1 || max == "")) {
+                alert("Please enter either minimum or maximum or both range of followers");
+                return;
+            }
+            min = parseInt(min)
+            max = parseInt(max)
+
+            if (min > max) {
+                alert("Please enter valid range of followers");
+                return;
+            }
+
+            fetch('../backend/api/getAllUsers.php')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredUsers = data.filter(user => {
+                        const followersCount = parseInt(user.followers_count);
+                        if (isNaN(max)) {
+                            return followersCount >= min;
+                        } else if (isNaN(min)) {
+                            return followersCount <= max;
+                        } else {
+                            return followersCount >= min && followersCount <= max;
+                        }
+                    });
+                    renderUsersFromAPI(filteredUsers);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function removeFilter() {
+            // Code to remove filter and render all users
+            fetch('../backend/api/getAllUsers.php')
+                .then(response => response.json())
+                .then(data => {
+                    renderUsersFromAPI(data);
+                    document.getElementById('minFollowers').value = ""
+                    document.getElementById('maxFollowers').value = ""
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
     </script>
 </body>
 
