@@ -6,6 +6,7 @@ $data = json_decode($jsonData, true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creator_id = $data['id'];
+    $creator_username = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username FROM page WHERE id = '$creator_id'"))['username'];
     $uname = $data['uname'];
     $email = $data['email'];
     $contact = $data['contact'];
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_begin_transaction($conn);
 
     try {
-        $insertQuery = "INSERT INTO booking_details( uname ,email , contact , requirements , budget , page_id) VALUES('$uname','$email','$contact','$requirements','$budget',$creator_id)";
+        $insertQuery = "INSERT INTO booking_details( uname ,email , contact , requirements , budget , page_id, page_username) VALUES('$uname','$email','$contact','$requirements','$budget',$creator_id, '$creator_username')";
 
 
         mysqli_query($conn, $insertQuery);
