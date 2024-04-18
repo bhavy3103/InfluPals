@@ -73,7 +73,7 @@
                 })
                 .then(data => {
                     console.log('data', data); // Log the parsed JSON response from the PHP script
-                    // window.location.href = `profile.php?userId=${data.id}`;
+                    window.location.href = `profile.php?userId=${data.id}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
