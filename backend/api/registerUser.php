@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Insert default row into pricing table
             $insertPricingQuery = "INSERT INTO pricing (page_id, story, igtv_video, reel, live_stream, feed_post) 
-                VALUES ('$id', 'default', 'default', 'default', 'default', 'default')";
+                VALUES ('$id', '0', '0', '0', '0', '0')";
             mysqli_query($conn, $insertPricingQuery);
 
             // Insert Category
