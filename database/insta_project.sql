@@ -27,6 +27,16 @@ SET time_zone = "+00:00";
 -- Table structure for table `booking_details`
 --
 
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL,
+  `Name` varchar(1000) NOT NULL,
+  `email` varchar(1000) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `password` varchar(1000) NOT NULL,
+  `role` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `booking_details` (
   `id` bigint(20) NOT NULL,
   `uname` varchar(50) NOT NULL,
@@ -225,6 +235,12 @@ ALTER TABLE `pricing`
 
 ALTER TABLE `booking_details` ADD `page_username` varchar(1000) NOT NULL;
 
+--user table
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 COMMIT;
 
