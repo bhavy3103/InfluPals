@@ -27,8 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'profile_picture_url' => $userData['profile_picture_url'],
             'media_count' => $userData['media_count'],
             'followers_count' => $userData['followers_count'],
-            'biography' => $userData['biography']
+            'biography' => $userData['biography'],
+            'location' => $userData['location']
         );
+
+        // echo json_encode($response);
 
         // 2. SQL query to fetch media
         $mediaQuery = "SELECT * FROM media WHERE page_id = '$id'";
@@ -87,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pricingData = mysqli_fetch_assoc($pricingResult);
         $response['pricing']=$pricingData;
 
+        $userData['pricing']=$pricingData;
         echo json_encode($response); // Return response
     } else {
         echo json_encode(array('message' => 'No data found.'));
