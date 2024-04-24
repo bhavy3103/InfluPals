@@ -23,7 +23,7 @@
                 <button onclick="openLoginPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Login As Creator
                 </button>
-                <a href="./page/compare.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Compare</a>
+                <!-- <a href="./page/compare.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Compare</a> -->
 
             </div>
         </div>

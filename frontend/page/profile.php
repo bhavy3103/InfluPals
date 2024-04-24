@@ -60,9 +60,9 @@
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Home</a>
                 <a href=""
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
-                <a href="./compare.php"
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a>
-                <a href=""
+                <!-- <a href="./compare.php"
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a> -->
+                <a href=""  
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
             </div>
         </div>
@@ -573,5 +573,4 @@
         fetchapi(userId);
     </script>
 </body>
-
 </html>

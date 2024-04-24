@@ -47,11 +47,6 @@
 <body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 20px; overflow-x: auto;">
-    <div class="button-container">
-        <input type="text" id="influencer1Input" placeholder="Search for Influencer 1">
-        <input type="text" id="influencer2Input" placeholder="Search for Influencer 2">
-        <button onclick="compareInfluencers()">Compare</button>
-    </div>
     
     <table>
         <tr>
@@ -72,7 +67,21 @@
         .then(response => response.json())
         .then(data => {
             allUsers = data;
-            console.log("add",allUsers);
+            // Extract influencer IDs from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId1 = urlParams.get('userId1');
+            const userId2 = urlParams.get('userId2');
+
+            // Find influencer objects based on IDs
+            const influencer1 = allUsers.find(user => user.id === userId1);
+            const influencer2 = allUsers.find(user => user.id === userId2);
+
+            // Compare influencers if both are found
+            if (influencer1 && influencer2) {
+                compareInfluencers(influencer1, influencer2);
+            } else {
+                console.error('Invalid influencer IDs.');
+            }
         })
         .catch(error => console.error('Error fetching all users:', error));
 
@@ -80,19 +89,8 @@
 let comparisonTablePopulated = false;
 
 // Step 2: Function to compare influencers
-function compareInfluencers() {
-    const influencer1Name = document.getElementById('influencer1Input').value.trim();
-    const influencer2Name = document.getElementById('influencer2Input').value.trim();
-
-    const influencer1 = allUsers.find(user => user.username.toLowerCase() === influencer1Name.toLowerCase());
-    const influencer2 = allUsers.find(user => user.username.toLowerCase() === influencer2Name.toLowerCase());
-
-    if (!influencer1 || !influencer2) {
-        alert('Please select valid influencers.');
-        return;
-    }
-
-    // Step 3: Fetch data for both influencers
+function compareInfluencers(influencer1, influencer2) {
+    // Fetch data for both influencers
     fetchInfluencerData(influencer1, 'influencer1');
     fetchInfluencerData(influencer2, 'influencer2');
 }
@@ -127,77 +125,72 @@ function fetchInfluencerData(influencer, influencerClass) {
 function populateComparisonTable(influencer1Data, influencer2Data) {
     const table = document.querySelector('table');
 
-    // Find the header row to determine the index where the rows for influencer should be inserted
-    const headerRow = table.querySelector('tr');
-    const headerCells = headerRow.querySelectorAll('th');
-
-    // Create header cells for each criterion if it's the first criterion being added
-    if (headerRow.childElementCount === 0) {
-        const headerCell = document.createElement('th');
-        headerCell.textContent = 'Comparison Criteria';
-        headerRow.appendChild(headerCell);
-        const influencer1HeaderCell = document.createElement('th');
-        influencer1HeaderCell.textContent = 'Influencer 1';
-        influencer1HeaderCell.classList.add('influencer1');
-        headerRow.appendChild(influencer1HeaderCell);
-        const influencer2HeaderCell = document.createElement('th');
-        influencer2HeaderCell.textContent = 'Influencer 2';
-        influencer2HeaderCell.classList.add('influencer2');
-        headerRow.appendChild(influencer2HeaderCell);
-    }
-
     // Function to create a row for each criterion and populate data
     const createRow = (criterion, influencer1Data, influencer2Data) => {
-    const row = document.createElement('tr');
-    const cell1 = document.createElement('td');
-    const cell2 = document.createElement('td');
-    const cell3 = document.createElement('td');
+        const row = document.createElement('tr');
+        const cell1 = document.createElement('td');
+        const cell2 = document.createElement('td');
+        const cell3 = document.createElement('td');
+        cell1.textContent = criterion;
 
-    cell1.textContent = criterion;
-
-    // Check if the criterion is demographics or some other data
-    if (criterion === 'demographicsAge' || criterion === 'demographicsGender' ) {
-        // If it's demographics, cityData, or genderData, format the data
-        const influencer1Text = formatDemographics(influencer1Data[criterion]);
-        const influencer2Text = formatDemographics(influencer2Data[criterion]);
-        cell2.innerHTML = influencer1Text;
-        cell3.innerHTML = influencer2Text;
-    }
-    else if(criterion==='demographicsCity'){
-        const influencer1Text = formatDemographicsCity(influencer1Data[criterion]);
-        const influencer2Text = formatDemographicsCity(influencer2Data[criterion]);
-        cell2.innerHTML = influencer1Text;
-        cell3.innerHTML = influencer2Text;
-    }
-    // else if (criterion==='pricing'){
-    //     Object.keys(influencer1Data[criterion]).forEach((val)=>{
-    //         console.log(val);
-    //         const influencer1Text = (influencer1Data.pricing[val]);
-    //         const influencer2Text = (influencer2Data.pricing[val]);
-    //         cell2.innerHTML = influencer1Text;
-    //         cell3.innerHTML = influencer2Text;
-    //         row.appendChild(cell1);
-    //         row.appendChild(cell2);
-    //         row.appendChild(cell3);
-    //         table.appendChild(row);
-    //     })
-    //     return ;
-        
-    // } 
-    else {
-    // If it's not demographics, cityData, or genderData, simply display the data
-    console.log(criterion);
-    const influencer1Text = formatText(influencer1Data[criterion]);
-    const influencer2Text = formatText(influencer2Data[criterion]);
+// Check if the criterion is demographics or some other data
+if (criterion === 'demographicsAge' || criterion === 'demographicsGender' ) {
+    // If it's demographics, cityData, or genderData, format the data
+    const influencer1Text = formatDemographics(influencer1Data[criterion]);
+    const influencer2Text = formatDemographics(influencer2Data[criterion]);
     cell2.innerHTML = influencer1Text;
     cell3.innerHTML = influencer2Text;
-    }
-    row.appendChild(cell1);
-    row.appendChild(cell2);
-    row.appendChild(cell3);
-    table.appendChild(row);
-};
+}
+else if(criterion==='demographicsCity'){
+    const influencer1Text = formatDemographicsCity(influencer1Data[criterion]);
+    const influencer2Text = formatDemographicsCity(influencer2Data[criterion]);
+    cell2.innerHTML = influencer1Text;
+    cell3.innerHTML = influencer2Text;
+}
+else if (criterion === 'pricing') {
+    Object.keys(influencer1Data[criterion]).forEach((val) => {
 
+        if (val === 'page_id' || val === 'id') {
+        return;
+    }
+        
+        // Create a new row for each key-value pair
+        const newRow = document.createElement('tr');
+
+        // Create cells for key, influencer1 value, and influencer2 value
+        const keyCell = document.createElement('td');
+        const influencer1Cell = document.createElement('td');
+        const influencer2Cell = document.createElement('td');
+
+        // Set the content of cells
+        keyCell.textContent = val;
+        influencer1Cell.textContent = influencer1Data.pricing[val];
+        influencer2Cell.textContent = influencer2Data.pricing[val];
+
+        // Append cells to the new row
+        newRow.appendChild(keyCell);
+        newRow.appendChild(influencer1Cell);
+        newRow.appendChild(influencer2Cell);
+
+        // Append the new row to the table
+        if(keyCell!='page_id')
+            table.appendChild(newRow);
+    });
+    return;
+} 
+else {
+// If it's not demographics, cityData, or genderData, simply display the data
+console.log(criterion);
+const influencer1Text = formatText(influencer1Data[criterion]);
+const influencer2Text = formatText(influencer2Data[criterion]);
+cell2.innerHTML = influencer1Text;
+cell3.innerHTML = influencer2Text;
+}
+row.appendChild(cell1);
+row.appendChild(cell2);
+row.appendChild(cell3);
+table.appendChild(row);
+};
 
 
 // Function to format text and add line breaks if it exceeds a certain length
@@ -243,28 +236,15 @@ const formatDemographicsCity = (data) => {
     }
     return ''; // Return an empty string if data is not an array
 };
-
-
-    console.log(influencer1Data.demographicsAge);
-    console.log(influencer1Data.demographicsCity);
-    console.log(influencer1Data.demographicsGender);
-    console.log(influencer1Data);
     // Loop through each criterion and create rows for each influencer
-    // Loop through each criterion and create rows for each influencer
+    Object.keys(influencer1Data).forEach(criterion => {
+        // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
+        if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media' ) {
+            createRow(criterion, influencer1Data, influencer2Data);
+        }
+    });
 
-    const influencerData = {
-    ...influencer1Data,
-    ...(influencer1Data.pricing)
-};
-console.log(influencerData);
-
-    Object.keys({...influencerData, ...(influencerData.pricing)}).forEach(criterion => {
-    // Skip the 'id', 'profile_picture_url', 'biography', and 'media' criteria
-    if (criterion !== 'id' && criterion !== 'profile_picture_url' && criterion !== 'biography' && criterion !== 'media' && criterion !== 'pricing' && criterion !== 'page_id') {
-        createRow(criterion, influencerData, influencerData);
-    }
-});
-
+    
 }
 </script>
 
