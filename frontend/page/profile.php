@@ -495,6 +495,10 @@
                         return 'Undefined';
                     }
                 }),
+                marker: {
+                    colors:  ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
+                    
+                },
                 type: 'pie',
                 hoverinfo: 'label+percent',
                 name: 'Gender vise follower count',
