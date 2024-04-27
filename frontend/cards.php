@@ -80,7 +80,7 @@
 
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer" id="userGrid">
+    <div class="grid grid-cols-auto sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mt-8 mr-2 ml-2 mb-4 cursor-pointer" id="userGrid">
         <!-- User cards will be added here dynamically -->
     </div>
 
@@ -142,30 +142,38 @@
                 const userGrid = document.getElementById('userGrid');
                 data.forEach(user => {
                     if (user.category === category) {
-                        // console.log(user.id);
                         const card = document.createElement('div');
-                        card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-xl', 'p-6', 'flex', 'flex-col');
+                        card.classList.add('bg', 'rounded-md', 'overflow-hidden','p-2', 'flex', 'flex-col');
+                        card.style.maxWidth = '290px'; 
 
                         card.innerHTML = `
-                             <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
-                            <div class="flex justify-center">
-                                <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
-                            </div>
-                            <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
-                            <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2">${user.biography}</p>
-                            <div class="flex flex-row justify-evenly mt-6">
-                                <div class="flex flex-col">
-                                    <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
-                                    <p class="font-semibold text-xl mb-1">Followers</p>
+                        <div class="flex flex-col m-2" style="max-width: 230px;">
+                            <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
+                            <div onclick="sendSingleUserId(${user.id})">
+                                <div class="flex justify-center">
+                                    <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
                                 </div>
-                                <div class="flex flex-col ml-6">
-                                    <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
-                                    <p class="font-semibold text-lg mb-1">Posts</p>
+                                <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
+                                <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2 biography" style="height: 50px; overflow: hidden;">${user.biography.length > 40 ? user.biography.substring(0, 40) + '...' : user.biography}</p>
+
+                                <div class="flex flex-row justify-evenly mt-6">
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
+                                        <p class="font-semibold text-xl mb-1">Followers</p>
+                                    </div>
+                                    <div class="flex flex-col ml-6">
+                                        <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
+                                        <p class="font-semibold text-lg mb-1">Posts</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col ml-6 mb-2">
+                                    <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
+                                </div>
+                                <div class="flex flex-col ml-6 mb-2">
+                                    <p class="text-black-600 font-semibold md:text-center" style="font-size: 20px;">&#8377; ${user.pricing.feed_post}</p> 
                                 </div>
                             </div>
-                            <div class="flex flex-col ml-6 mb-2">
-                                <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
-                            </div>
+                        </div>
 
                             `;
                         userGrid.appendChild(card);
@@ -187,28 +195,37 @@
                 if (user.category === category) {
                     // console.log(data);
                     const card = document.createElement('div');
-                    card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-xl', 'p-6', 'flex', 'flex-col');
-
+                    card.classList.add('bg', 'rounded-md', 'overflow-hidden','p-2', 'flex', 'flex-col');
+                    card.style.maxWidth = '290px'; 
                     card.innerHTML = `
-                    <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
-                            <div class="flex justify-center">
-                                <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
-                            </div>
-                            <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
-                            <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2">${user.biography}</p>
-                            <div class="flex flex-row justify-evenly mt-6">
-                                <div class="flex flex-col">
-                                    <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
-                                    <p class="font-semibold text-xl mb-1">Followers</p>
+                    <div class="flex flex-col m-2" style="max-width: 230px;">
+                            <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
+                            <div onclick="sendSingleUserId(${user.id})">
+                                <div class="flex justify-center">
+                                    <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
+
                                 </div>
-                                <div class="flex flex-col ml-6">
-                                    <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
-                                    <p class="font-semibold text-lg mb-1">Posts</p>
+                                <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
+                                <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2 biography" style="height: 60px; overflow: hidden;">${user.biography.length > 40 ? user.biography.substring(0, 40) + '...' : user.biography}</p>
+
+                                <div class="flex flex-row justify-evenly mt-6">
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
+                                        <p class="font-semibold text-xl mb-1">Followers</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
+                                        <p class="font-semibold text-lg mb-1">Posts</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <p class="text-black-600 font-semibold md:text-center">${user.pricing.feed_post}</p> 
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex flex-col ml-6 mb-2">
-                                <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
-                            </div>
+                        </div>
                     `;
                     userGrid.appendChild(card);
                 }

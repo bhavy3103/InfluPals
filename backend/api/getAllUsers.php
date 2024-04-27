@@ -10,9 +10,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(array('error' => mysqli_error($conn)));
     } else {
         if (mysqli_num_rows($result) > 0) {
-            $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            $usersData = array();
+            while ($userData = mysqli_fetch_assoc($result)) {
+                $id = $userData['id'];
+                
+                // Fetch pricing information for each user
+                $pricingQuery = "SELECT * FROM pricing WHERE page_id = '$id'";
+                $pricingResult = mysqli_query($conn, $pricingQuery);
+                $pricingData = mysqli_fetch_assoc($pricingResult);
+                
+                // Combine user data with pricing data
+                $userData['pricing'] = $pricingData;
+                $usersData[] = $userData;
+            }
+            
             header('Content-Type: application/json');
-            echo json_encode($data);
+            echo json_encode($usersData);
         } else {
             echo json_encode(array('message' => 'No data found.'));
         }
