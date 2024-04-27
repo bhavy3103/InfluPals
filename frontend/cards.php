@@ -102,22 +102,22 @@
         }
 
         var sendSingleUserId = (userId) => {
-    // console.log("Original userId:", userId); // Log the original userId
-    // Convert userId to a string
-    const userIdString = String(userId);
-    // Check if userIdString is a valid number
-    if (!isNaN(userIdString)) {
-        // Subtract 1 from userIdString
-        const newUserId = String(BigInt(userIdString) - BigInt(1));
-        // console.log("New userId:", newUserId); // Log the new userId
-        // Redirect to profile.php with the new user ID as a query parameter
-        window.location.href = `./page/profile.php?userId=${newUserId}`;
-    } else {
-        console.error('User ID is not a valid number.');
-    }
+            // console.log("Original userId:", userId); // Log the original userId
+            // Convert userId to a string
+            const userIdString = String(userId);
+            // Check if userIdString is a valid number
+            if (!isNaN(userIdString)) {
+                // Subtract 1 from userIdString
+                const newUserId = String(BigInt(userIdString) - BigInt(1));
+                // console.log("New userId:", newUserId); // Log the new userId
+                // Redirect to profile.php with the new user ID as a query parameter
+                window.location.href = `./page/profile.php?userId=${newUserId}`;
+            } else {
+                console.error('User ID is not a valid number.');
+            }
 
 
-}
+        }
         const openLoginPage = () => {
             location.assign('./page/login.php');
         }
@@ -177,7 +177,7 @@
         // Variable to store the current sorting criteria and order
         let sortBy = '';
         let sortOrder = 'asc';
-        let searchQuery = '';   
+        let searchQuery = '';
 
         function renderUsersFromAPI(data) {
             const userGrid = document.getElementById('userGrid');
@@ -190,6 +190,7 @@
                     card.classList.add('bg', 'rounded-md', 'overflow-hidden', 'shadow-xl', 'p-6', 'flex', 'flex-col');
 
                     card.innerHTML = `
+                    <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
                             <div class="flex justify-center">
                                 <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
                             </div>
@@ -204,11 +205,9 @@
                                     <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
                                     <p class="font-semibold text-lg mb-1">Posts</p>
                                 </div>
-                                <div class="flex flex-col ml-6">
-                                    <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
-                                    <p class="font-semibold text-lg mb-1">location</p>
-                                </div>
-                            <input type="checkbox" class="compare-checkbox" data-userid="${user.id}">
+                            </div>
+                            <div class="flex flex-col ml-6 mb-2">
+                                <p class="text-gray-600 font-semibold md:text-center">${user.location}</p>
                             </div>
                     `;
                     userGrid.appendChild(card);
