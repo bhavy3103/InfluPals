@@ -142,11 +142,9 @@
                 const userGrid = document.getElementById('userGrid');
                 data.forEach(user => {
                     if (user.category === category) {
-                        console.log(user);
                         const card = document.createElement('div');
                         card.classList.add('bg', 'rounded-md', 'overflow-hidden','p-2', 'flex', 'flex-col');
-                        card.style.maxWidth = '290px'; // Set the max-width property here
-
+                        card.style.maxWidth = '290px'; 
 
                         card.innerHTML = `
                         <div class="flex flex-col m-2" style="max-width: 230px;">
@@ -198,15 +196,14 @@
                     // console.log(data);
                     const card = document.createElement('div');
                     card.classList.add('bg', 'rounded-md', 'overflow-hidden','p-2', 'flex', 'flex-col');
-                    card.style.maxWidth = '290px'; // Set the max-width property here
-
-
+                    card.style.maxWidth = '290px'; 
                     card.innerHTML = `
                     <div class="flex flex-col m-2" style="max-width: 230px;">
                             <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
                             <div onclick="sendSingleUserId(${user.id})">
                                 <div class="flex justify-center">
                                     <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile" onclick="sendSingleUserId(${user.id})">
+
                                 </div>
                                 <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
                                 <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2 biography" style="height: 60px; overflow: hidden;">${user.biography.length > 40 ? user.biography.substring(0, 40) + '...' : user.biography}</p>
@@ -229,7 +226,6 @@
                                 </div>
                             </div>
                         </div>
-
                     `;
                     userGrid.appendChild(card);
                 }
