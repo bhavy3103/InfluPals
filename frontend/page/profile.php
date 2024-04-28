@@ -1,14 +1,17 @@
 <?php
 session_start();
-$isCreator = true;
-if (!$_SESSION['id'] === $_GET['userId']) {
-    $isCreator = false;
-    echo "<script>console.log('Access:" . $isCreator . "');</script>";
-}
-if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || strtolower($_SESSION['role']) === 'user'))) {
+$isAuthorized = false;
+
+if (!isset($_SESSION['id'])) {
     header("Location: ../auth/login.php");
+    exit; // After redirection, stop further execution
+}
+
+if ($_SESSION['id'] === $_GET['userId']) {
+    $isAuthorized = true;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +77,8 @@ if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || st
                 <!-- <a href="./compare.php"
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a> -->
                 <a href=""
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium"><Button
+                        onclick="logoutUser()">Logout</Button></a>
             </div>
         </div>
     </nav>
@@ -235,6 +239,15 @@ if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || st
 
 
         let user = {};
+
+        const logoutUser = () => {
+            fetch('../../backend/api/logout.php', {
+                method: 'POST'
+            }).then(res => {
+                console.log(res);
+                window.location.href = '../auth/login.php';
+            });
+        };
 
         let isHide = true;
         let isHideBookNow = true;
