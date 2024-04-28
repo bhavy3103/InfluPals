@@ -1,15 +1,17 @@
 <?php
 require_once '../../backend/db_connection.php';
-
-function sanitizeInput($data) {
+function sanitizeInput($data)
+{
     return htmlspecialchars(strip_tags(trim($data)));
 }
 
-function validateEmail($email) {
+function validateEmail($email)
+{
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function validatePhoneNumber($phone) {
+function validatePhoneNumber($phone)
+{
     return preg_match('/^[0-9]{10}$/', $phone);
 }
 
@@ -20,19 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : '';
 
     if (!validateEmail($email)) {
-        header("Location: ../../frontend/page/register-user.php?error_message=Invalid email format");
+        header("Location: ../../frontend/auth/register-user.php?error_message=Invalid email format");
         exit;
     }
 
     if (!validatePhoneNumber($phone)) {
-        header("Location: ../../frontend/page/register-user.php?error_message=Invalid phone number format");
+        header("Location: ../../frontend/auth/register-user.php?error_message=Invalid phone number format");
         exit;
     }
 
     $check_query = "SELECT * FROM user WHERE email = '$email'";
     $check_result = mysqli_query($conn, $check_query);
     if (mysqli_num_rows($check_result) > 0) {
-        header("Location: ../../frontend/page/register-user.php?error_message=Email already exists");
+        header("Location: ../../frontend/auth/register-user.php?error_message=Email already exists");
         exit;
     }
 
@@ -40,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        header("Location: ../../frontend/page/login-user.php?error_message=Registration successful. Please login to continue");
+        header("Location: ../../frontend/auth/login-user.php?error_message=Registration successful. Please login to continue");
         exit;
     } else {
-        header("Location: ../../frontend/page/register-user.php?error_message=Registration failed. Please try again");
+        header("Location: ../../frontend/auth/register-user.php?error_message=Registration failed. Please try again");
         exit;
     }
 } else {

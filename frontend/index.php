@@ -20,7 +20,8 @@
                 <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
                 <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
                 </div>
-                <button onclick="openLoginPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onclick="openLoginPage()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Login As Creator
                 </button>
                 <!-- <a href="./page/compare.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Compare</a> -->
@@ -30,13 +31,14 @@
 
     </nav>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer" id="categoryGrid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer"
+        id="categoryGrid">
         <!-- User cards will be added here dynamically -->
     </div>
 
     <script>
         const openLoginPage = () => {
-            location.assign('./page/login.php');
+            location.assign('./auth/login.php');
         }
 
         var openCategoryCards = (category) => {

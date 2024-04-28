@@ -73,7 +73,7 @@
                 })
                 .then(data => {
                     console.log('data', data); // Log the parsed JSON response from the PHP script
-                    window.location.href = `profile.php?userId=${data.id}`;
+                    window.location.href = `../page/profile.php?userId=${data.id}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -272,7 +272,7 @@
 
         const savePageDetails = (pageId) => {
             const { access_token: pageAccessToken } = pagesArray.find(page => page.id == pageId)
-            console.log('pageid',pageId, pageAccessToken);
+            console.log('pageid', pageId, pageAccessToken);
             getInstagramAccountId(pageId, pageAccessToken).then((instaId) => {
                 getInstagramAccountDetails(instaId, pageAccessToken).then((accountDetails) => {
                     const mediaPromises = accountDetails["media"]["data"].map(media => {
@@ -291,7 +291,7 @@
                             ...accountDetails,
                             media: mediaDetailsArray.map(media => media.details)
                         }
-                        console.log('final',finalData);
+                        console.log('final', finalData);
                         fetchapi(finalData);
                     }).catch(error => {
                         console.error('Error fetching media details:', error);

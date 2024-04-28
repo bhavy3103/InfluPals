@@ -1,3 +1,14 @@
+<?php
+session_start();
+$isCreator = true;
+if (!$_SESSION['id'] === $_GET['userId']) {
+    $isCreator = false;
+    echo "<script>console.log('Access:" . $isCreator . "');</script>";
+}
+if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || strtolower($_SESSION['role']) === 'user'))) {
+    header("Location: ../auth/login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +73,7 @@
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
                 <!-- <a href="./compare.php"
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a> -->
-                <a href=""  
+                <a href=""
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
             </div>
         </div>
@@ -159,7 +170,8 @@
 
                                 <div class="flex flex-col mb-3">
                                     <label for="contact" class="font-medium text-xl mr-2 mb-1">Contact :</label>
-                                    <input type="tel" min="0" minlength="10" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                    <input type="tel" min="0" minlength="10" maxlength="10"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                                         class="form-control border border-gray-300 rounded-md px-4 py-1" name="contact"
                                         id="contact" required>
                                 </div>
@@ -220,6 +232,8 @@
     </div>
 
     <script>
+
+
         let user = {};
 
         let isHide = true;
@@ -496,8 +510,8 @@
                     }
                 }),
                 marker: {
-                    colors:  ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
-                    
+                    colors: ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
+
                 },
                 type: 'pie',
                 hoverinfo: 'label+percent',
@@ -573,4 +587,5 @@
         fetchapi(userId);
     </script>
 </body>
+
 </html>

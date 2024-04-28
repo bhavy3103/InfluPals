@@ -1,8 +1,7 @@
-
-
 <?php
 
 require_once '../../backend/db_connection.php';
+session_start();
 
 $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);
@@ -22,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $demographicsCity = $data['demographicsCity'];
     $demographicsGender = $data['demographicsGender'];
 
-    $media=$data['media'];
+    $media = $data['media'];
 
     mysqli_query($conn, "SET foreign_key_checks = 0");
 
@@ -34,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userCheckResult = mysqli_query($conn, $userCheckQuery);
         if (mysqli_num_rows($userCheckResult) > 0) {
             // User already exists, return early
+            $_SESSION['id'] = $id;
             echo json_encode(array('message' => "User Already Exists", "id" => $id));
             mysqli_commit($conn);
             exit; // Stop further execution
@@ -44,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           VALUES ('$id', 'instagram', '$name', '$username', '$profile_picture_url', '$media_count', '$followers_count', '$category', '$biography', '$location')";
 
         if (mysqli_query($conn, $insertQuery)) {
-            $demographicsCityString=json_encode($demographicsCity);
-            $demographicsGenderString=json_encode($demographicsGender);
-            $demographicsAgeString=json_encode($demographicsAge);
+            $demographicsCityString = json_encode($demographicsCity);
+            $demographicsGenderString = json_encode($demographicsGender);
+            $demographicsAgeString = json_encode($demographicsAge);
             mysqli_query($conn, "INSERT INTO demographics (page_id, city, gender, age) 
                 VALUES ('$id', '$demographicsCityString', '$demographicsGenderString', '$demographicsAgeString')");
 
@@ -76,13 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!(mysqli_num_rows($userCheckResult) > 0)) {
                 mysqli_query($conn, "INSERT INTO category (name) VALUES ('$category')");
             }
-        
+
             mysqli_commit($conn);
+            $_SESSION['id'] = $id;
+            $_SESSION['role'] = "creator";
             echo json_encode(array('status' => 'success', 'message' => "Data inserted successfully", 'id' => $id));
         } else {
             echo json_encode(array('status' => 'error', 'message' => mysqli_error($conn)));
         }
-        
+
     } catch (Exception $e) {
         // Rollback transaction
         mysqli_rollback($conn);
