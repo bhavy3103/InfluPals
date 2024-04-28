@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || strtolower($_SESSION['role']) === 'user')))
+    header("Location: ../auth/login.php");
+else
+    header("Location: index_filter.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,38 +40,52 @@
 
     <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-end shadow-md">
         <div class="absolute left-0 flex items-center justify-start ml-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2" alt="instagram">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2"
+                alt="instagram">
             <span class="text-xl font-bold">Instagram</span>
         </div>
 
         <!-- Sort Options -->
         <div class="flex items-center">
-            <button onclick="sortUsers('followers')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="sortUsers('followers')"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
                 <i class="fas fa-sort"></i> Followers
             </button>
-            <button onclick="sortUsers('posts')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="sortUsers('posts')"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
                 <i class="fas fa-sort"></i> Posts
             </button>
         </div>
 
         <!-- Filter options -->
         <div class="relative">
-            <button id="filterDropdown" class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button id="filterDropdown"
+                class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
                 Filter by Follower Count <i class="fas fa-chevron-down ml-2"></i>
             </button>
-            <div id="filterDropdownContent" class="hidden absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div id="filterDropdownContent"
+                class="hidden absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="filterDropdown">
-                    <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="0-1000">0 - 1000</button>
-                    <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="1001-5000">1001 - 5000</button>
-                    <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="5001-10000">5001 - 10000</button>
-                    <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="10001-">10001+</button>
+                    <button
+                        class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                        role="menuitem" data-range="0-1000">0 - 1000</button>
+                    <button
+                        class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                        role="menuitem" data-range="1001-5000">1001 - 5000</button>
+                    <button
+                        class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                        role="menuitem" data-range="5001-10000">5001 - 10000</button>
+                    <button
+                        class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                        role="menuitem" data-range="10001-">10001+</button>
                 </div>
             </div>
         </div>
 
         <div class="flex items-center">
             <div class="relative">
-                <input type="text" id="searchInput" class="border border-gray-300 rounded-md p-2 pl-8 w-80" placeholder="Search by name or city" onkeyup="searchUsers(event)">
+                <input type="text" id="searchInput" class="border border-gray-300 rounded-md p-2 pl-8 w-80"
+                    placeholder="Search by name or city" onkeyup="searchUsers(event)">
                 <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400"></i>
                 </div>
@@ -121,53 +142,53 @@
     <script>
         // Define user data array
         const users = [{
-                name: "Blanche Pearson",
-                category: "Content creator",
-                followers: 290,
-                city: "Delhi",
-                posts: 700,
-                image: "img-3.jpg"
-            },
-            {
-                name: "Blanche Pearson",
-                category: "Content creator",
-                followers: 2900,
-                city: "Goa",
-                posts: 70,
-                image: "img-3.jpg"
-            },
-            {
-                name: "Blanche Pearson",
-                category: "Content creator",
-                followers: 900,
-                city: "Ahmedabad",
-                posts: 500,
-                image: "img-3.jpg"
-            },
-            {
-                name: "Blanche Pearson",
-                category: "Content creator",
-                followers: 9900,
-                city: "Mumbai",
-                posts: 7000,
-                image: "img-3.jpg"
-            },
-            {
-                name: "Blanche Pearson",
-                category: "Content creator",
-                followers: 3500,
-                city: "Abu",
-                posts: 100,
-                image: "img-3.jpg"
-            },
-            {
-                name: "Kristina Zasiadko",
-                category: "Content creator",
-                followers: 72000,
-                city: "Delhi",
-                posts: 5432,
-                image: "img-3.jpg"
-            }
+            name: "Blanche Pearson",
+            category: "Content creator",
+            followers: 290,
+            city: "Delhi",
+            posts: 700,
+            image: "img-3.jpg"
+        },
+        {
+            name: "Blanche Pearson",
+            category: "Content creator",
+            followers: 2900,
+            city: "Goa",
+            posts: 70,
+            image: "img-3.jpg"
+        },
+        {
+            name: "Blanche Pearson",
+            category: "Content creator",
+            followers: 900,
+            city: "Ahmedabad",
+            posts: 500,
+            image: "img-3.jpg"
+        },
+        {
+            name: "Blanche Pearson",
+            category: "Content creator",
+            followers: 9900,
+            city: "Mumbai",
+            posts: 7000,
+            image: "img-3.jpg"
+        },
+        {
+            name: "Blanche Pearson",
+            category: "Content creator",
+            followers: 3500,
+            city: "Abu",
+            posts: 100,
+            image: "img-3.jpg"
+        },
+        {
+            name: "Kristina Zasiadko",
+            category: "Content creator",
+            followers: 72000,
+            city: "Delhi",
+            posts: 5432,
+            image: "img-3.jpg"
+        }
         ];
 
         // Variable to store the current sorting criteria and order
@@ -180,7 +201,7 @@
         const dropdownContent = document.getElementById('filterDropdownContent');
 
         // Add click event listener to the button
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Toggle the 'hidden' class on the dropdown content element
             dropdownContent.classList.toggle('hidden');
         });
@@ -276,7 +297,7 @@
         // Add click event listeners to the filter options
         const filterOptions = dropdownContent.querySelectorAll('.filter-option');
         filterOptions.forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Get the selected range from the data attribute
                 const range = this.getAttribute('data-range');
                 // Extract min and max values from the range

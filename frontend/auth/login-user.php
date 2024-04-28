@@ -31,6 +31,7 @@
     
     <script>
         <?php
+        
         if (isset($_GET['error_message'])) {
             echo "alert('" . htmlspecialchars($_GET['error_message']) . "');";
         }

@@ -1,3 +1,17 @@
+<?php
+session_start();
+$isAuthorized = false;
+
+if (!isset($_SESSION['id'])) {
+    header("Location: ../auth/login.php");
+    exit; // After redirection, stop further execution
+}
+
+if ($_SESSION['id'] === $_GET['userId']) {
+    $isAuthorized = true;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,8 +76,9 @@
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
                 <!-- <a href="./compare.php"
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a> -->
-                <a href=""  
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Logout</a>
+                <a href=""
+                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium"><Button
+                        onclick="logoutUser()">Logout</Button></a>
             </div>
         </div>
     </nav>
@@ -159,7 +174,8 @@
 
                                 <div class="flex flex-col mb-3">
                                     <label for="contact" class="font-medium text-xl mr-2 mb-1">Contact :</label>
-                                    <input type="tel" min="0" minlength="10" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                    <input type="tel" min="0" minlength="10" maxlength="10"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                                         class="form-control border border-gray-300 rounded-md px-4 py-1" name="contact"
                                         id="contact" required>
                                 </div>
@@ -220,7 +236,18 @@
     </div>
 
     <script>
+
+
         let user = {};
+
+        const logoutUser = () => {
+            fetch('../../backend/api/logout.php', {
+                method: 'POST'
+            }).then(res => {
+                console.log(res);
+                window.location.href = '../auth/login.php';
+            });
+        };
 
         let isHide = true;
         let isHideBookNow = true;
@@ -496,8 +523,8 @@
                     }
                 }),
                 marker: {
-                    colors:  ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
-                    
+                    colors: ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
+
                 },
                 type: 'pie',
                 hoverinfo: 'label+percent',
@@ -573,4 +600,5 @@
         fetchapi(userId);
     </script>
 </body>
+
 </html>
