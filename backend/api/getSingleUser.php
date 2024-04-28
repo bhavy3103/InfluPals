@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'location' => $userData['location']
         );
 
+        // echo json_encode($response);
+
         // 2. SQL query to fetch media
         $mediaQuery = "SELECT * FROM media WHERE page_id = '$id'";
         $mediaResult = mysqli_query($conn, $mediaQuery);
@@ -89,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['pricing']=$pricingData;
 
         $userData['pricing']=$pricingData;
-
         echo json_encode($response); // Return response
     } else {
         echo json_encode(array('message' => 'No data found.'));
