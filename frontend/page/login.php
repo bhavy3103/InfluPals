@@ -64,7 +64,7 @@
         };
 
         const fetchapi = async (finalData) => {
-            fetch('../../backend/api/registerUser.php', {
+            fetch('../../backend/api/registerPage.php', {
                 method: 'POST',
                 body: JSON.stringify(finalData),
             })

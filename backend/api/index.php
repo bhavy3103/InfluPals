@@ -18,8 +18,8 @@
 $routes = [
     '/api/getAllUsers' => 'getAllUsers.php',
     '/api/getSingleUser' => 'getSingleUser.php',
+    '/api/registerPage' => 'registerPage.php',
     '/api/registerUser' => 'registerUser.php',
-    // '/api/updateData' => 'updateData.php',
 ];
 
 $requestUrl = $_SERVER['REQUEST_URI'];
