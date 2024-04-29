@@ -2,8 +2,7 @@
 session_start();
 if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || strtolower($_SESSION['role']) === 'user')))
     header("Location: login.php");
-else
-    header("Location: compare.php");
+
 ?>
 
 <!DOCTYPE html>

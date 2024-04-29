@@ -60,6 +60,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response['media'] = $media;
 
+        // 2.0.1 . SQL query to fetch media for reel comparision
+        $mediaQueryReel = "SELECT * FROM media WHERE page_id = '$id' AND media_product_type = 'REELS' ORDER BY like_count DESC LIMIT 5";
+        // $mediaQueryReel = "SELECT * FROM media WHERE page_id = '$id' AND media_product_type = 'REELS' ORDER BY like_count LIMIT 5";
+        $mediaResultReel = mysqli_query($conn, $mediaQueryReel);
+
+        if (!$mediaResultReel) {
+            echo json_encode(array('error' => mysqli_error($conn))); // Return error message if query fails
+            exit;
+        }
+
+        $mediaReel = array();
+        // Fetch media data
+        while ($mediaData = mysqli_fetch_assoc($mediaResultReel)) {
+            $mediaReel[] = array(
+                'id' => $mediaData['id'],
+                'media_type' => $mediaData['media_type'],
+                'permalink' => $mediaData['permalink'],
+                'media_url' => $mediaData['media_url'],
+                'like_count' => $mediaData['like_count'],
+                'comments_count' => $mediaData['comments_count'],
+                'thumbnail_url' => $mediaData['thumbnail_url'],
+                'timestamp' => $mediaData['timestamp'],
+                'media_product_type' => $mediaData['media_product_type'],
+            );
+        }
+
+        $response['mediaReel'] = $mediaReel;
+
         // 3. SQL query to fetch demographics
         $demoQuery = "SELECT * FROM demographics WHERE page_id = '$id'";
         $demoResult = mysqli_query($conn, $demoQuery);

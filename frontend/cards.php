@@ -94,16 +94,16 @@
                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="filterDropdown">
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="0-500">0 - 500 <i class="fa-solid fa-indian-rupee-sign text-gray-4700"></i></button>
+                            role="menuitem" data-range="0-500"><i class="fa-solid fa-indian-rupee-sign text-gray-4700"></i>0 - 500 </button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="501-1000">501 - 1000 <i class="fa-solid fa-indian-rupee-sign"></i></button>
+                            role="menuitem" data-range="501-1000"> <i class="fa-solid fa-indian-rupee-sign"></i>501 - 1000</button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="1001-1500">1001 - 1500 <i class="fa-solid fa-indian-rupee-sign"></i></button>
+                            role="menuitem" data-range="1001-1500"> <i class="fa-solid fa-indian-rupee-sign"></i>1001 - 1500</button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="1501-">1501+ <i class="fa-solid fa-indian-rupee-sign"></i></button>
+                            role="menuitem" data-range="1501-"> <i class="fa-solid fa-indian-rupee-sign"></i> 1501+</button>
                     </div>
                 </div>
             </div>
@@ -163,10 +163,11 @@
             // Check if userIdString is a valid number
             if (!isNaN(userIdString)) {
                 // Subtract 1 from userIdString
-                const newUserId = String(BigInt(userIdString) - BigInt(1));
+                // const newUserId = String(BigInt(userIdString) - BigInt(1));
                 // console.log("New userId:", newUserId); // Log the new userId
                 // Redirect to profile.php with the new user ID as a query parameter
-                window.location.href = `./page/profile.php?userId=${newUserId}`;
+                // window.location.href = `./page/profile.php?userId=${newUserId}`;
+                window.location.href = `./page/profile.php?userId=${userIdString}`;
             } else {
                 console.error('User ID is not a valid number.');
             }
@@ -174,7 +175,7 @@
 
         }
         const openLoginPage = () => {
-            location.assign('./page/login.php');
+            location.assign('./auth/login.php');
         }
 
         function compareSelectedUsers() {

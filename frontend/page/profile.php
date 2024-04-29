@@ -25,7 +25,6 @@ if ($_SESSION['id'] === $_GET['userId']) {
     <script src="https://kit.fontawesome.com/fe2fdff340.js" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
-
         tailwind.config = {
             theme: {
                 extend: {
@@ -70,15 +69,11 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
         <div class="">
             <div class="space-x-3 pe-200">
-                <a href="../index.php"
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Home</a>
-                <a href=""
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
+                <a href="../index.php" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Home</a>
+                <a href="" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Insights</a>
                 <!-- <a href="./compare.php"
                     class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium">Compare</a> -->
-                <a href=""
-                    class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium"><Button
-                        onclick="logoutUser()">Logout</Button></a>
+                <a href="" class="text-blue-900 hover:bg-orange-400 hover:text-blue-800 rounded-md px-3 py-2 text-lg font-medium"><Button onclick="logoutUser()">Logout</Button></a>
             </div>
         </div>
     </nav>
@@ -93,26 +88,20 @@ if ($_SESSION['id'] === $_GET['userId']) {
             <!-- modal -->
             <div class="flex justify-center items-center gap-6">
                 <div>
-                    <button onclick="showDialog()"
-                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        type="button">
+                    <button onclick="showDialog()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
                         Pricing Details
                     </button>
 
-                    <div id="price-modal"
-                        class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
+                    <div id="price-modal" class="hidden bg-white shadow-xl  border fixed rounded-xl left-[30%] top-[20%] w-[40vw] max-h-[60vh] z-30 overflow-y-hidden overflow-x-hidden flex justify-center items-center">
                         <div class="relative rounded-lg">
                             <!-- Modal header -->
                             <div class="flex items-center justify-between py-2 px-4 md:p-5 border-b relative">
                                 <div class="text-3xl text-center mx-auto font-semibold text-gray-800">
                                     Pricing
                                 </div>
-                                <button onclick="showDialog()" type="button"
-                                    class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                <button onclick="showDialog()" type="button" class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                     </svg>
                                     <span class="sr-only">Close modal</span>
                                 </button>
@@ -126,15 +115,12 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 </div>
 
                 <div>
-                    <button onclick="showBookNow()"
-                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        type="button">
+                    <button onclick="showBookNow()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
                         Book Now
                     </button>
 
                     <!-- main body of book-now -->
-                    <div id="book-now"
-                        class="hidden bg-white rounded-lg fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
+                    <div id="book-now" class="hidden bg-white rounded-lg fixed inset-0 fixed left-[20%] w-[60vw] h-[80vh] top-[10%] z-30 overflow-y-auto overflow-x-hidden flex justify-center items-center">
                         <!-- <form  method="post" id="booking_form"> -->
                         <!-- <div class="heading text-center text-3xl text-indigo-600 font-medium">Add Your Requirnments
                             <hr class="mx-4 mt-3 border-indigo-400" style="width: 20%; height: 10px; margin: 0 auto;">
@@ -144,12 +130,9 @@ if ($_SESSION['id'] === $_GET['userId']) {
                             <div class="text-3xl text-center mx-auto font-semibold text-gray-800">
                                 Booking
                             </div>
-                            <button onclick="showBookNow()" type="button"
-                                class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <button onclick="showBookNow()" type="button" class="absolute right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                 </svg>
                                 <span class="sr-only">Close modal</span>
                             </button>
@@ -160,39 +143,27 @@ if ($_SESSION['id'] === $_GET['userId']) {
                             <div class="w-full max-w-sm flex flex-col mb-3">
                                 <div class="flex flex-col mb-3">
                                     <label for="name" class="font-medium text-xl mr-2 mb-1">Name :</label>
-                                    <input type="text" min="0"
-                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="name"
-                                        id="name" required>
+                                    <input type="text" min="0" class="form-control border border-gray-300 rounded-md px-4 py-1" name="name" id="name" required>
                                 </div>
 
                                 <div class="flex flex-col mb-3 ">
                                     <label for="email" class="font-medium text-xl mr-2 mb-1">Email :</label>
-                                    <input type="email" min="0"
-                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="email"
-                                        id="email" required>
+                                    <input type="email" min="0" class="form-control border border-gray-300 rounded-md px-4 py-1" name="email" id="email" required>
                                 </div>
 
                                 <div class="flex flex-col mb-3">
                                     <label for="contact" class="font-medium text-xl mr-2 mb-1">Contact :</label>
-                                    <input type="tel" min="0" minlength="10" maxlength="10"
-                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="contact"
-                                        id="contact" required>
+                                    <input type="tel" min="0" minlength="10" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control border border-gray-300 rounded-md px-4 py-1" name="contact" id="contact" required>
                                 </div>
 
                                 <div class="flex flex-col mb-3">
                                     <label for="requirements" class="font-medium text-xl mr-2 mb-1">Requisite:</label>
-                                    <textarea name="requirements" id="requirements" cols="30" rows="10"
-                                        class="form-control border border-gray-300 rounded-md px-4 py-1"
-                                        style="resize: none; height: 150px;"
-                                        placeholder="60s reel with voiceover and good video shots." required></textarea>
+                                    <textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control border border-gray-300 rounded-md px-4 py-1" style="resize: none; height: 150px;" placeholder="60s reel with voiceover and good video shots." required></textarea>
                                 </div>
 
                                 <div class="flex flex-col mb-3">
                                     <label for="budget" class="font-medium text-xl mr-2 mb-1">Budget :</label>
-                                    <input type="number" min="0"
-                                        class="form-control border border-gray-300 rounded-md px-4 py-1" name="budget"
-                                        id="budget" required>
+                                    <input type="number" min="0" class="form-control border border-gray-300 rounded-md px-4 py-1" name="budget" id="budget" required>
                                 </div>
                             </div>
                         </div>
@@ -203,8 +174,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                             </div> -->
 
                         <div class="mt-3 mb-3 pr-4 flex items-center justify-center gap-x-6">
-                            <button onclick="bookingFunc()"
-                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            <button onclick="bookingFunc()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Book</button>
                         </div>
                         <!-- </form> -->
@@ -216,8 +186,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             <!-- Followers Demographics -->
             <h2 class="text-3xl pb-3 text-orange-400 font-medium">Followers Demographics</h2>
-            <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container"
-                style="height: 375px; display: block; ">
+            <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container" style="height: 375px; display: block; ">
                 <div class="chart_wrapper" id="ageChart"></div>
                 <div class="chart_wrapper" id="genderChart"></div>
                 <div class="chart_wrapper" id="cityChart"></div>
@@ -228,16 +197,22 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             <!-- Posts -->
             <h2 class="text-3xl pb-3 text-orange-400 font-medium">Recent Posts</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 bg-white rounded-lg shadow-lg p-8"
-                id="postsSection">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 bg-white rounded-lg shadow-lg p-8" id="postsSection">
                 <!-- The content will be dynamically set here -->
+            </div>
+
+            <hr class="my-8 border-gray-300">
+
+            <!-- Reel Comparison -->
+            <h2 class="text-3xl pb-3 text-orange-400 font-medium">Reel Comparison</h2>
+            <div id="bar" class="w-full bg-white rounded-lg shadow-lg p-8 chart_container" style="height: 600px; display: block;">
+                <div class="chart_wrapper" id="likeChart" style="width: 85%;"></div>
+                <!-- <div class="chart_wrapper" id="commentChart"></div> -->
             </div>
         </span>
     </div>
 
     <script>
-
-
         let user = {};
 
         const logoutUser = () => {
@@ -308,8 +283,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
             const modal = document.getElementById('price-modal');
             if (isHide) {
                 modal.style.display = "none";
-            }
-            else {
+            } else {
                 modal.style.display = "block";
             }
         }
@@ -318,8 +292,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
             const modal = document.getElementById('book-now');
             if (isHideBookNow) {
                 modal.style.display = "none";
-            }
-            else {
+            } else {
                 modal.style.display = "block";
             }
         }
@@ -398,7 +371,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             //Animate to posts smoothly
             document.querySelectorAll('a[href^="#post"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
 
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -551,13 +524,125 @@ if ($_SESSION['id'] === $_GET['userId']) {
             Plotly.newPlot('cityChart', [cityData], cityLayout);
 
             Plotly.newPlot('ageChart', [ageData], ageLayout, {
-                displayModeBar: false
+                displayModeBar: false,
+                responsive: true
             });
             Plotly.newPlot('genderChart', [genderData], genderLayout, {
-                displayModeBar: false
+                displayModeBar: false,
+                responsive: true
             });
             Plotly.newPlot('cityChart', [cityData], cityLayout, {
-                displayModeBar: false
+                displayModeBar: false,
+                responsive: true
+            });
+        };
+
+        const createReelCharts = () => {
+
+            // Like_count wise Distribution Chart
+            const likeData = {
+                // x: user.mediaReel.map(ele => ele.id),
+                x: [1, 2, 3, 4, 5],
+                y: user.mediaReel.map(ele => ele.like_count),
+                // y: [1, 2, 3, 4, 5],
+                type: 'bar',
+                marker: {
+                    color: 'rgb(131, 129, 240)'
+                },
+                name: 'Like count wise Comparison',
+                textposition: 'auto',
+                text: user.mediaReel.map(ele => ele.like_count),
+                font: {
+                    size: 28,
+                },
+                // hoverinfo: 'x+y',
+                // hovertemplate: 'Reel: %{x}<br>Likes: %{y}<extra></extra>'
+            };
+
+            // Comment_count wise Distribution Chart
+            const commentData = {
+                // x: user.mediaReel.map(ele => ele.permalink),
+                x: [1, 2, 3, 4, 5],
+                y: user.mediaReel.map(ele => ele.comments_count),
+                // y: [1, 2, 3, 4, 5],
+                type: 'bar',
+                marker: {
+                    color: 'rgb(168, 50, 72)'
+                },
+                name: 'Comment count wise Comparison',
+                textposition: 'auto',
+                text: user.mediaReel.map(ele => ele.comments_count),
+                font: {
+                    size: 28,
+                },
+                // hoverinfo: 'x+y'
+                // hovertemplate: 'Reel: %{x}<br>Comments: %{y}<extra></extra>'
+            };
+
+            const likeLayout = {
+                xaxis: {
+                    title: {
+                        text: 'Reels',
+                        font: {
+                            size: 20,
+                            // color: 'blue',
+                        },
+                    },
+                    tickfont: {
+                        size: 14,
+                        // color: 'blue'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Like count',
+                        font: {
+                            size: 20,
+                            // color: 'blue',
+                        },
+                    },
+                    tickfont: {
+                        size: 14,
+                        // color: 'blue'
+                    }
+                },
+                title: {
+                    text: 'Like count wise Comparison',
+                    font: {
+                        size: 28,
+                        // color: 'blue'
+                    },
+                },
+                showlegend: false,
+                showarrow: true,
+            };
+
+            const likeChartDiv = document.getElementById('likeChart');
+
+            // Plot charts
+            Plotly.newPlot('likeChart', [likeData, commentData], likeLayout);
+
+            Plotly.newPlot('likeChart', [likeData, commentData], likeLayout).then(function(chart) {
+                chart.on('plotly_click', function(data) {
+                    var pointIndex = data.points[0].pointIndex;
+                    var url = user.mediaReel[pointIndex].permalink;
+                    window.open(url, '_blank'); // Open the permalink in a new tab
+                });
+            });
+
+            // likeChartDiv.on('plotly_hover', function(data) {
+            //     if (data.points && data.points.length > 0) {
+            //         likeChartDiv.style.cursor = 'pointer';
+            //     }
+            // });
+
+            // likeChartDiv.on('plotly_unhover', function(data) {
+            //     likeChartDiv.style.cursor = ''; // Revert to default or specify another cursor style
+            // });
+
+            Plotly.newPlot('likeChart', [likeData, commentData], likeLayout, {
+                displayModeBar: false,
+                // responsive: true
             });
         };
 
@@ -593,6 +678,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 // Pass the data to the function that creates the charts
                 profileData();
                 createCharts();
+                createReelCharts();
             } catch (error) {
                 console.error('Error:', error);
             }
