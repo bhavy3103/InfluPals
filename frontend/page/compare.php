@@ -1,9 +1,10 @@
 <?php
 session_start();
-if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || strtolower($_SESSION['role']) === 'user')))
+if (!(isset($_SESSION['id'])))
     header("Location: login.php");
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +15,7 @@ if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || st
     <title>Influencer Comparison</title>
     <style>
         /* Style for buttons */
+
         .button-container {
             display: flex;
             justify-content: space-between;
@@ -31,6 +33,7 @@ if (!(isset($_SESSION['id']) && (strtolower($_SESSION['role']) === 'admin' || st
             margin-right: 5px;
             /* Adjusted margin for spacing */
         }
+        
 
         table {
             width: 100%;

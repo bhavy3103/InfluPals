@@ -88,7 +88,7 @@
                         `/${pageId}`,
                         'GET', {
                         access_token: pageAccessToken,
-                        fields: 'instagram_business_account'
+                        fields: 'connected_instagram_account,location,category'
                     },
                         function (response) {
                             if (!response || response.error) {
@@ -102,7 +102,7 @@
             } catch (error) {
                 console.error('Error fetching Instagram account:', error);
             }
-            return res["instagram_business_account"].id;
+            return res;
         };
 
         const getInstagramAccountDetails = async (instaId, pageAccessToken) => {
@@ -220,7 +220,7 @@
                     },
                         function (response) {
                             if (!response || response.error) {
-                                reject(response.error || new Error('Unknown error'));
+                                reject(response.error || new Error('Unknown error'));                  
                             } else {
                                 console.log(response);
                                 resolve(response);
@@ -273,7 +273,11 @@
         const savePageDetails = (pageId) => {
             const { access_token: pageAccessToken } = pagesArray.find(page => page.id == pageId)
             console.log('pageid', pageId, pageAccessToken);
-            getInstagramAccountId(pageId, pageAccessToken).then((instaId) => {
+            getInstagramAccountId(pageId, pageAccessToken).then((Object) => {
+                const instaId = Object.connected_instagram_account.id;
+                const location = Object.location;
+                const category = Object.category;
+
                 getInstagramAccountDetails(instaId, pageAccessToken).then((accountDetails) => {
                     const mediaPromises = accountDetails["media"]["data"].map(media => {
                         return getMediaDetails(media.id, pageAccessToken)
@@ -291,6 +295,8 @@
                             ...accountDetails,
                             media: mediaDetailsArray.map(media => media.details)
                         }
+                        finalData.location = location.city + " " + location.country;
+                        finalData.category = category;
                         console.log('final', finalData);
                         fetchapi(finalData);
                     }).catch(error => {
