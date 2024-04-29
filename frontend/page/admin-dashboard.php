@@ -20,28 +20,13 @@ if (!(isset($_SESSION['id']) && strtolower($_SESSION['role']) === 'admin'))
 </head>
 
 <body class="bg-blueGray-50">
-    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
-        <div class="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
-            <span class="text-xl font-bold">Instagram</span>
-        </div>
-
-        <div class="flex items-center">
-            <div class="relative">
-                <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                </div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    ADMIN
-                </button>
-                <button onclick="logoutUser()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    LOGOUT
-                </button>
-            </div>
-        </div>
-
-    </nav>
+    <?php
+    $isAdmin = true;
+    $flag = false;
+    $isflag = false;
+    $isCompare = false;
+    include '../utils/navbar.php'
+        ?>
 
     <!-- Bookings List -->
     <section class="bg-white">
