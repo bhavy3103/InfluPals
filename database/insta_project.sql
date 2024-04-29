@@ -242,6 +242,8 @@ ALTER TABLE `user`
 ALTER TABLE `user`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `booking_details` ADD `user_id` INT NOT NULL AFTER `page_id`;
+
 COMMIT;
 
 

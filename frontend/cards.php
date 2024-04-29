@@ -288,6 +288,7 @@
 
                     const filteredUsers = data.filter(user => {
                         return `${user.username}`.toLowerCase().includes(searchTerm) || `${user.location}`.toLowerCase().includes(searchTerm) || `${user.name}`.toLowerCase().includes(searchTerm);
+                        return `${user.username}`.toLowerCase().includes(searchTerm) || `${user.location}`.toLowerCase().includes(searchTerm) || `${user.name}`.toLowerCase().includes(searchTerm);
                     });
 
                     renderUsersFromAPI(filteredUsers);
