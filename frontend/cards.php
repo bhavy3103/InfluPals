@@ -30,40 +30,32 @@
 </head>
 
 <body>
-    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
-        <div class="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2" alt="instagram">
-            <span class="text-xl font-bold">Instagram</span>
-        </div>
-
-        <div class="flex items-center">
-            <div class="relative">
-                <input type="text" id="searchInput" class="border border-gray-300 rounded-md p-2 pl-8 w-80 mr-2" placeholder="Search by name or city" onkeyup="searchUsers(event)">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
-                </div>
-                <button onclick="openLoginPage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                    Login As Creator
-                </button>
-                <button onclick="compareSelectedUsers()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Compare</button>
-            </div>
-        </div>
-    </nav>
+    <?php
+    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $flag = true;
+    $isflag = false;
+    $isCompare = false;
+    include './utils/navbar.php';
+    ?>
 
     <div class="bg-white border-b border-gray-300 p-4 shadow-md flex items-center justify-between">
 
         <!-- Filter options -->
         <div class="left-1 flex items-center">
             <label for="minFollowers" class="mr-2">Min Followers:</label>
-            <input type="text" id="minFollowers" name="minFollowers" class="border border-gray-300 rounded-md p-2 w-24 mr-2" placeholder="0">
+            <input type="text" id="minFollowers" name="minFollowers"
+                class="border border-gray-300 rounded-md p-2 w-24 mr-2" placeholder="0">
 
             <label for="maxFollowers" class="mr-2">Max Followers:</label>
-            <input type="text" id="maxFollowers" name="maxFollowers" class="border border-gray-300 rounded-md p-2 w-24 mr-4" placeholder="0">
+            <input type="text" id="maxFollowers" name="maxFollowers"
+                class="border border-gray-300 rounded-md p-2 w-24 mr-4" placeholder="0">
 
-            <button onclick="filterUsers(event)" id="filterButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="filterUsers(event)" id="filterButton"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
                 <i class="fas fa-filter"></i> Filter
             </button>
-            <button onclick="removeFilter()" id="filterButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="removeFilter()" id="filterButton"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
                 Remove Filter
             </button>
         </div>
@@ -71,33 +63,53 @@
         <!-- Sort Options -->
         <div class="right-1 flex items-center">
             <div class="mr-4">
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-md px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Pricing Filter<svg class="w-2.5 h-2.5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+                    class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-md px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">Pricing Filter<svg class="w-2.5 h-2.5 ml-3" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
 
                 <!-- Dropdown menu -->
-                <div id="filterDropdownContent" class="hidden absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div id="filterDropdownContent"
+                    class="hidden absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="filterDropdown">
-                        <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="0-500"><i class="fa-solid fa-indian-rupee-sign text-gray-4700"></i>0 - 500 </button>
-                        <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="501-1000"> <i class="fa-solid fa-indian-rupee-sign"></i>501 - 1000</button>
-                        <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="1001-1500"> <i class="fa-solid fa-indian-rupee-sign"></i>1001 - 1500</button>
-                        <button class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100" role="menuitem" data-range="1501-"> <i class="fa-solid fa-indian-rupee-sign"></i> 1501+</button>
+                        <button
+                            class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                            role="menuitem" data-range="0-500"><i
+                                class="fa-solid fa-indian-rupee-sign text-gray-4700"></i>0 - 500 </button>
+                        <button
+                            class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                            role="menuitem" data-range="501-1000"> <i class="fa-solid fa-indian-rupee-sign"></i>501 -
+                            1000</button>
+                        <button
+                            class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                            role="menuitem" data-range="1001-1500"> <i class="fa-solid fa-indian-rupee-sign"></i>1001 -
+                            1500</button>
+                        <button
+                            class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                            role="menuitem" data-range="1501-"> <i class="fa-solid fa-indian-rupee-sign"></i>
+                            1501+</button>
                     </div>
                 </div>
             </div>
 
-            <button onclick="sortUsers('followers_count')" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="sortUsers('followers_count')"
+                class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
                 <i class="fas fa-sort"></i> Followers
             </button>
-            <button onclick="sortUsers('media_count')" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
+            <button onclick="sortUsers('media_count')"
+                class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded mr-4">
                 <i class="fas fa-sort"></i> Posts
             </button>
         </div>
 
     </div>
 
-    <div class="grid grid-cols-auto sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mt-8 mr-2 ml-2 mb-4 cursor-pointer" id="userGrid">
+    <div class="grid grid-cols-auto sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mt-8 mr-2 ml-2 mb-4 cursor-pointer"
+        id="userGrid">
         <!-- User cards will be added here dynamically -->
     </div>
 
@@ -106,11 +118,11 @@
         const dropdownButton = document.getElementById('dropdownDefaultButton');
         const dropdownMenu = document.getElementById('filterDropdownContent');
 
-        dropdownButton.addEventListener('click', function() {
+        dropdownButton.addEventListener('click', function () {
             dropdownMenu.classList.toggle('hidden');
         });
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.classList.add('hidden');
             }
@@ -137,6 +149,16 @@
                 alert('Please select exactly 2 users to compare.');
             }
         }
+
+        const logoutUser = () => {
+            fetch('../../backend/api/logout.php', {
+                method: 'POST'
+            }).then(res => {
+                console.log(res);
+                window.location.href = './home.php';
+            });
+        };
+
 
         function renderUsersFromAPI(data) {
             const userGrid = document.getElementById('userGrid');
@@ -302,7 +324,7 @@
         // Add click event listeners to the filter options
         const filterOptions = filterDropdownContent.querySelectorAll('.filter-option');
         filterOptions.forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Get the selected range from the data attribute
                 const range = this.getAttribute('data-range');
                 // Extract min and max values from the range

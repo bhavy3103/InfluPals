@@ -239,7 +239,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 method: 'POST'
             }).then(res => {
                 console.log(res);
-                window.location.href = '../auth/login.php';
+                window.location.href = '../home.php';
             });
         };
 
