@@ -89,7 +89,7 @@ if (!(isset($_SESSION['id']) && strtolower($_SESSION['role']) === 'admin'))
                 method: 'POST'
             }).then(res => {
                 console.log(res);
-                window.location.href = '../auth/login-user.php';
+                window.location.href = '../home.php';
             });
         };
 

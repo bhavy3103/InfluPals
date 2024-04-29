@@ -11,7 +11,6 @@
 <body>
     <?php
     $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
-    echo '<script>console.log(' . json_encode($isAdmin) . ');</script>';
     $flag = true;
     $isflag = false;
     $isCompare = false;
@@ -24,6 +23,16 @@
     </div>
 
     <script>
+
+        const logoutUser = () => {
+            fetch('../../backend/api/logout.php', {
+                method: 'POST'
+            }).then(res => {
+                console.log(res);
+                window.location.href = './home.php';
+            });
+        };
+
         const openLoginPage = () => {
             location.assign('./auth/login.php');
         }
