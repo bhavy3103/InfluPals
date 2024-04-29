@@ -429,7 +429,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 name: 'Age vise Followers',
                 text: user.demographicsAge.map(ele => ele.value),
                 textposition: 'auto',
-                hoverinfo: 'x+text',
+                // hoverinfo: 'x+text',
                 opacity: 0.8,
             };
             const ageLayout = {
@@ -555,8 +555,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 font: {
                     size: 28,
                 },
-                // hoverinfo: 'x+y',
-                // hovertemplate: 'Reel: %{x}<br>Likes: %{y}<extra></extra>'
+                hovertemplate: 'Reel: %{x}<br>Likes: %{y}<extra></extra>'
             };
 
             // Comment_count wise Distribution Chart
@@ -575,8 +574,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 font: {
                     size: 28,
                 },
-                // hoverinfo: 'x+y'
-                // hovertemplate: 'Reel: %{x}<br>Comments: %{y}<extra></extra>'
+                hovertemplate: 'Reel: %{x}<br>Comments: %{y}<extra></extra>'
             };
 
             const likeLayout = {
@@ -585,12 +583,10 @@ if ($_SESSION['id'] === $_GET['userId']) {
                         text: 'Reels',
                         font: {
                             size: 20,
-                            // color: 'blue',
                         },
                     },
                     tickfont: {
                         size: 14,
-                        // color: 'blue'
                     }
                 },
                 yaxis: {
@@ -598,19 +594,16 @@ if ($_SESSION['id'] === $_GET['userId']) {
                         text: 'Like count',
                         font: {
                             size: 20,
-                            // color: 'blue',
                         },
                     },
                     tickfont: {
                         size: 14,
-                        // color: 'blue'
                     }
                 },
                 title: {
                     text: 'Like count wise Comparison',
                     font: {
                         size: 28,
-                        // color: 'blue'
                     },
                 },
                 showlegend: false,
@@ -630,19 +623,9 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 });
             });
 
-            // likeChartDiv.on('plotly_hover', function(data) {
-            //     if (data.points && data.points.length > 0) {
-            //         likeChartDiv.style.cursor = 'pointer';
-            //     }
-            // });
-
-            // likeChartDiv.on('plotly_unhover', function(data) {
-            //     likeChartDiv.style.cursor = ''; // Revert to default or specify another cursor style
-            // });
-
             Plotly.newPlot('likeChart', [likeData, commentData], likeLayout, {
                 displayModeBar: false,
-                // responsive: true
+                responsive: true
             });
         };
 
