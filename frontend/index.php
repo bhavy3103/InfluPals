@@ -9,27 +9,13 @@
 </head>
 
 <body>
-    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
-        <div class="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2">
-            <span class="text-xl font-bold">Instagram</span>
-        </div>
-
-        <div class="flex items-center">
-            <div class="relative">
-                <input type="text" class="border border-gray-300 rounded-md p-2 pl-8" placeholder="Search...">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                </div>
-                <button onclick="openLoginPage()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Login As Creator
-                </button>
-                <!-- <a href="./page/compare.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Compare</a> -->
-
-            </div>
-        </div>
-
-    </nav>
+    <?php
+    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $flag = true;
+    $isflag = false;
+    $isCompare = false;
+    include './utils/navbar.php';
+    ?>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mx-4 mb-8 cursor-pointer"
         id="categoryGrid">

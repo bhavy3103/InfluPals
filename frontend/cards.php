@@ -30,29 +30,13 @@
 </head>
 
 <body>
-    <nav class="bg-white border-b border-gray-300 p-4 flex items-center justify-between shadow-md">
-        <div class="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="h-8 mr-2"
-                alt="instagram">
-            <span class="text-xl font-bold">Instagram</span>
-        </div>
-
-        <div class="flex items-center">
-            <div class="relative">
-                <input type="text" id="searchInput" class="border border-gray-300 rounded-md p-2 pl-8 w-80 mr-2"
-                    placeholder="Search by name or city" onkeyup="searchUsers(event)">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
-                </div>
-                <button onclick="openLoginPage()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                    Login As Creator
-                </button>
-                <button onclick="compareSelectedUsers()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Compare</button>
-            </div>
-        </div>
-    </nav>
+    <?php
+    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $flag = false;
+    $isflag = true;
+    $isCompare = true;
+    include './utils/navbar.php';
+    ?>
 
     <div class="bg-white border-b border-gray-300 p-4 shadow-md flex items-center justify-between">
 
@@ -78,7 +62,7 @@
 
         <!-- Sort Options -->
         <div class="right-1 flex items-center">
-        <div class="mr-4">
+            <div class="mr-4">
                 <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
                     class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-md px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button">Pricing Filter<svg class="w-2.5 h-2.5 ml-3" aria-hidden="true"
@@ -94,16 +78,20 @@
                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="filterDropdown">
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="0-500"><i class="fa-solid fa-indian-rupee-sign text-gray-4700"></i>0 - 500 </button>
+                            role="menuitem" data-range="0-500"><i
+                                class="fa-solid fa-indian-rupee-sign text-gray-4700"></i>0 - 500 </button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="501-1000"> <i class="fa-solid fa-indian-rupee-sign"></i>501 - 1000</button>
+                            role="menuitem" data-range="501-1000"> <i class="fa-solid fa-indian-rupee-sign"></i>501 -
+                            1000</button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="1001-1500"> <i class="fa-solid fa-indian-rupee-sign"></i>1001 - 1500</button>
+                            role="menuitem" data-range="1001-1500"> <i class="fa-solid fa-indian-rupee-sign"></i>1001 -
+                            1500</button>
                         <button
                             class="filter-option text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-                            role="menuitem" data-range="1501-"> <i class="fa-solid fa-indian-rupee-sign"></i> 1501+</button>
+                            role="menuitem" data-range="1501-"> <i class="fa-solid fa-indian-rupee-sign"></i>
+                            1501+</button>
                     </div>
                 </div>
             </div>
@@ -339,7 +327,7 @@
                 .then(data => {
 
                     const filteredUsers = data.filter(user => {
-                        return `${user.username}`.toLowerCase().includes(searchTerm)|| `${user.location}`.toLowerCase().includes(searchTerm) || `${user.name}`.toLowerCase().includes(searchTerm);
+                        return `${user.username}`.toLowerCase().includes(searchTerm) || `${user.location}`.toLowerCase().includes(searchTerm) || `${user.name}`.toLowerCase().includes(searchTerm);
                     });
 
                     renderUsersFromAPI(filteredUsers);
