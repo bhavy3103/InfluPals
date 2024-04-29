@@ -11,6 +11,7 @@
 <body>
     <?php
     $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    echo '<script>console.log(' . json_encode($isAdmin) . ');</script>';
     $flag = true;
     $isflag = false;
     $isCompare = false;
