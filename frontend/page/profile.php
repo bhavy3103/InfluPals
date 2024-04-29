@@ -358,7 +358,39 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             // pricing
             const pricingSection = document.getElementById('pricing_block');
-            pricingSection.innerHTML = `
+            if(true){
+                pricingSection.innerHTML = `
+                <div class="justify-center border px-8 py-4 overflow-y-scroll">
+                    <div class="my-4 flex gap-4">
+                        <div class="text-xl font-medium text-gray-700">Story</div>
+                        ₹ <input id="story" type="text" value="${user.pricing.story}" />
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div class="text-xl font-medium text-gray-700">IGTV Video</div>
+                        ₹ <input id="igtv_video" type="text" value="${user.pricing.igtv_video}" />
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div class="text-xl font-medium text-gray-700">Reel</div>
+                        ₹ <input id="reel" type="text" value="${user.pricing.reel}" />
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div class="text-xl font-medium text-gray-700">Live Stream</div>
+                        ₹ <input id="live_stream" type="text" value="${user.pricing.live_stream}" />
+                    </div>
+                    <div class="my-4 flex gap-4">
+                        <div class="text-xl font-medium text-gray-700">Feed Post</div>
+                        ₹ <input id="feed_post" type="text" value="${user.pricing.feed_post}" />
+                    </div>
+                    
+                    <div class="border-t"></div>
+                    <div class="my-4">
+                        <button id="updateBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 block mx-auto rounded-lg px-5 py-2.5 text-center">Update</button>
+                    </div>
+                </div>
+                `;
+            }
+            else{
+                pricingSection.innerHTML = `
                 <div class="justify-center border px-8 py-4 overflow-y-scroll">
                     <div class="my-4 flex gap-4">
                         <div for="post" class="text-xl font-medium text-gray-700">Story</div>
@@ -380,13 +412,41 @@ if ($_SESSION['id'] === $_GET['userId']) {
                         <div for="post" class="text-xl font-medium text-gray-700">Feed Post</div>
                         <div id="feed_post">₹ ${user.pricing.feed_post} / feed post</div>
                     </div>
-                    
-                    <div class="border-t"></div>
-                    <div class="my-4">
-                    <button class="block text-white text-center mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
-                    </div>
                 </div>
             `
+            }
+
+            const updateBtn = document.getElementById('updateBtn');
+            updateBtn.addEventListener('click', () => {
+                const updatedPricing = {
+                    story: document.getElementById('story').value,
+                    igtv_video: document.getElementById('igtv_video').value,
+                    reel: document.getElementById('reel').value,
+                    live_stream: document.getElementById('live_stream').value,
+                    feed_post: document.getElementById('feed_post').value,
+                };
+
+                fetch('./../../backend/api/pricingDetails.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedPricing),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update pricing details');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle successful response
+                    alert('Pricing details updated successfully');
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+            });
 
             //Animate to posts smoothly
             document.querySelectorAll('a[href^="#post"]').forEach(anchor => {
