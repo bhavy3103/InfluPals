@@ -56,4 +56,24 @@
         });
     });
 
+    const logoutUser = () => {
+        fetch('../backend/api/logout.php', {
+            method: 'POST'
+        })
+            .then((res) => {
+                // If logout is successful, update the isLoggedIn variable and redirect to the login page
+                if (res.ok) {
+                    isLoggedIn = false; // Update isLoggedIn variable
+                    // Redirect to the login page
+                    window.location.href = '../index.php';
+                } else {
+                    // Handle error if logout fails
+                    console.error('Logout failed');
+                }
+            })
+            .catch(error => {
+                // Handle any network or other errors
+                console.error('Error during logout:', error);
+            });
+    };
 </script>

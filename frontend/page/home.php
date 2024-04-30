@@ -46,8 +46,8 @@ if (!(isset($_SESSION['id']))) {
 
                 // Access and display limited data for each user
                 const categoriesGrid = document.getElementById('categoryGrid');
-                const categories=data.categories;
-                const categoryFreq=data.categoryFreq;
+                const categories = data.categories;
+                const categoryFreq = data.categoryFreq;
 
                 categories.forEach(category => {
                     const card = document.createElement('div');
@@ -56,7 +56,6 @@ if (!(isset($_SESSION['id']))) {
                     card.addEventListener('click', () => openCategoryCards(category.name));
 
                     card.innerHTML = `
-                    <a href="./cards.php?category=${category.name}">
                         <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-xl bg-clip-border rounded-xl w-72">
                             <div class="relative h-40 mx-4 mt-6 overflow-hidden text-white shadow-xl bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
                                 <img src="${category.image_url}" alt="card-image" />
@@ -67,8 +66,7 @@ if (!(isset($_SESSION['id']))) {
                                 </h5>
                                 <h5 class="text-xl text-gray-500">${categoryFreq[category.name] || 0}</h5>
                             </div>
-                        </div>
-                        </a>`;
+                        </div>`;
                     categoriesGrid.appendChild(card);
                 });
             })
