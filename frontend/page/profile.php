@@ -415,7 +415,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
             }
 
             const updateBtn = document.getElementById('updateBtn');
-            updateBtn.addEventListener('click', () => {
+            updateBtn?.addEventListener('click', () => {
                 const updatedPricing = {
                     story: document.getElementById('story').value,
                     igtv_video: document.getElementById('igtv_video').value,
