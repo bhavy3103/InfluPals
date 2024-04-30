@@ -356,7 +356,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             // pricing
             const pricingSection = document.getElementById('pricing_block');
-            if (true) {
+            if (<?php echo $isAuthorized ? 'true' : 'false'; ?>) {
                 pricingSection.innerHTML = `
                 <div class="justify-center border px-8 py-4 overflow-y-scroll">
                     <div class="my-4 flex gap-4">

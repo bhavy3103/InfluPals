@@ -295,7 +295,12 @@
                             ...accountDetails,
                             media: mediaDetailsArray.map(media => media.details)
                         }
-                        finalData.location = location.city + " " + location.country;
+                        if(!location?.city && !location?.country){
+                            finalData.location = "None";
+                        }
+                        else{
+                            finalData.location = (location?.city || "None") + ", " + (location?.country || "None");
+                        }
                         finalData.category = category;
                         console.log('final', finalData);
                         fetchapi(finalData);
