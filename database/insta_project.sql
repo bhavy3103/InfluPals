@@ -244,6 +244,8 @@ ALTER TABLE `user`
 
 ALTER TABLE `booking_details` ADD `user_id` INT NOT NULL AFTER `page_id`;
 
+ALTER TABLE `category` MODIFY COLUMN `image_url` MEDIUMTEXT DEFAULT NULL;
+
 COMMIT;
 
 
