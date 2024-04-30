@@ -3,7 +3,7 @@ session_start();
 $isAuthorized = false;
 
 if (!isset($_SESSION['id'])) {
-    header("Location: ../auth/login.php");
+    header("Location: ../index.php");
     exit; // After redirection, stop further execution
 }
 
@@ -62,10 +62,10 @@ if ($_SESSION['id'] === $_GET['userId']) {
 <body class="bg-white-200">
     <!-- <div class="bg-sky-100"> -->
     <?php
-    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $showAdminDashboardNavigation = isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'admin';
     $flag = false;
-    $isflag = false;
-    $isCompare = false;
+    $showSearchBar = false;
+    $showCompareUserButton = false;
     include '../utils/navbar.php';
     ?>
 
@@ -233,15 +233,6 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
     <script>
         let user = {};
-
-        const logoutUser = () => {
-            fetch('../../backend/api/logout.php', {
-                method: 'POST'
-            }).then(res => {
-                console.log(res);
-                window.location.href = '../home.php';
-            });
-        };
 
         let isHide = true;
         let isHideBookNow = true;
@@ -426,7 +417,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                     feed_post: document.getElementById('feed_post').value,
                 };
 
-                fetch('./../../backend/api/pricingDetails.php', {
+                fetch('../../backend/api/pricingDetails.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

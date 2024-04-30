@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ( !(isset($_SESSION['id']) )) {
+    header("Location: ../index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,11 +38,11 @@
 
 <body>
     <?php
-    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $showAdminDashboardNavigation = isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'admin';
     $flag = true;
-    $isflag = false;
-    $isCompare = false;
-    include './utils/navbar.php';
+    $showSearchBar = false;
+    $showCompareUserButton = false;
+    include '../utils/navbar.php';
     ?>
 
     <div class="bg-white border-b border-gray-300 p-4 shadow-md flex items-center justify-between">
@@ -131,11 +138,7 @@
         const category = new URLSearchParams(window.location.search).get('category');
 
         var sendSingleUserId = (userId) => {
-            window.location.href = `./page/profile.php?userId=${userId}`;
-        }
-
-        const openLoginPage = () => {
-            location.assign('./auth/login.php');
+            window.location.href = `./profile.php?userId=${userId}`;
         }
 
         function compareSelectedUsers() {
@@ -144,21 +147,11 @@
 
             if (selectedUserIds.length === 2) {
                 // Redirect to the compare page with selected user IDs as query parameters
-                window.location.href = `./page/compare.php?userId1=${selectedUserIds[0]}&userId2=${selectedUserIds[1]}`;
+                window.location.href = `./compare.php?userId1=${selectedUserIds[0]}&userId2=${selectedUserIds[1]}`;
             } else {
                 alert('Please select exactly 2 users to compare.');
             }
         }
-
-        const logoutUser = () => {
-            fetch('../../backend/api/logout.php', {
-                method: 'POST'
-            }).then(res => {
-                console.log(res);
-                window.location.href = './home.php';
-            });
-        };
-
 
         function renderUsersFromAPI(data) {
             const userGrid = document.getElementById('userGrid');
@@ -210,7 +203,7 @@
             });
         }
 
-        fetch('../backend/api/getAllUsers.php')
+        fetch('../../backend/api/getAllUsers.php')
             .then(response => response.json())
             .then(data => {
 
@@ -282,7 +275,7 @@
                 sortOrder = 'asc';
             }
 
-            fetch('../backend/api/getAllUsers.php')
+            fetch('../../backend/api/getAllUsers.php')
                 .then(response => response.json())
                 .then(data => {
 
@@ -304,7 +297,7 @@
         function searchUsers(event) {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
 
-            fetch('../backend/api/getAllUsers.php')
+            fetch('../../backend/api/getAllUsers.php')
                 .then(response => response.json())
                 .then(data => {
 
@@ -338,7 +331,7 @@
 
         // Function to filter users based on follower count range
         function filterByFollowerCountRange(min, max) {
-            fetch('../backend/api/getAllUsers.php').then(response => response.json())
+            fetch('../../backend/api/getAllUsers.php').then(response => response.json())
                 .then(user => {
                     const filteredUsers = user.filter(user => {
                         if (min >= 1501) {
@@ -370,7 +363,7 @@
                 return;
             }
 
-            fetch('../backend/api/getAllUsers.php')
+            fetch('../../backend/api/getAllUsers.php')
                 .then(response => response.json())
                 .then(data => {
                     const filteredUsers = data.filter(user => {
@@ -390,7 +383,7 @@
 
         function removeFilter() {
             // Code to remove filter and render all users
-            fetch('../backend/api/getAllUsers.php')
+            fetch('../../backend/api/getAllUsers.php')
                 .then(response => response.json())
                 .then(data => {
                     renderUsersFromAPI(data);
