@@ -206,53 +206,6 @@ if (!(isset($_SESSION['id']))) {
         fetch('../../backend/api/getAllUsers.php')
             .then(response => response.json())
             .then(data => {
-
-                // Access and display limited data for each user
-                // const userGrid = document.getElementById('userGrid');
-                // data.forEach(user => {
-                //     if (user.category === category) {
-                //         const card = document.createElement('div');
-                //         card.classList.add('bg', 'rounded-md', 'shadow-xl', 'overflow-hidden', 'p-2', 'flex', 'flex-col');
-                //         card.style.maxWidth = '450px';
-
-                //         card.innerHTML = `
-                //         <div class="flex flex-col m-2" style="max-width: 450px;">
-                //             <input type="checkbox" class="compare-checkbox h-5 w-5" data-userid="${user.id}">
-                //             <div onclick="sendSingleUserId('${user.id}')">
-                //                 <div class="flex justify-center">
-                //                     <img src="${user.profile_picture_url}" class="profile shadow-xl" alt="profile">
-                //                 </div>
-                //                 <p class="text-lg font-bold flex justify-center mt-4">${user.username}</p>
-                //                 <p class="text-gray-600 flex justify-center mt-3 md:text-center mb-2 biography" style="height: 50px; overflow: hidden;">${user.biography.length > 40 ? user.biography.substring(0, 40) + '...' : user.biography}</p>
-
-                //                 <div class="flex flex-row justify-evenly mt-2">
-                //                     <div class="flex flex-col">
-                //                         <p class="text-gray-600 font-semibold md:text-center">${user.followers_count}</p>
-                //                         <p class="font-semibold text-xl mb-1">Followers</p>
-                //                     </div>
-                //                     <div class="flex flex-col ml-6">
-                //                         <p class="text-gray-600 font-semibold md:text-center">${user.media_count}</p>
-                //                         <p class="font-semibold text-lg mb-1">Posts</p>
-                //                     </div>
-                //                 </div>
-                //                 <div class="flex justify-center items-center text-center align-center mt-3 ">
-                //                         <p class="font-semibold text-lg mb-1 mr-2">Price per Post : </p>
-                //                         <p class="text-gray-600 font-semibold md:text-center"><i class="fa-solid fa-indian-rupee-sign"></i> ${user.pricing.feed_post}</p>
-                //                 </div>
-                //                 <div class="flex flex-col mb-2">
-                //                     <div class="flex justify-center items-center text-gray-600 text-center align-center mt-1 mb-2">
-                //                     <div>
-                //                         <i class="fa-solid fa-location-dot"></i>
-                //                         <span>${user.location}</span>
-                //                     </div>
-                //                     </div> 
-                //                 </div>
-                //             </div>
-                //         </div>
-                //             `;
-                //         userGrid.appendChild(card);
-                //     }
-                // });
                 renderUsersFromAPI(data)
             })
             .catch(error => console.error('Error fetching data:', error));
