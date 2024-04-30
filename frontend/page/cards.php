@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ( !(isset($_SESSION['id']) )) {
+if (!(isset($_SESSION['id']))) {
     header("Location: ../index.php");
 }
 ?>
@@ -39,8 +39,8 @@ if ( !(isset($_SESSION['id']) )) {
 <body>
     <?php
     $showAdminDashboardNavigation = isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'admin';
-    $flag = true;
-    $showSearchBar = false;
+    $flag = false;
+    $showSearchBar = true;
     $showCompareUserButton = false;
     include '../utils/navbar.php';
     ?>
