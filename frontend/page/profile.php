@@ -243,13 +243,20 @@ if ($_SESSION['id'] === $_GET['userId']) {
             const requirements = document.getElementById('requirements').value;
             const budget = document.getElementById('budget').value;
 
+            const queryString = window.location.search;
+            // Parse the query string into URLSearchParams object
+            const urlParams = new URLSearchParams(queryString);
+            const pageId = urlParams.get('userId');
+            console.log(pageId);
+
             const data = {
                 "id": userId,
                 "uname": uname,
                 "email": email,
                 "contact": contact,
                 "requirements": requirements,
-                "budget": budget
+                "budget": budget,
+                "pageId": pageId
             }
 
             const options = {
@@ -349,7 +356,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
 
             // pricing
             const pricingSection = document.getElementById('pricing_block');
-            if(true){
+            if (true) {
                 pricingSection.innerHTML = `
                 <div class="justify-center border px-8 py-4 overflow-y-scroll">
                     <div class="my-4 flex gap-4">
@@ -380,7 +387,7 @@ if ($_SESSION['id'] === $_GET['userId']) {
                 </div>
                 `;
             }
-            else{
+            else {
                 pricingSection.innerHTML = `
                 <div class="justify-center border px-8 py-4 overflow-y-scroll">
                     <div class="my-4 flex gap-4">
@@ -424,19 +431,19 @@ if ($_SESSION['id'] === $_GET['userId']) {
                     },
                     body: JSON.stringify(updatedPricing),
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to update pricing details');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Handle successful response
-                    alert('Pricing details updated successfully');
-                })
-                .catch(error => {
-                    alert(error.message);
-                });
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to update pricing details');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Handle successful response
+                        alert('Pricing details updated successfully');
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
             });
 
             //Animate to posts smoothly

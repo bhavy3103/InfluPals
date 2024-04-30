@@ -12,12 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contact = $data['contact'];
     $requirements = $data['requirements'];
     $budget = $data['budget'];
-
+    $pageId = $data['$pageId'];
     mysqli_query($conn, "SET foreign_key_checks = 0");
     mysqli_begin_transaction($conn);
 
     try {
-        $insertQuery = "INSERT INTO booking_details( uname ,email , contact , requirements , budget , page_id, page_username) VALUES('$uname','$email','$contact','$requirements','$budget',$creator_id, '$creator_username')";
+        $insertQuery = "INSERT INTO booking_details( uname ,email , contact , requirements , budget , page_id, user_id) VALUES('$uname','$email','$contact','$requirements','$budget',$creator_id, '$creator_username')";
 
 
         mysqli_query($conn, $insertQuery);
